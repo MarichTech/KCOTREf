@@ -1,0 +1,46 @@
+<div class="fullscreen">
+
+  <div *ngIf="isDisconnected==false" class="wrapper fadeInDown">
+    <div id="formContent">
+  
+      <h2 class="active"> Admin Login </h2>
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="assets/imgs/RLogo.png" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+        <input *ngIf="isValid==false"  type="text" placeholder="" [(ngModel)]="LoginError" readonly>
+        <input type="text"  class="fadeIn second" placeholder="UserName" [(ngModel)]="UserName" >
+        <input type="password" id="password" class="fadeIn third" placeholder="Password" [(ngModel)]="Password">
+        <input type="submit" (click)="submit(UserName, Password)" class="fadeIn fourth" value="Log In">
+
+    </div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+      <p style="color: white;">{{spinnerContent}}</p>
+  </ngx-spinner>
+  
+ 
+  </div>
+
+  <div *ngIf="isDisconnected==true" style="background-color: white; padding: 2%; margin-top: 5%; margin-left: 20%; margin-right: 20%;">
+    <!--connection status starts here-->
+        <div >
+            <label>No Internet Connection</label>
+        </div>
+        <hr>
+        <div class="circle_Connection"><i class="fa fa-wifi" aria-hidden="true"></i>
+          <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+        </div>
+        <br>
+        <label text-wrap>Please check your connection and try again</label>
+          <hr>
+          <div class="card-text">
+              <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+          </div> 
+    </div>  
+  
+</div>
+
+  

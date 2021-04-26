@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Loans
+  <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Apply Loan
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/Loans"> <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;Mobile Loans</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/Loans-BackOffice"> <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Back-Office Loans</a>
+          </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Guarantorship
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/ApproveNominations"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Approve Guarantorship</a>
+            <a class="dropdown-item" routerLink="/NominateGuarantors"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Request Guarantorship</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/LoanNominations"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View Outgoing Requests</a>
+          </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--page starts here-->
+<div class="alert alert-light">
+        <label>{{subTitle}}</label>
+        <div class="circle_Connection">
+            <i class="fa fa-check-square-o" *ngIf="status=='success'" style="color: green; font-size: 700%;" aria-hidden="true"></i> 
+            <i class="fa fa-times-circle" aria-hidden="true" style="color: red; border-radius: 50%; font-size: 700%;" *ngIf="status=='warning'"></i>
+        </div>
+        <label>{{message}}</label>
+        <hr>
+        <button class="btn btn-info btn-block" (click)="Pop()">OK</button>
+</div>

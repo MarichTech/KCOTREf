@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+  Register
+  <img src="assets/imgs/Logo_Name.png" style="width: 40% !important;height: 40% !important;">
+  </div>
+ </nav>
+
+<div class="alert alert-light">
+            <button class="btn btn-block btn-success" style="margin-bottom: 10px;">Security Details (2)</button>
+            <input  [(ngModel)]="Cellno" name="Cellno" type="tel" placeholder="Enter Mobile No." class="form-control">
+            <br>
+            <div class="input-group" style="margin-top: -10px;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Secret Question</span>
+                </div>
+                <select [(ngModel)]="SecretQuestn" name="SecretQuestn" class="form-control">
+                    <option value="notSelected">Not Selected</option>
+                    <option value="firstPhoneNo">First phone number?</option>
+                    <option value="firstTeacher">First Teacher's Name?</option>
+                    <option value="oldestCousin">Oldest cousin's Name?</option>
+                    <option value="favUncle">Name of your Favorite Uncle?</option>
+                    <option value="fatherBornPlace">Town your father was born in?</option>
+                    <option value="motherBornPlace">Town your mother was born in?</option>
+                </select>
+              </div>
+
+            <input name="SecretAnswer" style="margin-top: 10px;" [(ngModel)]="SecretAnswer" type="text" placeholder="Enter Secret Answer" class="form-control">
+            <input [(ngModel)]="PIN" style="margin-top: 10px;" name="PIN" type="password" maxlength="4" placeholder="Enter PIN No." class="form-control">
+        <!--displaying errors-->
+        <div style="margin-top: 10px;">
+        <div *ngIf="touched&&!Cellno">
+            <button class="btn btn-danger btn-block">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Mobile No.
+            </button>
+          </div>
+          <!--<div *ngIf="touched&&!email&&Cellno">
+              <button  block color="danger">
+                <ion-icon name="ios-warning-outline"></ion-icon>&nbsp;Enter Email Address
+              </button>
+            </div>-->
+            <div *ngIf="touched&&Cellno&&SecretQuestn=='notSelected'">
+                <button  class="btn btn-danger btn-block">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Select Secret Question
+                </button>
+              </div>
+              <div *ngIf="touched&&Cellno&&!SecretQuestn">
+                <button  class="btn btn-danger btn-block">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Select Secret Question
+                </button>
+              </div>
+              <div *ngIf="touched&&Cellno&&SecretQuestn!='notSelected'&&!SecretAnswer&&SecretAnswer!=''">
+                  <button  class="btn btn-danger btn-block">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Secret Answer
+                  </button>
+                </div>
+                <div *ngIf="touched&&Cellno&&SecretQuestn!=notSelected&&SecretAnswer&&!PIN">
+                    <button  class="btn btn-danger btn-block">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter PIN
+                    </button>
+                  </div>
+                  <div *ngIf="touched&&Cellno&&SecretQuestn!=notSelected&&SecretAnswer&&PIN&&errorMsg!=''">
+                    <button  class="btn btn-danger btn-block">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{errorMsg}}
+                    </button>
+                  </div>
+                <!-- End -->
+            <button *ngIf="resIsSuccess==false" style="margin-top: 10px;" class="btn btn-block btn-info" (click)="addCustomer(Cellno,email,SecretQuestn,SecretAnswer,PIN)"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;SUBMIT</button>
+            <button  *ngIf="resIsSuccess==true" style="margin-top: 10px;" class="btn btn-block btn-primary" (click)="goToActivatePage()">&nbsp;OK</button>
+          </div>
+          <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+            <p style="color: white;">{{spinnerContent}}</p>
+        </ngx-spinner>
+        </div>
+  

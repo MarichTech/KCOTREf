@@ -1,0 +1,343 @@
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 10px;">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Home 
+   <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item" active>
+          <a class="nav-link" routerLink="/UserLoanApplication"> <i class="fa fa-money"></i>&nbsp;My Loan Applications</a>
+        </li>  
+        
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+  {{StoredfirstName}}
+</nav>
+
+<div  *ngIf="!Connecting&&!isDisconnected">
+<div class="row g-4 mb-4" >
+  <div class="col-6 col-lg-3">
+    <div class="app-card app-card-stat shadow-sm h-100" (click)="MyLoansPage()">
+      <div class="app-card-body p-3 p-lg-4">
+        <h4 class="stats-type mb-1">Loans</h4>
+        <div class="stats-figure">{{totalLoans | currency:' ':true:'1.0'}}</div>
+      </div><!--//app-card-body-->
+    </div><!--//app-card-->
+  </div><!--//col-->
+  
+  <div class="col-6 col-lg-3">
+    <div class="app-card app-card-stat shadow-sm h-100" (click)="MyLoansPage()">
+      <div class="app-card-body p-3 p-lg-4">
+        <h4 class="stats-type mb-1">Arrears</h4>
+        <div class="stats-figure"><b style="font-size: 11px;">ksh.</b>{{totalLoanBalance | currency:' ':true:'1.0'}}</div>
+      </div><!--//app-card-body-->
+    </div><!--//app-card-->
+  </div><!--//col-->
+
+  <div class="col-6 col-lg-3">
+    <div class="app-card app-card-stat shadow-sm h-100" (click)="MyLoansPage()">
+      <div class="app-card-body p-3 p-lg-4">
+        <h4 class="stats-type mb-1">Outstanding Balances</h4>
+        <div class="stats-figure"><b style="font-size: 11px;">ksh.</b>{{totalLoanBalance | currency:' ':true:'1.0'}}</div>
+      </div><!--//app-card-body-->
+    </div><!--//app-card-->
+  </div><!--//col-->
+  
+  <div class="col-6 col-lg-3">
+    <div class="app-card app-card-stat shadow-sm h-100" (click)="AllUserApps()">
+      <div class="app-card-body p-3 p-lg-4">
+        <h4 class="stats-type mb-1">Loan Applications</h4>
+        <div class="stats-figure">{{ApplicationList?.length}}</div>
+    </div><!--//app-card-->
+  </div><!--//col-->
+</div>
+
+
+<!--start-->
+<div class="col-12 col-lg-6"   style="margin-top: 10px !important;">
+  <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+    <div class="app-card-header p-3 border-bottom-0">
+      <div class="row align-items-center gx-3">
+        <div class="col-auto">
+    <div class="app-icon-holder">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+      </svg>
+    </div><!--//icon-holder-->
+          
+    </div><!--//col-->
+<div class="col-auto">
+  <h4 class="app-card-title">Basic Profile</h4>
+</div>
+</div>
+</div>
+<div class="app-card-body px-4 w-100">
+
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Names </strong></div>
+    <div class="item-data">{{fName}} {{oNames}} {{lName}}</div>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>National ID Number</strong></div>
+    <div class="item-data">{{natId}}</div>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Date of Birth</strong></div>
+    <div class="item-data">{{dob | date: 'dd/MM/yyyy'}}</div>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Mobile Phone Number</strong></div>
+    <div class="item-data">{{cellNo}}</div>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Email Address</strong></div>
+    <div class="item-data">{{email}}</div>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+</div><!--//app-card-body-->
+<div class="app-card-footer p-4 mt-auto">
+<a class="btn app-btn-secondary" (click)="toAccountPage()">View full profile</a>
+</div><!--//app-card-footer-->
+
+</div><!--//app-card-->
+</div><!--//col-->
+<div class="col-12 col-lg-6"  style="margin-top: 10px !important;">
+<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+<div class="app-card-header p-3 border-bottom-0">
+<div class="row align-items-center gx-3">
+<div class="col-auto">
+  <div class="app-icon-holder">
+  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shield-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" d="M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z"/>
+<path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+</svg>
+</div><!--//icon-holder-->
+      
+</div><!--//col-->
+<div class="col-auto">
+  <h4 class="app-card-title">Security</h4>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//app-card-header-->
+<div class="app-card-body px-4 w-100">
+
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Password</strong></div>
+    <div class="item-data">••••••••</div>
+</div><!--//col-->
+<div class="col text-right">
+  <a class="btn-sm app-btn-secondary" href="#">Change</a>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+<div class="item border-bottom py-3">
+<div class="row justify-content-between align-items-center">
+<div class="col-auto">
+  <div class="item-label"><strong>Two-Factor Authentication</strong></div>
+    <div class="item-data">You haven't set up two-factor authentication. </div>
+</div><!--//col-->
+<div class="col text-right">
+  <a class="btn-sm app-btn-secondary" href="#">Set up</a>
+</div><!--//col-->
+</div><!--//row-->
+</div><!--//item-->
+</div><!--//app-card-body-->
+
+<div class="app-card-footer p-4 mt-auto">
+<a class="btn app-btn-secondary" href="#">Manage Security</a>
+</div><!--//app-card-footer-->
+
+</div><!--//app-card-->
+</div>
+</div>
+<!--end-->
+
+<div *ngIf="!isDisconnected">
+<div *ngIf="!foundLoans">
+    <div class="alert alert-light">
+            <label style="color: #161c42;">Please wait..</label>
+        <hr>
+            <label>Checking Loan status..</label>
+            <br>
+        </div>
+      </div>
+  </div>
+  <!--
+  <div class="row">
+    <div class="col-sm-4">
+  <div *ngIf="Connecting==false&&!isDisconnected&&foundLoans">
+<div class="alert alert-light" *ngIf="loanLimit>0">
+        <i class="fa fa-money" aria-hidden="true"></i>
+        <label style="font-weight: bold;">&nbsp; Apply for a Mobile Loan</label>
+    <hr style="margin-top: 0%;">
+    <label style="margin-top: -2.5%;">Your Mobile Loan Limit is:</label>
+    <p class="circle"><span style="color: #161c42;">{{loanLimit| currency:'ksh ':true:'1.0'}}</span></p>
+    <label text-wrap>Use the Loan Calculator to know the total cost.</label>
+
+    <div *ngIf="!pay">
+      <div class="button-group">
+        <button class="btn" style="float: left; width: 47.5%; background-color: #1D385F; color: white; font-size: 85%;" (click)="LoanPage()"><i class="fa fa-money" aria-hidden="true"></i>&nbsp; Apply Loan</button>
+        <button class="btn" style="float: right; width: 50%; background-color: #1D385F; color: white; font-size: 85%;" (click)="loanCalcPage()"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Loan Calculator</button>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="alert alert-light" *ngIf="loanLimit<=0">
+        <i class="fa fa-money" aria-hidden="true"></i>
+      <label style="color: #161c42;font-weight: bold;">&nbsp;Loan Offers</label>
+    <hr> 
+  <label text-wrap>Borrow loans of up to:</label>
+      <p class="circle"><span style="color: #161c42;">{{resMaximumLoan| currency:'ksh ':true:'1.0'}}</span></p>
+      <br>
+    <label text-wrap>Paying promptly will increase your chances of accessing higher loans.</label>
+    <br>
+</div>
+  </div>
+    </div>
+    <div class="col-sm-4">
+    <div class="alert alert-light" *ngIf="totalLoanBalance>0">
+        <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+          <label style="color: #161c42;font-weight: bold;">Upcoming Reminder</label>
+      <hr>
+      <label text-wrap>You have {{totalLoans}} active loan(s). See balance below:</label>
+          <p class="AccountBalanceFont">Ksh.{{totalLoanBalance}}</p>
+      <div *ngIf="!pay">
+        <div class="button-group">
+            <button class="btn btn-info" style="float: left; width: 45%;" (click)="PayPage()"><i class="fa fa-money" aria-hidden="true"></i>&nbsp; Pay Now</button>
+            <button class="btn btn-info" style="float: right; width: 45%;" (click)="MyLoansPage()"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View details</button>
+          </div>
+          </div>
+      <div *ngIf="pay">      
+      <div *ngIf="pay" class="form-group">
+          <input type="number" [(ngModel)]="PayAmount" name="PayAmount" type="number" maxlength="7" placeholder="Enter Amount To Pay" class="form-control"/></div>
+          <button class="btn btn-info btn-block" (click)="Pay(PayAmount)"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pay Now</button>
+          <!--<div><button ion-button round block (click)="Pay(PayAmount)" item-start color="purple"><ion-icon name="ios-cash-outline" icon-left></ion-icon>&nbsp;Pay Now</button></div>-->
+    <!--</div>
+  </div>
+
+<div class="alert alert-light">
+  <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+    <label style="color: #161c42;font-weight: bold; margin-top: -2.5%;">My Savings</label>
+<hr>
+<div class="card-text" *ngIf="fetchingShares"><div class="spinner-grow text-info" role="status">
+  <span class="sr-only">Updating balances...</span>
+</div>
+</div>
+<div *ngIf="!fetchingShares">
+  <div class="row" *ngFor="let SavingsProduct of SavingsProducts">
+      <div class="col">
+        {{SavingsProduct.ShareTypeName}} |
+      </div>
+      <div class="col">
+       Balance <i>{{SavingsProduct.Balance | currency:'Kes. ':true:'1.0'}}</i>
+      </div>
+  </div>
+</div>
+</div>
+    </div>
+
+  <div class="col-sm-4" *ngIf="Connecting==false&&!isDisconnected">
+    <div class="alert alert-light">
+      <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+        <label style="color: #161c42;font-weight: bold; margin-top: -2.5%;">Loans</label>
+    <hr>
+    <div class="row">
+      <div class="col" style="text-align: right;">
+        Mobile Loan Limit |
+      </div>
+      <div class="col" style="text-align: left;">
+        <i>{{loanLimit | currency:'Kes ':true:'1.0'}}</i>
+      </div>
+    </div>
+      <div class="row">
+      <div class="col" style="text-align: right;">
+        Loan Eligibility |
+      </div>
+      <div class="col" style="text-align: left;">
+        <i>{{loanEligibility.MemberEligibility | currency:'Kes ':true:'1.0'}}</i>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col" style="text-align: right;">
+        Loan Arrears |
+      </div>
+      <div class="col" style="text-align: left;">
+        <i>{{totalLoanBalance | currency:'Kes ':true:'1.0'}}</i>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col" style="text-align: right;">
+        Outstanding Loans |
+      </div>
+      <div class="col" style="text-align: left;">
+        <i>{{totalLoanBalance | currency:'Kes ':true:'1.0'}}</i>
+      </div>
+      </div>
+    </div>
+  </div>-->
+
+<div *ngIf="isDisconnected==true" class="alert alert-light">
+    <!--connection status starts here-->
+        <div>
+            <label>No Internet Connection</label>
+        </div>
+        <hr>
+        <div class="circle_Connection"><i class="fa fa-wifi" aria-hidden="true"></i>
+          <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+        </div>
+        <br>
+        <label text-wrap>Please check your connection and try again</label>
+          <hr>
+          <div class="card-text">
+              <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+          </div> 
+    </div>
+</div>
+</div>

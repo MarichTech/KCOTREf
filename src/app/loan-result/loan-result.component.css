@@ -1,0 +1,27 @@
+.circle_Connection {
+    text-align: center;
+    -webkit-animation: scale-in-top 1.0s 3;
+            animation: scale-in-top 1.0s 3;
+  }
+  @-webkit-keyframes scale-in-top {
+    0% {
+        opacity: 1;
+      }
+      50% {
+          opacity: 0.1;
+      }
+      100% {
+        opacity: 1;
+      }
+  }
+  @keyframes scale-in-top {
+    0% {
+      opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

@@ -1,0 +1,102 @@
+<div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"></a>
+      <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+      <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/A-Dashboard"> <i class="fa fa-home"></i>&nbsp;Home</a>
+          </li>
+  
+      
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+          </li>
+      
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>Help</a> 
+          </li>
+        </ul>
+      </div>
+    </nav>
+  
+    
+  
+    <div *ngIf="isDisconnected==true" class="alert alert-light">
+      <!--connection status starts here-->
+          <div>
+              <label>No Internet Connection</label>
+          </div>
+          <hr>
+          <div class="circle_Connection"><i class="fa fa-wifi" aria-hidden="true"></i>
+            <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+          </div>
+          <br>
+          <label text-wrap>Please check your connection and try again</label>
+            <hr>
+            <div class="card-text">
+                <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+            </div> 
+      </div>
+  
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+      <p style="color: white;">{{spinnerContent}}</p>
+  </ngx-spinner>
+  
+  
+  <div *ngIf="isDisconnected==false" class="container-fluid">
+  
+          <h4 class="mat-h1">Unapproved members</h4>  
+          <div class="table-responsive">
+              <table datatable class="table table table-striped table-bordered" *ngIf="this.temp">
+    
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Telephone</th>
+                          <th>Email</th>
+                          <th>Gender </th>
+                          <th>D.O.B</th>
+                          <th>Id Number</th>
+                          <th>Approve</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     
+                    <tr *ngFor="let items of NotApprovedList">
+  
+                          <td (click)="onView(items.MemberId)">{{items.FirstName}}{{items.Surname}}{{items.OtherNames}}</td>
+                          <td (click)="onView(items.MemberId)">{{items.CellNo}}</td>
+                          <td (click)="onView(items.MemberId)">{{items.EmailAddress}}</td>
+                          <td (click)="onView(items.MemberId)">{{items.Gender}}</td>
+                          <td (click)="onView(items.MemberId)">{{items.DOB}}</td>
+                          <td (click)="onView(items.MemberId)">{{items.IDNO}}</td>
+                          <td><button (click)="onApproveMember(items.MemberId, items.EmailAddress)" class="btn btn-sm btn-outline-success"><i class="far fa-thumbs-up"></i></button> 
+                          </td>
+                    </tr>    
+            </tbody>
+          
+           
+          </table>
+  
+          </div>
+  </div>
+  
+  
+  
+  
+  
+  </div>
+  
+    

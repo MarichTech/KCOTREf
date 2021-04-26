@@ -1,0 +1,879 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+     Loan Application
+    <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+        </li>
+        <li class="nav-item" active>
+            <a class="nav-link" routerLink="/Loans"> <i class="fa fa-money"></i>&nbsp;Apply Loan</a>
+          </li>  
+          
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>
+            Help</a> 
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div *ngIf="isDisconnected==true" class="alert alert-light">
+    <!--connection status starts here-->
+        <div>
+            <label>No Internet Connection</label>
+        </div>
+        <hr>
+        <div class="circle_Connection"><i class="fa fa-wifi" aria-hidden="true"></i>
+          <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+        </div>
+        <br>
+        <label text-wrap>Please check your connection and try again</label>
+          <hr>
+          <div class="card-text">
+              <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+          </div> 
+    </div>
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+      <p style="color: white;">{{spinnerContent}}</p>
+    </ngx-spinner>
+
+    <div *ngIf="openPdfId =='Yes'">
+
+      <div class="card">
+        <label style="margin-top: 10px;">Generating PDF...</label>
+        <hr>
+        <i class="far fa-file-pdf" style="font-size: 500%; color: maroon;"></i>
+        <hr>
+        <label style="margin-bottom: 10px;">Please wait...</label>
+      </div>
+
+    </div>
+
+    <div *ngIf="openPdfId !='Yes'">
+
+      <div *ngIf="isDisconnected==false">
+
+        <mat-card style="margin-top: 5px;">
+          <div class="row" style="margin:2px">
+            <div class="col-sm-6"><h3>BUSINESSES LOAN APPLICATION FORM</h3></div>
+          </div>
+             
+             
+             
+             <mat-tab-group [selectedIndex]="selectedIndex"  (selectedIndexChange)="informChange($event)">
+                <mat-tab [label]=Tab1>
+                  
+                  <div style="padding-left:25px;padding-right: 25px;"> 
+                    
+                    <div class="table-responsive" *ngIf="ClientTypeId=='1'">
+                      <h4>Client details</h4>
+                      <table class="table table table-striped table-bordered">
+          
+                        <thead>
+                            <tr>
+                                <th>FullName</th>
+                                <th>ID Number</th>
+                                <th colspan="2">Sub County</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td >{{FullNames}}</td>
+                                <td >{{IdNo}}</td>
+                                <td colspan="2">{{SubCountyPerson}}</td>
+                            </tr>    
+                        </tbody>
+                        <thead>
+                          <tr>
+                              <th colspan="2">Ward</th>
+                              <th colspan="2">Village</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td colspan="2">{{Ward}}</td>
+                              <td colspan="2">{{Village}}</td>
+                          </tr>    
+                      </tbody>
+                      <thead>
+                        <tr>
+                            <th>Postal Address</th>
+                            <th>Email Address</th>
+                            <th>Telephone Number</th>
+                            <th>Level of Education</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >{{PostalAddress}}</td>
+                            <td >{{Email}}</td>
+                            <td >{{TelephoneNumber}}</td>
+                            <td >{{LevelOfEducation}}</td>
+                        </tr>    
+                    </tbody>
+            
+                    </table>
+            
+                    </div>
+          
+                    <div class="table-responsive" *ngIf="ClientTypeId=='2'">
+                      <h4>Entity details</h4>
+                      <table class="table table table-striped table-bordered">
+          
+                        <thead>
+                            <tr>
+                                <th>Entity Name</th>
+                                <th>Form of Business/Registration</th>
+                                <th>Registration Number</th>
+                                <th>Registration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td >{{FullNames}}</td>
+                                <td>{{FormOfBusiness}}</td>
+                                <td >{{RegNo}}</td>
+                                <td colspan="2">{{BusinessRegistrationDate}}</td>
+                            </tr>    
+                        </tbody>
+                        <thead>
+                          <tr>
+                              <th >KRA Pin</th>
+                              <th >Email</th>
+                              <th colspan="2">Postal Address</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td >{{KRAPin}}</td>
+                              <td >{{Email}}</td>
+                              <td colspan="2">{{PostalAddress}}</td>
+                          </tr>    
+                      </tbody>
+                      <thead>
+                        <tr>
+                            <th>Contact Person</th>
+                            <th>Contact Person Position</th>
+                            <th colspan="2">Contact Telephone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >{{ContactPerson}}</td>
+                            <td >{{ContactPersonPosition}}</td>
+                            <td colspan="2">{{TelephoneNumber}}</td>
+                        </tr>    
+                    </tbody>
+                    <thead>
+                      <tr>
+                          <th>Sub-County/Constituency</th>
+                          <th>Ward</th>
+                          <th colspan="2">Village</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td >{{SubCountyPerson}}</td>
+                          <td >{{Ward}}</td>
+                          <td colspan="2">{{Village}}</td>
+                      </tr>    
+                  </tbody>
+            
+                    </table>
+            
+                    </div>
+                    <div *ngIf="ClientTypeId=='1'">
+                      <hr>
+                      <h4>Please fill the following details <strong style="color:red">*</strong></h4>
+            
+                      <div class="row" style="margin:2px">
+                        <div class="col-sm-4">
+                          <label>Next of Kin</label>
+                          <input type="text" class="form-control" [(ngModel)]="NextOfKin">
+                      </div>
+              
+                      <div class="col-sm-4">
+                        <label >Relationship with Next of Kin</label>
+                        <input type="text" class="form-control" [(ngModel)]="Relationship"> 
+                      </div>  
+                        
+                        <div class="col-sm-4">
+                            <label>Have you received any business or technical training? </label>
+                            <select class="form-control" [(ngModel)]="HasReceivedTraining">
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>
+                            </select>
+                        </div>
+                      </div>
+                    
+            
+                    <div class="row" *ngIf="HasReceivedTraining=='Yes'" style="margin:2px">
+                      <div class="col-sm-12">
+                        <label >If yes, Give details</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="TrainingDescription"></textarea> 
+                      </div> 
+            
+                    </div>
+            
+                    <div class="row" style="margin:2px">
+                      <div class="col-sm-4">
+                        <label>For how long have you been in business </label>
+                        <div class="row" *ngIf="passedLoanId ==0">
+                          <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInBusiness"></div>
+                          <div class="col-sm-8">
+                            <select class="form-control" [(ngModel)]="BeenInBusinessTime">
+                              <option value="Day">Day(s)</option>
+                              <option value="Month">Month(s)</option>
+                              <option value="Year">Year(s)</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="passedLoanId !=0">
+                          <div class="col-sm-12">
+                            <input class="form-control" [(ngModel)]="BeenInBusiness">
+                          </div>
+                        </div>
+                        
+                    </div>
+            
+                    <div class="col-sm-4">
+                      <label >Are you in paid employment?</label>
+                      <select class="form-control" [(ngModel)]="PaidEmployment">
+                        <option value="">-select-</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+            
+                    </div>  
+                      
+                      <div class="col-sm-4">
+                          <label>Do you have any physical disabilities?</label>
+                          <select class="form-control" [(ngModel)]="IsPysicallyDisabled">
+                            <option value="">-select-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                      </div>
+                    </div>
+            
+                    <div class="row" *ngIf="PaidEmployment=='Yes'" style="margin:2px">
+                      <div class="col-sm-12">
+                        <label >If Employed, state the employer</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="UserEmployer"></textarea>  
+                      </div> 
+            
+                    </div>
+            
+                    <div class="row" *ngIf="IsPysicallyDisabled=='Yes'" style="margin:2px">
+                      <div class="col-sm-12">
+                        <label >If yes, explain what kind of disability</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="PysicallyDisabledDescription"></textarea>  
+                      </div> 
+            
+                    </div>
+                    
+                    <div class="row" style="margin:2px">
+                      <div class="col-sm-12">
+                        <label >Other sources of income</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="OtherSourcesOfIncome"></textarea> 
+                      </div> 
+            
+                    </div>
+            
+                   
+                  </div>
+                  
+                  <div *ngIf="ClientTypeId=='2'" >
+                    <div class="row" style="margin:2px">
+                      <div class="col-sm-6">
+                        <label >Business license.</label>
+                        <input type="text" class="form-control"   [(ngModel)]="BusinessLicence" >
+                      </div>
+                      <div class="col-sm-6">
+                        <label >Attach Business license.</label>
+                        <input type="file" class="form-control"   style="border: 0;">
+                      </div>
+                    
+                    </div>
+          
+                    <div class="row" style="margin:2px">
+                      <div class="col-sm-4">
+                        <label >Plot Number.</label>
+                        <input type="text" class="form-control"   [(ngModel)]="PlotNumber" >
+                      </div>
+          
+                      <div class="col-sm-4">
+                        <label >Market/Road</label>
+                        <input type="text" class="form-control"   [(ngModel)]="MarketOrRoad" >
+                      </div>
+          
+                      <div class="col-sm-4">
+                        <label >Sub County.</label>
+                        <select class="form-control" [(ngModel)]="Subcounty">
+                          <option value="">-select-</option>
+                        </select>
+                      </div>
+                    </div>
+        
+                    <div class="row" style="margin:2px">
+                      <div class="col-sm-12">
+                        <label >Name, address and occupation of each Partners/Directors/Trustees.</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Partners"></textarea>  
+                      </div>
+                    </div>
+        
+                  </div>
+        
+                  <br>
+              
+
+                  <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                    MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                     MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
+                     AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Save Progress <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
+                    <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                  </div>
+            
+                </div>
+                   
+                </mat-tab>
+        
+            
+              
+        
+             
+        
+              <mat-tab [label]=Tab2 >
+                <div style="padding-left:25px;padding-right: 25px;">
+                  <div *ngIf="ClientTypeId=='2'">
+                    <div class="table-responsive">
+                      <h4>Business Operation details</h4>
+                      <table class="table table table-striped table-bordered"></table>
+        
+                  <thead>
+                        <tr>
+                           
+                            <th>Nature of trade or business</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          
+                            <td >{{NatureOfBusiness}}</td>
+                        </tr>    
+                    </tbody>
+                    </div>
+                  </div>
+                  
+                  <div class="table-responsive" *ngIf="ClientTypeId=='1'">
+                    <h4>Business details</h4>
+                    <table class="table table table-striped table-bordered">
+        
+                      <thead>
+                          <tr>
+                              <th>Name of Business</th>
+                              <th colspan="2">Physical Location</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td >{{BusinessName}}</td>
+                              <td colspan="2">{{PhysicalAddress}}</td>
+                          </tr>    
+                      </tbody>
+                      <thead>
+                        <tr>
+                            <th>Legal Status</th>
+                            <th>Form of Business/Registration</th>
+                            <th>Nature of trade or business</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >{{LegalStatus}}</td>
+                            <td >{{FormOfBusiness}}</td>
+                            <td >{{NatureOfBusiness}}</td>
+                        </tr>    
+                    </tbody>
+                    
+          
+                  </table>
+          
+                  </div> 
+                  <hr>
+                  <h4>Please fill the following details <strong style="color:red">*</strong></h4>
+        
+                  <div *ngIf="ClientTypeId=='1'">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <label >Business license.</label>
+                        <input type="text" class="form-control"   [(ngModel)]="BusinessLicence" >
+                      </div>
+                      <div class="col-sm-6">
+                        <label >Attach Business license.</label>
+                        <input type="file" class="form-control"   style="border: 0;">
+                      </div>
+                    
+                    </div>
+          
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <label >Plot Number.</label>
+                        <input type="text" class="form-control"   [(ngModel)]="PlotNumber" >
+                      </div>
+          
+                      <div class="col-sm-4">
+                        <label >Market/Road</label>
+                        <input type="text" class="form-control"   [(ngModel)]="MarketOrRoad" >
+                      </div>
+          
+                      <div class="col-sm-4">
+                        <label >Sub County.</label>
+                        <select class="form-control" name="Constituency" [(ngModel)]="Subcounty" >
+                          <option selected value="">-Not Selected-</option>
+                          <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" >{{Constituency.EmployerName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="LegalStatus !='Unregistered' || FormOfBusiness !='Sole-Proprietor'">
+                      <div class="col-sm-12">
+                        <label >Name, address and occupation of each partner.</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Partners"></textarea>  
+                      </div>
+                    </div>
+        
+                  </div>
+                  
+        
+                  
+        
+          
+              <div class="row">
+                <div class="col-sm-4">
+                  <label >How long has the business been in operation?</label> 
+                  <div class="row" *ngIf="passedLoanId ==0">
+                    <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInOperation" value="BeenInOperation"></div>
+                    <div class="col-sm-8">
+                      <select class="form-control" [(ngModel)]="BeenInOperationTime">
+                        <option value="Day">Day(s)</option>
+                        <option value="Month">Month(s)</option>
+                        <option value="Year">Year(s)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="passedLoanId !=0">
+                    <div class="col-sm-12">
+                      <input class="form-control" [(ngModel)]="BeenInOperation">
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col-sm-4">
+                  <label>Number of Employees engaged by business</label>
+                  <input type="text" class="form-control"   [(ngModel)]="NoOfEmployees" > 
+                </div>
+        
+                <div class="col-sm-4">
+                  <label >Do you own the business building or is it rented?</label>
+                    <select class="form-control" [(ngModel)]="OwnBuilding">
+                      <option value="">-select-</option>
+                      <option value="Rented">Rented</option>
+                      <option value="Owner">Owner</option>
+                    </select>
+                </div>
+              </div>
+        
+              
+              <div class="row" *ngIf="OwnBuilding=='Rented'">
+                <div class="col-sm-4">
+                    <label >Business premise owner name</label>
+                    <input type="text" class="form-control" [(ngModel)]="BuildingOwner"> 
+                </div>
+                <div class="col-sm-4">
+                    <label>Business premise owner's Address</label>
+                    <input type="text" class="form-control"   [(ngModel)]="BuildingAddress" > 
+            
+                </div>
+                <div class="col-sm-4">
+                  <label >Premise monthly rent</label>
+                    <input type="text" class="form-control"  [(ngModel)]="MonthRent" > 
+                </div>
+              </div> 
+        
+              <div class="row">
+               
+                <div class="col-sm-3">
+                  <label >Average sales per month</label>
+                  <div style="padding-top: 8%;">
+                    <input type="text" class="form-control"  [(ngModel)]="SalePerMonth" > 
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                    <label >Average business expenses per month</label>
+                    <input type="text" class="form-control"  [(ngModel)]="ExpensesPerMonth" > 
+                </div>
+                <div class="col-sm-3">
+                  <label >What is the business’s monthly profit</label>
+                  <div style="padding-top: 8%;">
+                    <input type="text" class="form-control"  [(ngModel)]="MonthProfit"> 
+                  </div>
+              </div>
+              <div class="col-sm-3">
+                  <label>What is the value of the saleable stock?</label>
+                  <input type="text" class="form-control"   [(ngModel)]="SaleAbleStock" > 
+           
+              </div>
+            </div>
+        
+        
+        <div class="row">
+          <div class="col-sm-4">
+              <label >What book of accounts do you keep</label>
+              <input type="text" class="form-control" [(ngModel)]="BookofAccount"> 
+          </div>
+          <div class="col-sm-4">
+              <label>Do you keep the books yourself?</label>
+              <select class="form-control" [(ngModel)]="PersonalBooks">
+                <option value="">-select-</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+          </div>
+          <div class="col-sm-4">
+            <label >Do you have a business bank account?</label>
+            <select class="form-control" [(ngModel)]="BusinessBank">
+                <option value="">-select-</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        </div>
+        
+        <div class="row" *ngIf="BusinessBank=='Yes'" >
+          
+          <div class="col-sm-4">
+              <label>Bank Name</label>
+              <select class="form-control" [(ngModel)]="BankName">
+                <option value="">-select-</option>
+                <option value="The Co-operative Bank">The Co-operative Bank</option>
+                <option value="Suntra Investment Bank Ltd">Suntra Investment Bank Ltd</option>
+                <option value="Sterling Investment Bank">Sterling Investment Bank</option>
+                <option value="Standard Investment Bank">Standard Investment Bank</option>
+                <option value="Standard Chartered">Standard Chartered</option>
+                <option value="Prime Bank">Prime Bank</option>
+                <option value="Paramount Bank">Paramount Bank</option>
+                <option value="Oriental Commercial Bank Ltd">Oriental Commercial Bank Ltd.</option>
+                <option value="NIC Bank">NIC Bank</option>
+                <option value="ABC Bank">ABC Bank</option>
+                <option value="National Bank">National Bank</option>
+                <option value="K-Rep Bank">K-Rep Bank</option>
+                <option value="Kenya Post Office Savings Bank">Kenya Post Office Savings Bank</option>
+                <option value="KCB Bank">KCB Bank</option>
+                <option value="Investments & Mortgages Bank Limited – I&M Bank">Investments & Mortgages Bank Limited – I&M Bank</option>
+                <option value="Imperial Bank Limited">Imperial Bank Limited</option>
+                <option value="Housing Finance">Housing Finance</option>
+                <option value="Guardian Bank Ltd">Guardian Bank Ltd.</option>
+                <option value="Giro Commercial Bank Ltd">Giro Commercial Bank Ltd</option>
+                <option value="Fina Bank">Fina Bank</option>
+                <option value="Fidelity Bank">Fidelity Bank</option>
+                <option value="Faida Investment Bank – FIB">Faida Investment Bank – FIB</option>
+                <option value="Equity Bank">Equity Bank</option>
+                <option value="Equatorial Investment Bank">Equatorial Investment Bank</option>
+                <option value="Equatorial Commercial Bank Limited">Equatorial Commercial Bank Limited</option>
+                <option value="Dyer & Blair Investment Bank">Dyer & Blair Investment Bank</option>
+                <option value="Dubai Bank Kenya Ltd">Dubai Bank Kenya Ltd</option>
+                <option value="Dry Associates Limited">Dry Associates Limited</option>
+                <option value="Development Bank Of Kenya Ltd">Development Bank Of Kenya Ltd</option>
+                <option value="Co-operative Bank">Co-operative Bank</option>
+                <option value="Consolidated Bank">Consolidated Bank</option>
+                <option value="Commercial Bank of Africa">Commercial Bank of Africa</option>
+                <option value="Citibank N A">Citibank N A</option>
+                <option value="CFC Stanbic Bank Limited">CFC Stanbic Bank Limited</option>
+                <option value="Central Bank of Kenya">Central Bank of Kenya</option>
+                <option value="Bank Of Baroda (Kenya) Ltd">Bank Of Baroda (Kenya) Ltd.</option>
+                <option value="Bank of Africa Kenya Ltd">Bank of Africa Kenya Ltd</option>
+                <option value="Afrika Investment Bank">Afrika Investment Bank</option>
+                <option value="African Development Bank Group">African Development Bank Group</option>
+                <option value="African Banking Corporation">African Banking Corporation</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <label>Bank Branch</label>
+            <input type="text" class="form-control"   [(ngModel)]="BankBranch" > 
+        </div>
+        <div class="col-sm-4">
+          <label>Bank Account Number</label>
+          <input type="text" class="form-control"   [(ngModel)]="BankAccountNo" > 
+        </div>
+        </div>
+        <div *ngIf="ClientTypeId=='1'">
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Private Debts(Ksh)</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Ksh</span>
+                <input type="number" class="form-control"   [(ngModel)]="PrivateDebts" > 
+              </div>
+                
+              </div>
+            <div class="col-sm-4">
+              <label>Business Debts(Ksh)</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Ksh</span>
+              <input type="number" class="form-control"   [(ngModel)]="BusinessDebts" > 
+              </div>
+            </div>
+          <div class="col-sm-4">
+            <label>Total Debts(Ksh)</label>
+            <div class="input-group mb-3">
+            <span class="input-group-text">Ksh</span>
+            <input class="form-control"  [(ngModel)]="TotalDebts" readonly> 
+          </div>
+          </div>
+          </div>
+        </div>
+        
+        <div *ngIf="ClientTypeId=='2'">
+          <div class="row">
+          
+            <div class="col-sm-4">
+              <label>Current debts (1 year and Below)</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Ksh</span>
+              <input type="number" class="form-control"   [(ngModel)]="CurrentDebts" > 
+              </div>
+          </div>
+          <div class="col-sm-4">
+            <label> Longterm debts (above 1 Year)</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Ksh</span>
+            <input type="number" class="form-control"   [(ngModel)]="LongTermDebts" > 
+            </div>
+          </div>
+          <div class="col-sm-4">
+          <label>Total Debts</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Ksh</span>
+          <input class="form-control"  value="{{CurrentDebts -- LongTermDebts}}" readonly>
+          </div> 
+          </div>
+          </div>
+        </div>
+        
+        
+        
+              <br>
+
+              <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                <button type="button" (click)="previousStep()" class="btn btn-primary">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
+                AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Save Progress <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
+                <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+              </div>
+           
+        
+            </div>
+        
+            </mat-tab>
+                 
+                <mat-tab [label]=Tab3 >
+                    <div style="padding-left:25px;padding-right: 25px;"> 
+                  <div class="row">
+                    <div class="col-sm-4">
+                        <label>Amount of loan required Sh</label>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Ksh</span>
+                          <input type="number" class="form-control" (blur)="transformAmount($event)" [(ngModel)]="loanAmount" >
+                        </div>
+                      </div>
+                    <div class="col-sm-8">
+                      <label>What is the purpose of the loan if granted? (100 Characters)</label>
+                      <textarea class="form-control" aria-label="With textarea" maxlength="100" [(ngModel)]="loanpurpose"></textarea> 
+                    </div>
+                      
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-4">
+                          <label >Have you applied for or received a loan from any other source during the past two years? </label>
+                          
+                          <select class="form-control" [(ngModel)]="haveAppliedLoan">
+                            <option value="">-select-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-8" *ngIf="haveAppliedLoan=='Yes'">
+                          <label>If Yes State the loan Creditor</label>
+                          <textarea class="form-control" aria-label="With textarea" [(ngModel)]="AppliedLoanCreditor"></textarea>
+                   
+                      </div>
+                  </div>
+                  <hr>
+                  <h4>Collateral.</h4>
+                  <div class="row" *ngIf="ClientTypeId=='1'">
+                    <div class="col-sm-4">
+                        <label >What security will you offer </label>
+                        <select class="form-control" [(ngModel)]="collateralType">
+                          <option value="">-select-</option>
+                          <option value="Log Books">Log Books (motor cycle, motor vehicle) </option>
+                          <option value="Title deed">Title deed</option>
+                          <option value="Third Party Collateral">Third Party Collateral</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-4" >
+                        <label>Attach Collateral Document</label>
+                        <input type="file" class="form-control" style="border: 0;">
+                    </div>
+                    <div class="col-sm-4" *ngIf="collateralType=='Third Party Collateral'">
+                      <label>Attach Concent Document</label>
+                      <input type="file"  id="file"  class="form-control" style="border: 0;">
+                    </div>
+                  </div>
+                  <div *ngIf="ClientTypeId=='2'">
+                    <div class="row" >
+                      <div class="col-sm-4">
+                          <label >What security will you offer </label>
+                          <select class="form-control" [(ngModel)]="collateralType">
+                            <option value="">-select-</option>
+                            <option value="Log Books">Log Books (motor cycle, motor vehicle) </option>
+                            <option value="Title deed">Title deed</option>
+                            <option *ngIf="FormOfBusiness =='Partnership' || FormOfBusiness =='Limited Company'" value="Third Party Collateral">Third Party Collateral</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4" >
+                          <label>Attach Collateral Document</label>
+                          <input type="file" class="form-control" style="border: 0;">
+                      </div>
+                      <div class="col-sm-4" *ngIf="FormOfBusiness !='Partnership' || FormOfBusiness !='Limited Company'">
+                        <label>Attach Endorsement Document</label>
+                        <input type="file"  id="file"  class="form-control" style="border: 0;">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4" *ngIf="collateralType=='Third Party Collateral'">
+                        <label>Attach Concent Document</label>
+                        <input type="file"  id="file"  class="form-control" style="border: 0;">
+                      </div>
+                    </div>
+                  </div>
+                  
+               
+                  <hr>
+                  <h4>Enter Names, addresses and signatures of two Guarantors.</h4>
+                  <h4>Guarantor 1</h4>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >FullName</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor1Name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Address</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor1Address">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >ID Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor1IdNo">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Attach Copy of ID</label>
+                        <input type="file" id="file"  class="form-control" style="border: 0;">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >Email Address</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor1Email">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Telephone Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor1Telephone">
+                    </div>
+                  </div>
+                  <h4>Guarantor 2</h4>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >FullName</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor2Name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Address</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor2Address">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >ID Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor2IdNo">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Attach Copy of ID</label>
+                        <input type="file" id="file"  class="form-control" style="border: 0;">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label >Email Address</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor2Email">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Telephone Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="gurantor2Telephone">
+                    </div>
+                  </div>
+        
+                  <br>
+                  <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button type="button" (click)="previousStep()" class="btn btn-primary  ">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                    <button type="button" (click)="generatePdf()" class="btn btn-secondary  ml-2">Preview In PDf &nbsp; <i class="fas fa-file-pdf"></i></button>
+                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmit(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                      MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                      MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
+                      AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Apply Loan <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
+                  </div>
+               
+        
+                </div>
+        
+                </mat-tab>
+                
+              </mat-tab-group>
+            </mat-card>
+  
+      </div>
+
+    </div>
+
+  
+
+
+</div>

@@ -1,0 +1,33 @@
+.circle {
+    border-radius:50%;
+    border-width:2.5px;  
+    border-style:solid;
+    color: #1D385F;
+    display:table;
+    height: 100%;
+    font-weight: bolder;
+    font-size: 150%;
+    width: auto;
+    margin:0 auto;
+    -webkit-animation: mymove 2s 1; /* Chrome, Safari, Opera */
+    animation: mymove 2s 1;
+ }
+
+@-webkit-keyframes mymove {
+    from {color: #3BB2B8;}
+    to {color: #1D385F}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    from {color: #3BB2B8;}
+    to {color: #1D385F;}
+}
+.circle span {
+  display:table-cell;
+  vertical-align:middle;
+  height:175px;
+  width: 175px;
+  text-align:center;
+  padding: 0 15px;
+}

@@ -1,0 +1,1102 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"></a>
+      <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+       Loan Application
+      <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/A-Dashboard"> <i class="fa fa-home"></i>&nbsp;Home</a>
+              </li>
+              <li class="nav-item" active>
+                  <a class="nav-link" routerLink="/Non-ApprovedMembers"> <i class="far fa-thumbs-up"></i>&nbsp;Approve Members</a>
+                </li>  
+              
+              
+            <li class="nav-item" active>
+              <a class="nav-link" routerLink="/Loan-Appraisal"> <i class="fa fa-money"></i>&nbsp;Loan Appraisal</a>
+            </li> 
+          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+          </li>
+          
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>
+              Help</a> 
+        </li>
+        </ul>
+      </div>
+    </nav>
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+        <p style="color: white;">{{spinnerContent}}</p>
+      </ngx-spinner>
+
+    <mat-card>
+        <div class="row" style="margin:2px">
+          <div class="col-sm-6"><h3>APPRAISAL FORM</h3></div>
+          
+        </div>
+        <mat-tab-group [selectedIndex]="selectedIndex" (selectedIndexChange)="informChange($event)">
+            <mat-tab [label]=Tab1>
+                <div class="table-responsive">
+                    <h4>Personal details</h4>
+
+                    <div class="row" style="margin:2px">
+                        <div class="col-sm-4">
+                            <label><strong>Name  of Applicant</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="FullNames" disabled style="background-color:white;">
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <label> <strong>ID Number</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="IdNo" disabled style="background-color:white;">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label> <strong>Pin Number</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="PinNo" disabled style="background-color:white;">
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin:2px">
+                        <div class="col-sm-4">
+                            <label> <strong>PostalAddress</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="PostalAddress" disabled style="background-color:white;">
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <label> <strong>Email Address</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="Email" disabled style="background-color:white;">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label> <strong>Telephone</strong></label>
+                            <input type="text" class="form-control"   [(ngModel)]="Telephone" disabled style="background-color:white;">
+                        </div>
+                      </div>
+
+                  </div>
+                  <br>
+
+                  <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                        <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                    
+                  </div>
+
+            </mat-tab>
+
+            <mat-tab [label]=Tab2>
+
+                <h4>Business Details </h4>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Type of Business</label>
+                        <input type="text" class="form-control"   [(ngModel)]="TypeofBusiness" > 
+                    </div>
+
+                    <div class="col-sm-4">
+                      <label >How long has the business been in operation?</label> 
+                      <div class="row">
+                        <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInOperation"></div>
+                        <div class="col-sm-8">
+                          <select class="form-control" [(ngModel)]="BeenInOperationTime">
+                            <option value="Day">Day(s)</option>
+                            <option value="Month">Month(s)</option>
+                            <option value="Year">Year(s)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+            
+                   
+            
+                    <div class="col-sm-4">
+                        <label>Is the business registered? </label>
+                        <input type="text" class="form-control"   [(ngModel)]="IsRegistered" > 
+                        
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <label>Select form of Business</label>
+                        <select class="form-control" name="CompanyBForm" [(ngModel)]="CompanyBForm">
+                          <option selected value="None">-Not Selected-</option>
+                          <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+                          <option value="Partnership" name="Partnership">Partnership</option>
+                          <option value="Limited Company" name="Limited Company">Limited Company</option>
+                          <option value="SILC" name="SILC">SILC</option>
+                          <option value="VSLA" name="VSLA">VSLA</option>
+                          <option value="Juakali" name="Juakali">Juakali </option>
+                          <option value="Sole-Proprietor" name="Juakali">Sole-Proprietor</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Trade license /Permit</label>
+                        <input type="text" class="form-control"   [(ngModel)]="TradeLicense" > 
+                    </div>
+                  </div>
+
+                  <hr>
+                  <h4>Business premises </h4>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                        <label>Type of Building </label>
+                        <input type="text" class="form-control"   [(ngModel)]="TypeofBuilding" > 
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>Condition</label>
+                        <input type="text" class="form-control"   [(ngModel)]="Condition" > 
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label >Do you own the business building or is it rented?</label>
+                        <select class="form-control" [(ngModel)]="OwnBuilding">
+                        <option value="">-select-</option>
+                        <option value="Rented">Rented</option>
+                        <option value="Owner">Owner</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="OwnBuilding=='Rented'">
+                    <div class="col-sm-4">
+                        <label >Owner's Name(Landloard/LandLady)</label>
+                        <input type="text" class="form-control" [(ngModel)]="BuildingOwnerName"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Owner's Address(Landloard/LandLady)</label>
+                        <input type="text" class="form-control"   [(ngModel)]="BuildingOwnerAddress" > 
+                
+                    </div>
+                    <div class="col-sm-4">
+                      <label >Amount of Rent(Ksh)</label>
+                      <input type="text" class="form-control"  [(ngModel)]="BuildingRent" > 
+                    </div>
+                  </div> 
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <label>Layout and cleanliness </label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="LayoutAndCleanliness"></textarea>    
+                    </div>
+                </div>
+
+                  <hr>
+                  <h4>Business Records: </h4>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                        <label>Cash Book </label>
+                        <select class="form-control" [(ngModel)]="CashBook">
+                          <option value="">-select-</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label>Credit Ledger</label>
+                        <select class="form-control" [(ngModel)]="CreditLedger">
+                          <option value="">-select-</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label>Stock Books</label>
+                        <select class="form-control" [(ngModel)]="StockBooks">
+                          <option value="">-select-</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <label >Others</label>
+                      <select class="form-control" [(ngModel)]="OtherBooks">
+                        <option value="">-select-</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <label>Describe the other books used</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="OtherBooksDescription"></textarea>    
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                        <label >Are Books kept up-to-date? </label>
+                        <select class="form-control" [(ngModel)]="IsBooksUpToDate">
+                            <option value="">-select-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label >Who keeps the books? </label>
+                        <input type="text" class="form-control"  [(ngModel)]="WhoKeepsBooks" >
+                    </div>
+                    <div class="col-sm-3">
+                        <label >Are Personal drawings recorded? </label>
+                        <select class="form-control" [(ngModel)]="IsPersonalDrawingsRecorded">
+                            <option value="">-select-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label >Do you have a business bank account?</label>
+                        <select class="form-control" [(ngModel)]="HaveBusinessBank">
+                            <option value="">-select-</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="HaveBusinessBank=='Yes'" >
+                    <div class="col-sm-4">
+                        <label>Bank Name</label>
+                        <select class="form-control" [(ngModel)]="BankName">
+                          <option value="">-select-</option>
+                          <option value="Equity Bank">Equity Bank</option>
+                          <option value="KCB Bank">KCB Bank</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <label>Bank Branch</label>
+                      <input type="text" class="form-control"   [(ngModel)]="BankBranch" > 
+                    </div>
+
+                  </div>
+
+                  <br>
+                  <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                    <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                  </div>
+                  
+            </mat-tab>
+
+            <mat-tab [label]=Tab3>
+                <mat-tab-group [selectedIndex]="selectedIndex1" (selectedIndexChange)="informChangeTable($event)">
+                    <mat-tab [label]=Tabs1>
+                        <h2>(i) CASH FLOW ANALYSIS FORM</h2>
+
+                        <div class="row">
+                            <h3>a) Cash in the bank at the start of the month</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="A1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="A2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="A3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="A4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation() [(ngModel)]="A5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="A6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>b) Cash in hand at the start of the month</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="B1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="B2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="B3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="B4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="B5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="B6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>C) Cash  sales</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="C6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>Total cash (A+B+C)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABC6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>d) Other monies expected</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="D1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="D2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="D3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="D4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="D5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="D6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>Total cash inflows (A+B+C+D)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"   [(ngModel)]="ABCD1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"    [(ngModel)]="ABCD2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"    [(ngModel)]="ABCD3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="ABCD4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="ABCD5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="ABCD6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>e) Cash  Purchases</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="E1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="E2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="E3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="E4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="E5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="E6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>f) Cash Payments</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="F1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="F2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="F3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="F4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="F5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="F6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>Total Cash outflows(E+F)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"    [(ngModel)]="EF1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="EF2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="EF3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="EF4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"  [(ngModel)]="EF5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"  [(ngModel)]="EF6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>Surplus/Deficit </h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="S6" > 
+                            </div>
+                        </div>
+                        <br>
+                        <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                            <button type="button" (click)="previousStepTable()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                            <button type="button" (click)="nextStepTable()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                        
+                        </div>
+                        
+                        
+                    </mat-tab>
+                    <mat-tab [label]=Tabs2>
+                        <h2>(ii) PROFIT AND LOSS STATEMENT </h2>
+
+                        <div class="row">
+                            <h3>a) Monthly sales</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="MS1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="MS2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="MS3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="MS4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="MS5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="MS6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>b) opening stock </h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OS1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="OS2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="OS3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OS4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="OS5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OS6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>c) Purchases  for that month</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="PM1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="PM2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="PM3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="PM4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="PM5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="PM6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>d)Goods available for sale(B+C)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GBC1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"    [(ngModel)]="GBC2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"    [(ngModel)]="GBC3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="GBC4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="GBC5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"    [(ngModel)]="GBC6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>e) Closing Stock</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"   (keyup)=formulation()  [(ngModel)]="CS1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="CS2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="CS3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="CS4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number"class="form-control"  (keyup)=formulation() [(ngModel)]="CS5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="CS6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>f) Cost of goods Sold(D-E)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number"  class="form-control"    [(ngModel)]="DE1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="DE2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="DE3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="DE4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="DE5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="DE6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>g) Gross Profit(A-F)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"    [(ngModel)]="AF1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  [(ngModel)]="AF2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="AF3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"  [(ngModel)]="AF4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="AF5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="AF6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>h) Operating expenses</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OE1" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="OE2" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OE3" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OE4" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="OE5" > 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="OE6" > 
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <h3>i)  Net Profit(G-H)</h3>
+                            <div class="col-sm-2">
+                                <label>1st</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH1" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2nd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH2" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>3rd</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH3" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>4th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH4" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>5th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH5" disabled style="background-color:white;"> 
+                            </div>
+                            <div class="col-sm-2">
+                                <label>6th</label>
+                                <input type="number" class="form-control"   [(ngModel)]="GH6" disabled style="background-color:white;"> 
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                            <button type="button" (click)="previousStepTable()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                            <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                        </div>
+
+                    </mat-tab>
+                </mat-tab-group>
+                
+
+
+            </mat-tab>
+
+            <mat-tab [label]=Tab4>
+                <h4>OTHER DETAILS</h4>
+
+                <h3>(i) Security</h3>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label >Type of security </label>
+                        <select class="form-control" [(ngModel)]="SecurityType">
+                          <option value="">-select-</option>
+                          <option value="Log Books">Log Books (motor cycle, motor vehicle) </option>
+                          <option value="Title deed">Title deed</option>
+                          <option value="Third Party Collateral">Third Party Collateral</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Approximate value of security</label>
+                        <input type="text" class="form-control"   [(ngModel)]="ApproximateValOfSecurity" >
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Adequacy of security</label>
+                        <input type="text" class="form-control"   [(ngModel)]="AdequacyofSecurity" >
+                    </div>
+                </div>
+
+                <hr>
+
+                <h3>(ii) Business environment</h3>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Competitors</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Competitors"></textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>General safety (security)</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="GeneralSafety"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Regulations (Licenses)</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Regulations"></textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Technology in use</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="TechnologyUsed"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Date of visit(s) </label>
+                        <input type="date" class="form-control"   [(ngModel)]="DateofVisit" >
+                    </div>
+                </div>
+                <br>
+
+                <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                    <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                               
+                </div>
+            </mat-tab>
+
+            <mat-tab [label]=Tab5>
+                <h3> Loan Appraisal Score Sheet</h3>
+
+                <div class="row">
+                    <h3>ISSUE/PARAMETERS</h3>
+                    <h3>1. Purpose</h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="30" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="PurposeActualScore" > 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="PurposeRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <h3>2. Character </h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="25" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="CharacterActualScore" > 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="CharacterRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <h3>3. Security </h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="20" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="SecurityActualScore" > 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="SecurityRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <h3>4. Ability</h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="20" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="AbilityActualScore" > 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="AbilityRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <h3>5. Amount</h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="10" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="AmountActualScore" > 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="AmountRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <h3>Total</h3>
+                    <div class="col-sm-4">
+                        <label>Maximum score (%)</label>
+                        <input type="text" class="form-control"   value="100" disabled style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Actual score</label>
+                        <input type="number" class="form-control"  (keyup)=formulation()  [(ngModel)]="TotalActualScore" readonly style="background-color: white;"> 
+                    </div>
+                    <div class="col-sm-4">
+                        <label>REMARK</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="TotalRemarks"></textarea> 
+                    </div>
+                </div>
+
+                <br>
+                <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                    <button type="button" (click)="openAppraisalPdf(TypeofBusiness,BeenInOperation,BeenInOperationTime,IsRegistered,CompanyBForm,TradeLicense,TypeofBuilding,
+                    Condition,OwnBuilding,BuildingOwnerName,BuildingOwnerAddress,BuildingRent,LayoutAndCleanliness,CashBook,CreditLedger,
+                    StockBooks,OtherBooks,OtherBooksDescription,IsBooksUpToDate,WhoKeepsBooks,IsPersonalDrawingsRecorded,HaveBusinessBank,
+                    BankName,BankBranch,A1,A2,A3,A4,A5,A6,B1,B2,B3,B4,B5,B6,C1,C2,C3,C4,C5,C6,ABC1,ABC2,ABC3,ABC4,ABC5,ABC6,D1,D2,D3,D4,
+                    D5,D6,ABCD1,ABCD2,ABCD3,ABCD4,ABCD5,ABCD6,E1,E2,E3,E4,E5,E6,F1,F2,F3,F4,F5,F6,EF1,EF2,EF3,EF4,EF5,EF6,S1,S2,S3,S4,S5,S6,MS1,MS2,MS3,MS4,MS5,MS6,
+                    OS1,OS2,OS3,OS4,OS5,OS6,PM1,PM2,PM3,PM4,PM5,PM6,GBC1,GBC2,GBC3,GBC4,GBC5,GBC6,CS1,CS2,CS3,CS4,CS5,CS6,DE1,DE2,DE3,DE4,DE5,DE6,AF1,AF2,AF3,AF4,AF5,AF6,
+                    OE1,OE2,OE3,OE4,OE5,OE6,GH1,GH2,GH3,GH4,GH5,GH6,SecurityType,ApproximateValOfSecurity,AdequacyofSecurity,Competitors,GeneralSafety,Regulations,TechnologyUsed,
+                    DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
+                    AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks)" class="btn btn-secondary  ml-2">Preview In PDf &nbsp; <i class="fas fa-file-pdf"></i></button>
+                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmit(TypeofBusiness,BeenInOperation,BeenInOperationTime,IsRegistered,CompanyBForm,TradeLicense,TypeofBuilding,
+                              Condition,OwnBuilding,BuildingOwnerName,BuildingOwnerAddress,BuildingRent,LayoutAndCleanliness,CashBook,CreditLedger,
+                              StockBooks,OtherBooks,OtherBooksDescription,IsBooksUpToDate,WhoKeepsBooks,IsPersonalDrawingsRecorded,HaveBusinessBank,
+                              BankName,BankBranch,A1,A2,A3,A4,A5,A6,B1,B2,B3,B4,B5,B6,C1,C2,C3,C4,C5,C6,ABC1,ABC2,ABC3,ABC4,ABC5,ABC6,D1,D2,D3,D4,
+                              D5,D6,ABCD1,ABCD2,ABCD3,ABCD4,ABCD5,ABCD6,E1,E2,E3,E4,E5,E6,F1,F2,F3,F4,F5,F6,EF1,EF2,EF3,EF4,EF5,EF6,S1,S2,S3,S4,S5,S6,MS1,MS2,MS3,MS4,MS5,MS6,
+                              OS1,OS2,OS3,OS4,OS5,OS6,PM1,PM2,PM3,PM4,PM5,PM6,GBC1,GBC2,GBC3,GBC4,GBC5,GBC6,CS1,CS2,CS3,CS4,CS5,CS6,DE1,DE2,DE3,DE4,DE5,DE6,AF1,AF2,AF3,AF4,AF5,AF6,
+                              OE1,OE2,OE3,OE4,OE5,OE6,GH1,GH2,GH3,GH4,GH5,GH6,SecurityType,ApproximateValOfSecurity,AdequacyofSecurity,Competitors,GeneralSafety,Regulations,TechnologyUsed,
+                              DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
+                              AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks)" ><i class="fa fa-database"></i>&nbsp;Submit Form</button>
+                </div>
+                        
+            </mat-tab>
+
+        </mat-tab-group>
+    </mat-card>
+</div>  

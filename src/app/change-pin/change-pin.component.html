@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Change PIN
+  <img src="assets/imgs/Logo_Name.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item" active>
+          <a class="nav-link" routerLink="/Loans"> <i class="fa fa-money"></i>&nbsp;Apply Loan</a>
+        </li>  
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="alert alert-light">
+    <div class="input-group" >
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Current PIN</span>
+        </div>
+        <input maxlength="4" name="oldPin" [(ngModel)]="oldPin" type="password" placeholder="Enter Current PIN" class="form-control">
+        </div>
+
+        <div class="input-group" style="margin-top: 10px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">New PIN</span>
+            </div>
+            <input maxlength="4" name="newPIN" [(ngModel)]="newPIN" type="password" placeholder="Enter New PIN" class="form-control">
+        </div>
+
+        <div class="input-group" style="margin-top: 10px;">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Confirm PIN</span>
+            </div>
+            <input maxlength="4" name="confirmedPIN" [(ngModel)]="confirmedPIN" type="password" placeholder="Confirm New PIN" class="form-control">
+        </div>
+
+        <div *ngIf="errorMsg!=''" style="margin-top: 10px;">
+            <button class="btn btn-block btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{errorMsg}}</button>
+        </div>
+        <div *ngIf="processingMsg!=''&&isProcessing==true" style="margin-top: 10px;">
+            <button class="btn btn-block btn-primary"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;{{processingMsg}}</button>
+        </div>
+        <div *ngIf="isSusccess==true" style="margin-top: 10px;">
+            <button class="btn btn-block btn-success"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;{{successMsg}}</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <button class="btn btn-block btn-danger"  *ngIf="touched&&!oldPin"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Current PIN</button>
+            <button class="btn btn-block btn-danger"   *ngIf="touched&&oldPin&&!newPIN"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter New PIN</button>
+            <button class="btn btn-block btn-danger"  *ngIf="touched&&oldPin&&newPIN&&!confirmedPIN"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Confirm PIN</button>
+            <button class="btn btn-block btn-danger"   *ngIf="touched&&oldPin&&newPIN&&confirmedPIN&&newPIN!=confirmedPIN"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;PINs do not match</button>
+            <button class="btn btn-block btn-danger"   *ngIf="touched&&oldPin&&newPIN&&confirmedPIN&&newPIN==confirmedPIN&&rPin!=oldPin"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Invalid Details</button>
+            <button class="btn btn-block btn-info"   (click)="updatePIN(newPIN,confirmedPIN,oldPin)"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;Update PIN</button>
+            </div>
+</div>
+  

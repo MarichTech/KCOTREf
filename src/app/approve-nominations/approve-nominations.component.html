@@ -1,0 +1,133 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Approve Guarantorship
+  <img src="assets/imgs/Logo_Name.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Apply Loan
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/Loans"> <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;Mobile Loans</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/Loans-BackOffice"> <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Back-Office Loans</a>
+          </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Guarantorship
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/ApproveNominations"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Approve Guarantorship</a>
+            <a class="dropdown-item" routerLink="/NominateGuarantors"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Request Guarantorship</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/LoanNominations"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View Outgoing Requests</a>
+          </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="alert alert-light" *ngIf="connecting==true&&!disconnected"> 
+<div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+<hr>
+<img src="assets/imgs/loan-application_former.png">
+<br>
+  <label>Getting Guarantorship Requests ready..</label>
+</div>
+
+<div class="alert alert-light" *ngIf="uploadingApproval==true"> 
+  <div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+  <hr>
+  <img src="assets/imgs/loan-application_former.png">
+  <br>
+    <label>Uploading Approval..</label>
+  </div>
+
+<div *ngIf="disconnected==true">
+<!--connection status starts here-->
+<div class="networkCard">
+  <div class="card">
+  <div style="color: gray;">
+      <label color="purple">No Internet Connection</label>
+  </div>
+  <hr>
+  <br>
+  <div class="circle_Connection">
+    <i class="fa fa-wifi" aria-hidden="true"></i>
+    <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+  </div>
+  <br>
+  <label text-wrap>Please check your connection and try again</label>
+    <hr>
+    <div style="color: gray;">
+        <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+    </div> 
+  </div>
+</div>
+</div>
+
+<div *ngIf="start==true">
+<div *ngIf="respGRequests&&noOfRequests>0">
+<!--<div class="alert alert-light">
+ <label class="form-control">Select a Loan from the listing to proceed</label>
+</div>-->
+<div *ngFor="let respGRequest of respGRequests">
+
+      <ul class="list-group" >
+          <li class="list-group-item" style="margin-top: 10px;">
+              Member Name : <i>{{respGRequest.CreatedBy}}</i> |<br>
+              Requested Amount <i>{{respGRequest.NominatedAmount |currency:'ksh ':true:'1.0'}}</i> | <br>
+              Approved Amount <i>{{respGRequest.ApprovedAmount |currency:'ksh ':true:'1.0'}}</i> <br>
+              Request Date <i>{{respGRequest.CreatedOn | date: 'dd/MM/yyyy'}}</i>
+            <button class="btn btn-primary" style="float: right; margin-top: 10px;" (click)="approve(respGRequest.NominatedGuarantorId,respGRequest.GuarantorId,respGRequest.LoanId,respGRequest.NominatedAmount, respGRequest.CreatedBy)">Approve</button>
+            </li>
+      </ul>
+</div>
+</div>
+
+<div *ngIf="respGRequests&&noOfRequests==0">
+    <div class="alert alert-light">
+    <label class="form-control">You do not have any Guarantor Requests received at the moment</label>
+
+    <button class="btn btn-primary" (click)="Home()" style="margin-top: 20px;">OK</button>
+    </div>
+</div>
+</div>
+
+<div *ngIf="next==true&&uploadingApproval==false">
+  <div class="alert alert-light">
+     <label class="form-control">Member Name: <i>{{CreatedBy}}</i> </label>
+     <label class="form-control">Requested Amount <i>{{requestedAmount |currency:'ksh ':true:'1.0'}}</i> | </label>
+     <hr>
+     <label>Approval Amount</label>
+     <input [(ngModel)]="apprAmount" name="apprAmount" maxlength="7" maxlength="10" placeholder="Enter amount to approve" class="form-control">
+    <button class="btn btn-primary" (click)="approveFinal(apprAmount)" style="margin-top: 10px;">Proceed</button> 
+    </div>
+ </div>

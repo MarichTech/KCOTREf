@@ -1,0 +1,185 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+    <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/A-Dashboard"> <i class="fa fa-home"></i>&nbsp;Home</a>
+          </li>
+  
+      
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+          </li>
+      
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>Help</a> 
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+<div class="container-fluid">
+    <br>
+
+        <div class="row">
+            <div class="col-md-4"> 
+
+                <h1 class="mat-h1">Member Details</h1>  
+
+            </div>
+
+        
+        </div>
+
+        <br>
+    
+        <div class="row">
+            <div class="col-md-4"> 
+                    <label class="form-label">Surname</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control"  [(ngModel)]="Surname" readonly>
+                    </div>        
+               </div>
+
+               <div class="col-md-4">
+                    <label class="form-label">FirstName</label>
+                    <div class="input-group">    
+                        <input type="text" class="form-control" [(ngModel)]="FirstName" readonly>
+                    </div> 
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">Other Names</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="OtherNames" readonly>
+                    </div>  
+                </div> 
+
+        </div>
+
+        <br>
+
+        <div class="row">
+           
+            <div class="col-md-4">
+             <label class="form-label">Gender</label>
+             <div class="input-group">    
+                 <input type="text" class="form-control" errorDescription [(ngModel)]="Gender" readonly>
+             </div> 
+            </div> 
+
+
+            <div class="col-md-4">
+             <label class="form-label">Marital Status</label>
+             <div class="input-group">    
+                 <input type="text" class="form-control" [(ngModel)]="MaritalStatus" readonly>
+             </div> 
+            </div> 
+
+            <div class="col-md-4">
+             <label class="form-label">Date of Birth</label>
+             <div class="input-group">    
+                 <input type="text" class="form-control" [(ngModel)]="DOB" readonly>
+             </div> 
+            </div> 
+            
+
+     </div>
+
+        <br>
+
+        <div class="row">
+           
+               <div class="col-md-4">
+                <label class="form-label">Id Number</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="IdNo" readonly>
+                </div> 
+               </div> 
+
+
+               <div class="col-md-4">
+                <label class="form-label">Email</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="Email" readonly>
+                </div> 
+               </div> 
+
+               <div class="col-md-4">
+                <label class="form-label">Fax</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="Fax" readonly>
+                </div> 
+               </div> 
+               
+
+        </div>
+
+    <br>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">PhoneNumber</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="PhoneNumber" readonly>
+                </div> 
+               </div> 
+
+
+               <div class="col-md-4">
+                <label class="form-label">Telephone 1</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="Tel1" readonly>
+                </div> 
+               </div> 
+
+               <div class="col-md-4">
+                <label class="form-label">Telephone 2</label>
+                <div class="input-group">    
+                    <input type="text" class="form-control" [(ngModel)]="Tel2" readonly>
+                </div> 
+               </div> 
+               
+   
+           </div> 
+           
+    <br>
+   
+    <div class="row">
+        <div class="col-md-4">
+            <label class="form-label">Address</label>
+            <div class="input-group">    
+                <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Address" readonly></textarea>
+            </div> 
+           </div> 
+
+        <div class="col-md-4"> 
+            <label class="form-label">Postal Address</label>
+            <div class="input-group">
+                <textarea class="form-control" aria-label="With textarea" [(ngModel)]="PostalAddress" readonly></textarea>
+            </div> 
+        </div> 
+
+       </div> 
+
+       <br>
+
+       <div class="btn-toolbar">
+        <button type="button" (click)="onBack()"   class="btn btn-outline-danger btn-space"><i class="fas fa-arrow-left"></i> Back</button>
+              
+    </div>
+    
+
+</div>
+

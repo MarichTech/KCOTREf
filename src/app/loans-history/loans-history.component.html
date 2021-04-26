@@ -1,0 +1,124 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   My Loans
+  <img src="assets/imgs/Logo_Name.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item" active>
+          <a class="nav-link" routerLink="/Loans"> <i class="fa fa-money"></i>&nbsp;Apply Loan</a>
+        </li>  
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    <section class="alert alert-light" *ngIf="isConnecting">
+            
+        <p class="lead" style="color: #161c42;font-weight: bold;">Please wait..</p>
+            <hr>
+            <img src="assets/imgs/loan-application_former.png">
+            <p class="lead" style="color: #161c42;font-weight: bold;">Getting your Loan History ready...</p>
+            <br>
+     </section>
+<div class="card" *ngIf="noLoans&&!isConnecting&&!isDisconnected">
+  <div style="text-align: center;">
+<label style="color: #1D385F; font-size: 110%;">{{subTitle}}</label>
+<div class="circle_Connection">
+   <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 300%;"></i>
+</div>
+<label text-wrap>{{message}}</label>
+
+   <div *ngIf="isAllLoans&&!isClosedLoans&&!isActiveLoans">
+       <button class="btn btn-block btn-primary" (click)="ActiveLoans()"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Active</button><button class="btn btn-block btn-info" (click)="ClosedLoans()"><i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;Cleared Loans</button>
+   </div>
+   <div *ngIf="!isAllLoans&&isClosedLoans&&!isActiveLoans">
+       <button class="btn btn-block btn-primary" (click)="ActiveLoans()"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Active</button><button class="btn btn-block btn-info" (click)="AllLoans()"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;All Loans</button>
+   </div>
+   <div *ngIf="!isAllLoans&&!isClosedLoans&&isActiveLoans">
+       <button class="btn btn-block btn-primary" (click)="ClosedLoans()"><i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;Cleared</button><button class="btn btn-block btn-info" (click)="AllLoans()"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;All Loans</button>
+   </div>
+ </div>
+ </div>
+
+<div *ngIf="!isConnecting&&!isDisconnected&&respLoans" class="loanList">
+  <div *ngFor="let respLoan of respLoans">
+    <div *ngIf="respLoan.loanstatus=='DISBURSED'">
+      <div class="alert alert-light">
+    <i>Kes.</i><label style="font-size: 150%; color: purple; font-weight: bolder;">{{respLoan.LoanAmount}}</label>&nbsp;&nbsp;&nbsp;<label style="float: right;" *ngIf="respLoan.LoanBalance>0" style="color:green;">Active</label><label *ngIf="respLoan.LoanBalance<=0" style="color:grey; float: right;">Cleared</label>
+<hr>
+<div class="LoanAmountFontSmall" (click)="historyDetails(respLoan.LoanId,respLoan.TotalLoan,respLoan.Duedate,respLoan.LoanBalance)">
+   Due Date::{{respLoan.Duedate | date: 'dd/MM/yyyy'}} 
+   <button class="btn btn-block btn-info">View</button>
+</div>
+</div>
+</div>
+</div>
+<button class="btn btn-block" style="color: white" *ngIf="loansFound>0">Accounts found:: {{loansFound}}</button>
+</div>
+
+<div *ngIf="isDisconnected">
+
+ <div class="networkCard">
+     <div class="card">
+     <div style="color: gray;">
+         <label color="purple">No Internet Connection</label>
+     </div>
+     <hr>
+     <br>
+     <div class="circle_Connection">
+       <i class="fa fa-wifi" aria-hidden="true"></i>
+       <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+     </div>
+     <br>
+     <label text-wrap>Please check your connection and try again</label>
+       <hr>
+       <div style="color: gray;">
+           <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+       </div> 
+     </div>
+ </div>
+ </div>
+
+<!-- <ion-fab right bottom *ngIf="!isConnecting&&!isDisconnected&&respLoans">
+<button ion-fab>
+ <ion-icon name="ios-funnel-outline"></ion-icon>
+ <ion-label style="font-weight: bolder;">filter</ion-label>
+</button>
+<ion-fab-list side="top">
+<button ion-fab *ngIf="!isAllLoans">
+   <ion-icon name="ios-list-box-outline" (click)="AllLoans()"></ion-icon>
+   <ion-label (click)="AllLoans()">All Loans</ion-label>
+ </button>
+<button ion-fab *ngIf="!isClosedLoans">
+<ion-icon name="ios-checkmark-circle-outline" (click)="ClosedLoans()"></ion-icon>
+<ion-label (click)="ClosedLoans()">Cleared Loans</ion-label>
+</button>
+<button ion-fab *ngIf="!isActiveLoans">
+<ion-icon name="ios-time-outline" (click)="ActiveLoans()"></ion-icon>
+<ion-label (click)="ActiveLoans()">Active Loans</ion-label>
+</button>
+</ion-fab-list>
+</ion-fab>-->

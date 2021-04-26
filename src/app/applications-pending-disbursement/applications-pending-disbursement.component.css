@@ -1,0 +1,21 @@
+.container-fluid{
+   
+    background-color: white;
+}
+
+.container {
+    padding: 1%;
+    height: 120vh;
+    margin: 0 auto;
+  }
+
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: #92badd; /* Just to visualize the extent */
+    
+  }

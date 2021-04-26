@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import '@angular/material/prebuilt-themes/deeppurple-amber.css';*/
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.jumbotron{
+    /*background-color: purple;*/
+}
+.alert-light{
+color: #1D385F;
+/*font-weight: bold;*/
+}
+.alert-danger{
+    color: white;
+    background-color: red;
+    }
+.alert{
+    margin: 0%;
+    margin-top: 5px;
+    /*font-weight: lighter;*/
+    text-align: center;
+}
+.btn-info{
+    background-color: #1D385F;
+}
+.button-group{
+    display: flex;
+    justify-content: space-between;
+   /* width: 20rem;
+    border: .1rem red solid;*/
+}
+.button{
+    width: 100%;
+}
+mat-divider{
+    margin-bottom: 10px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.is-invalid{
+    color:form-feedback-invalid-color;
+    icon:form-feedback-icon-invalid;
+  }

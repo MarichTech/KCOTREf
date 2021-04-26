@@ -1,0 +1,63 @@
+<h5 style="color:blue">Referees</h5>
+ <form  #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" style="padding: -20px;">
+    <input type="hidden"  name="LoanRefereeId"   #LoanRefereeId="ngModel" [(ngModel)]="formData.LoanRefereeId" >
+    <input type="hidden"  name="LoanId"   #LoanId="ngModel" [(ngModel)]="formData.LoanId" >
+    <div class="row">
+     
+        <div class="col-md-6">
+            <label>Full Name</label>
+            <input class="form-control" name="NameOne"   #NameOne="ngModel" [(ngModel)]="formData.NameOne"  placeholder="Enter Full Name" 
+            [class.is-invalid]="!isValid && formData.NameOne==''" required >
+            <div style="color: red; " *ngIf="NameOne.touched && !NameOne.valid">
+                <div *ngIf="NameOne.errors.required">This field is required !!!!</div>
+            </div>  
+        </div>
+        <div class="col-md-6">
+            <label>ID NO.</label>
+            <input class="form-control" name="IDOne"   #IDOne="ngModel" [(ngModel)]="formData.IDOne"  placeholder="ID NO" 
+            [class.is-invalid]="!isValid && formData.IDOne==''" required>
+            <div style="color: red; " *ngIf="IDOne.touched && !IDOne.valid">
+                <div *ngIf="IDOne.errors.required">This field is required !!!!</div>
+            </div> 
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Email Address</label>
+            <input class="form-control" name="EmailOne"   #EmailOne="ngModel" [(ngModel)]="formData.EmailOne"   placeholder="Email Address" 
+            [class.is-invalid]="!isValid && formData.EmailOne==''" [pattern]="Patternemail" required> 
+            <div style="color: red; " *ngIf="EmailOne.touched && !EmailOne.valid">
+                <div *ngIf="EmailOne.errors.required">Email is required !!!!</div>
+                <div *ngIf="EmailOne.errors.pattern"> 
+                    Please Enter <Strong style="text-decoration: underline;">CORRECT</Strong> email format.
+                </div>
+        
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label>Phone No.</label>
+            <input class="form-control" name="PhoneOne"   #PhoneOne="ngModel" [(ngModel)]="formData.PhoneOne" placeholder="Phone NO"
+            [class.is-invalid]="!isValid && formData.PhoneOne==''" required >
+            <div style="color: red; " *ngIf="PhoneOne.touched && !PhoneOne.valid">
+                <div *ngIf="PhoneOne.errors.required">This field is required !!!!</div>
+            </div> 
+        </div>
+    </div>
+    
+    
+    <label>Location Address</label>
+    <input class="form-control"  name="LocationAddress1"   #LocationAddress1="ngModel" [(ngModel)]="formData.LocationAddress1"   placeholder="Location Address" 
+    [class.is-invalid]="!isValid && formData.LocationAddress1==''" required>
+    <div style="color: red; " *ngIf="LocationAddress1.touched && !LocationAddress1.valid">
+        <div *ngIf="LocationAddress1.errors.required">This field is required !!!!</div>
+    </div> 
+     <div style="padding:5px;">
+    <button type="submit" class=" btn btn-info"><i class="fa fa-database"></i> Submit</button>
+   
+    </div>
+</form>
+<br>
+
+
+

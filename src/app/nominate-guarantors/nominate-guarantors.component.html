@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Request Guarantorship
+  <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Apply Loan
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/Loans"> <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;Mobile Loans</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/Loans-BackOffice"> <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Back-Office Loans</a>
+          </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Guarantorship
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/ApproveNominations"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Approve Guarantorship</a>
+            <a class="dropdown-item" routerLink="/NominateGuarantors"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Request Guarantorship</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/LoanNominations"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View Outgoing Requests</a>
+          </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="alert alert-light" *ngIf="connecting==true&&!disconnected"> 
+    <div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+      <hr>
+      <img src="assets/imgs/loan-application_former.png">
+      <br>
+        <label>Getting loans ready..</label>
+ </div>
+ <div *ngIf="next==false">
+    <div *ngFor="let respLoan of respLoans">
+        <div *ngIf="respLoan.loanstatus=='PENDING'">
+            <ul class="list-group" >
+                <li class="list-group-item" style="margin-top: 10px;">
+                    <i>Kes.</i><label style="font-size: 150%; color: black; font-weight: bolder;">
+                        {{respLoan.LoanAmount}} </label> | Loan Date::{{respLoan.LoanApplicationDate | date: 'dd/MM/yyyy'}}
+                        &nbsp;&nbsp; |<u (click)="proceed(respLoan.LoanId,respLoan.LoanAmount,respLoan.LoanApplicationDate)"> Nominate </u>
+                    </li>
+            </ul>
+        </div>
+    </div>
+ </div>
+    <div *ngIf="next==true" class="alert alert-light">
+         <label>Loan Code: {{LoanId}} | Amount {{LoanAmount |currency:'ksh ':true:'1.0'}} | Date {{ApplicationDate | date: 'dd/MM/yyyy'}}</label>
+
+          <label>Enter Guarantor Member Number</label>
+            <input [(ngModel)]="memberNumber" name="memberNumber" maxlength="7" maxlength="10" placeholder="Enter Member Number" class="form-control">
+             {{guarantorName}}
+            <button class="btn btn-light" (click)="Search(memberNumber)" *ngIf="!guarantorName">Search</button>
+    </div>
+    <div *ngIf="next2==true" class="alert alert-light">
+      <label class="form-control">Loan Code: LN000{{LoanId}} | Amount {{LoanAmount |currency:'ksh ':true:'1.0'}} | </label>
+      <label class="form-control">Loan Date: {{ApplicationDate |date: 'dd/MM/yyyy'}}</label>
+      <label class="form-control">Guarantor Name :: {{guarantorName}}</label>
+      <label>Enter suggested Guarantor Amount</label>
+      <input [(ngModel)]="nominatedAmount" name="nominatedAmount" maxlength="7" maxlength="10" placeholder="Enter suggested Amount" class="form-control">
+      <button class="btn btn-primary" (click)="submit(nominatedAmount)" style="margin-top: 10px;"><i class="fa fa-paper-plane" aria-hidden="true"></i> &nbsp;SUBMIT</button>
+    </div> 
+    
+    

@@ -1,0 +1,449 @@
+
+<div class="container">
+  <mat-card>
+    <div class="row">
+      <div class="col-sm-8">
+        <img src="assets/imgs/RLogo.png"  
+        style="width: 200px;height: 50px;padding-left: 10px;">
+      </div>
+      <div class="col-sm-1" style="color: white;padding-bottom: 1%;">
+        <a  routerLink="/" ><i class="fa fa-home"></i>
+        Home</a> 
+      </div>
+      <div class="col-sm-1" style="color: white;">
+        <a routerLink="/help"><i class="fa fa-question-circle"></i>
+        Help</a> 
+      </div>
+    </div>
+    
+  <mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="First">
+      <mat-card class="registration-card">
+        <mat-card-content>
+         <div class="row">
+           <div class="col-sm-3">
+             <label>Select Category</label>
+             <select class="form-control" name="ClientType" [(ngModel)]="ClientType" style="margin-bottom: 10px;">
+               <option selected value="0">-Not Selected-</option>
+               <option value="1" name="Individual">Individual</option>
+               <option value="2" name="Entity">Entity</option>
+             </select>
+             </div>
+             <div class="col-sm-3">
+                 <label>Select Constituency</label>
+                 <select class="form-control" name="Constituency" [(ngModel)]="Constituency" style="margin-bottom: 10px;" (ngModelChange)="loadStations(Constituency)">
+                   <option selected value="0">-Not Selected-</option>
+                   <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" name="Constituency">{{Constituency.EmployerName}}</option>
+                 </select>
+              </div>
+              <div class="col-sm-3">
+                 <label>Select Ward</label>
+                 <select class="form-control" name="Ward" [(ngModel)]="Ward" style="margin-bottom: 10px;" (ngModelChange)=" loadDepartments(Ward)">
+                   <option selected value="0">-Not Selected-</option>
+                   <option *ngFor="let Ward of Wards" value="{{Ward.StationId}}" name="Ward">{{Ward.StationName}}</option>
+                 </select>
+                </div>
+                <div class="col-sm-3">
+                 <label>Select Village</label>
+                 <select class="form-control" name="Village" [(ngModel)]="Village" style="margin-bottom: 10px;">
+                   <option selected value="0">-Not Selected-</option>
+                   <option *ngFor="let Village of Villages" value="{{Village.DepartmentId}}" name="Village">{{Village.DepartmentName}}</option>
+                 </select>
+                </div>
+         </div>
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-6">
+                 <button mat-raised-button color="primary" style="margin-top: 10px;" class="button" (click)="nextCard(ClientType,Constituency,Ward,Village)">NEXT&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-sm-3"></div>
+                </div>
+        </mat-card-content>
+      </mat-card>  
+    </mat-tab>
+    <mat-tab label="Second">
+      <div *ngIf="ClientType==1">
+      <mat-card>
+        <label>Personal Details</label>
+        <div class="row">
+          <div class="col-sm-3">
+            <label>Enter First Name</label>
+              <input [(ngModel)]="Firstname" name="Firstname" type="text" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-sm-3">
+            <label>Enter Middle Name</label>
+              <input [(ngModel)]="Othernames"  name="Othernames" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-sm-3">
+            <label>Enter Surname</label>
+              <input [(ngModel)]="Surname"  name="Surname" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-sm-3">
+            <label>Date of Birth</label>
+            <input type="date" name="DOB" displayFormat="DD MM YYYY" [(ngModel)]="DOB" class="form-control">
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <label>Select Gender</label>
+            <select class="form-control" name="Gender" [(ngModel)]="Gender" placeholder="Select Gender" style="margin-bottom: 10px;">
+              <option selected value="None">-Not Selected-</option>
+              <option value="Male" name="Male">Male</option>
+              <option value="Female" name="Female">Female</option>
+              <option value="Female" name="Intersex">Intersex</option>
+            </select>
+         </div>
+       <div class="col-sm-3">
+      <label>Select Level Of Education</label>
+      <select class="form-control" name="LevelOfEducation" [(ngModel)]="LevelOfEducation" style="margin-bottom: 10px;">
+        <option selected value="None">-Not Selected-</option>
+        <option value="Primary" name="Primary">Primary</option>
+        <option value="Secondary" name="Secondary">Secondary</option>
+        <option value="Certificate" name="Certificate">Certificate</option>
+        <option value="Diploma" name="Diploma">Diploma</option>
+        <option value="UnderGraduate" name="UnderGraduate">UnderGraduate</option>
+        <option value="PostGraduate" name="PostGraduate">PostGraduate</option>
+        <option value="Uneducated" name="Uneducated">Informal</option> 
+      </select>
+      </div>
+      <div class="col-sm-3">
+        <label>Enter National Id No.</label>
+        <input [(ngModel)]="NatIdNo" (keypress)="onlyNumbersAllowed($event)"  name="NatIdNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+     </div>
+      <div class="col-sm-3">
+        <label>Enter Postal Address</label>
+        <input [(ngModel)]="PostalAddress"  name="PostalAddress" type="text" color="secondary" class="form-control">
+      </div>    
+     </div>
+
+          <div class="row">
+              <div class="col-sm-3">
+                <label>Enter Mobile Number</label>
+                <input [(ngModel)]="MobileNo"  name="MobileNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+              </div>
+              <div class="col-md-3">
+                <label>Enter Alternative Phone Number</label>
+                <input type="text" class="form-control" name="AlternativePhoneNumber" [(ngModel)]="AlternativePhoneNumber" style="margin-bottom: 10px;">
+               </div>
+               <div class="col-sm-3">
+                <label>Enter Email Address</label>
+                 <input [(ngModel)]="EmailAddress"  name="EmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+               </div>
+               <div class="col-sm-3">
+                <label>Confirm Email Address</label>
+                <input [(ngModel)]="ConfirmEmailAddress"  name="ConfirmEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+               </div>
+               
+          </div>
+              
+        <br>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Select Employment Status</label>
+            <select class="form-control" name="Empstatus" [(ngModel)]="Empstatus" style="margin-bottom: 10px;">
+              <option selected value="None">-Not Selected-</option>
+              <option value="Employed" name="Employed">Employed</option>
+              <option value="Unemployed" name="Unemployed">Not Employed</option>
+            </select>
+          </div>
+         
+          <div class="col-md-6">
+            <label>Enter personal KRA Pin</label>
+           <input type="text" class="form-control" name="personalKRA" [(ngModel)]="personalKRA" style="margin-bottom: 10px;">
+          </div>
+          
+        </div>     
+      </mat-card>
+      <mat-card>
+        <label>Business Details</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <label> Business Name</label>
+            <input [(ngModel)]="BName"  name="BName" type="text" color="secondary"  class="form-control" style="margin-bottom: 10px;">
+          </div>
+
+
+            <div class="col-sm-6">
+              <label>Legal Status</label>
+              <select class="form-control" name="LegalStatus" [(ngModel)]="LegalStatus" style="margin-bottom: 10px;" (change)="getId($event.target.value)">
+                <option selected value="0">-Not Selected-</option>
+                <option  value="1"  >Registered Business</option>
+                <option  value="2"> Unregistered Business</option>
+              </select>
+           </div>
+           
+        </div>
+      <div *ngIf="show"> 
+        <div  class="row">
+          <div class="col-sm-4">
+            <label>Select form of Business</label>
+            <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;">
+              <option selected value="None">-Not Selected-</option>
+              <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+              <option value="Partnership" name="Partnership">Partnership</option>
+              <option value="Limited Company" name="Limited Company">Limited Company</option>
+              <option value="SILC" name="SILC">SILC</option>
+              <option value="VSLA" name="VSLA">VSLA</option>
+              <option value="Juakali" name="Juakali">Juakali </option>
+              <option value="Sole-Proprietor" name="Juakali">Sole-Proprietor</option>
+  
+            </select>
+            </div> 
+            <div class="col-sm-4">
+              <label>Enter Business Registration Number</label>
+              <input [(ngModel)]="RegistrationNo"  name="RegistrationNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+          <div class="col-sm-4">
+            <label>Registration Date</label>
+            <input type="date" name="BRegDate" displayFormat="DD MM YYYY" [(ngModel)]="BRegDate" class="form-control" >
+          </div>
+        </div> 
+        <div  class="row">
+          <div class="col-sm-6">
+            <label>Enter Business KRA PIN</label>
+            <input [(ngModel)]="BKRA"  name="BKRA" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-sm-6">
+            <label for="file">Attach Registration Certificates</label>
+            <input type="file" id="file"  class="form-control" style="border: 0;">
+          </div>
+         
+        </div> 
+        </div>
+
+        <div class="row">
+          
+        <div class="col-sm-6">
+           <label> Business Type</label>
+            <input class="form-control" maxlength="50" name="BType" [(ngModel)]="BType" style="margin-bottom: 10px;">
+              
+            </div>
+          
+            <div class="col-sm-6" >
+              <label>Physical Location</label>
+            <input  maxlength="50" name="BusinessPhysicalAddress" [(ngModel)]="BusinessPhysicalAddress" class="form-control" style="margin-bottom: 10px;">
+            </div>
+        </div>
+           
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+              <button mat-raised-button color="primary" style="margin-top: 10px;" class="button" (click)="nextCardPersonal(Firstname,Othernames,Surname,MobileNo,DOB,NatIdNo,EmailAddress,Gender,LevelOfEducation,Empstatus,PostalAddress,BName,BRegDate,BKRA,BForm, BType)">NEXT&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+      </mat-card>
+      </div>
+    <mat-card *ngIf="ClientType==2">
+        <label>Entity Details</label>
+        <div class="row">
+          <div class="col-sm-4">
+            <label>Enter Entity Name</label>
+              <input [(ngModel)]="CompanyName" name="CompanyName" type="text" class="form-control" style="margin-bottom: 10px;">
+          </div>
+         
+          <div class="col-sm-4"> 
+            <label>Select form of Business</label>
+          <select class="form-control" name="CompanyBForm" [(ngModel)]="CompanyBForm" style="margin-bottom: 10px;">
+            <option selected value="None">-Not Selected-</option>
+            <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+            <option value="Partnership" name="Partnership">Partnership</option>
+            <option value="Limited Company" name="Limited Company">Limited Company</option>
+            <option value="SILC" name="SILC">SILC</option>
+            <option value="VSLA" name="VSLA">VSLA</option>
+            <option value="Juakali" name="Juakali">Juakali </option>
+          </select>
+          </div>
+
+          <div class="col-sm-4">
+            <label>Enter Registration Number</label>
+            <input [(ngModel)]="CompanyCertNumber" name="CompanyCertNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <label>Entity Registration Date</label>
+                <input type="date" name="CompanyRegDate" [(ngModel)]="CompanyRegDate" displayFormat="DD MM YYYY" class="form-control">
+          </div>
+          <div class="col-sm-3">
+            <label> Business Type</label>
+            <input  class="form-control" name="CompanyBType" [(ngModel)]="CompanyBType" maxlength="50" style="margin-bottom: 10px;">
+            </div>
+            <div class="col-md-3">
+              <label for="file">Attach Registration Certificates</label>
+              <input type="file" id="file" >
+
+            </div>
+          <div class="col-sm-3">
+            <label>Enter Entity KRA PIN</label>
+              <input [(ngModel)]="CompanyKRAPIN"  name="CompanyKRAPIN" type="text" color="secondary" class="form-control">
+          </div>
+       
+          
+          </div>
+          <!--<div class="col-sm-3">
+          <label>Select Co. Sub-County</label>
+          <select class="form-control" name="CompanyBSubCounty" [(ngModel)]="CompanyBSubCounty" style="margin-bottom: 10px;" (ngModelChange)="loadBusinessStations(CompanyBSubCounty)">
+            <option selected value="0">-Not Selected-</option>
+            <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" name="CompanyBSubCounty">{{Constituency.EmployerName}}</option>
+          </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Select Co. Ward</label>
+            <select class="form-control" name="CompanyBWard" [(ngModel)]="CompanyBWard" style="margin-bottom: 10px;" (ngModelChange)="loadBusinessDepartments(CompanyBWard)">
+              <option selected value="0">-Not Selected-</option>
+              <option *ngFor="let Ward of BWards" value="{{Ward.StationId}}" name="CompanyBWard">{{Ward.StationName}}</option>
+            </select>
+            </div>
+        </div>-->
+          <!--<div class="col-sm-3">
+          <label>Select Business Village</label>
+          <select class="form-control" name="CompanyBVillage" [(ngModel)]="CompanyBVillage" style="margin-bottom: 10px;">
+            <option selected value="0">-Not Selected-</option>
+            <option *ngFor="let Village of BVillages" value="{{Village.DepartmentId}}" name="CompanyBVillage">{{Village.DepartmentName}}</option>
+          </select>
+          </div>-->
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Enter Entity's Email Address</label>
+                <input [(ngModel)]="CompanyEmailAddress"  name="CompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+            <div class="col-md-4">
+              <label>Confirm Entity's Email Address</label>
+              <input [(ngModel)]="ConfirmCompanyEmailAddress"  name="ConfirmCompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+            <div class="col-sm-4">
+              <label>Enter Entity's Postal Address</label>
+              <input [(ngModel)]="CompanyPostalAddress"  name="CompanyPostalAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Enter Entity's Contact Person</label>
+              <input [(ngModel)]="ContactPerson"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+          
+            <div class="col-md-4">
+              <label>Enter Entity's Contact Person Position</label>
+              <input [(ngModel)]="ContactPersonPosition"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+
+            <div class="col-sm-4">
+              <label>Enter Entity's Phone Number One</label>
+              <input [(ngModel)]="CompanyCellNumber"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+          
+            <div class="col-md-4">
+              <label>Enter Entity's Phone Number Two</label>
+              <input [(ngModel)]="Telephone2"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+              <button mat-raised-button color="primary" style="margin-top: 10px;" class="button" (click)="nextCardCompany(CompanyName,CompanyCertNumber,CompanyRegDate,CompanyKRAPIN,CompanyBForm,CompanyBType,CompanyCellNumber,CompanyEmailAddress,ContactPerson,ContactPersonPosition,CompanyPostalAddress)">NEXT&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+    </mat-card>
+    </mat-tab>
+    <mat-tab label="Third">
+    <mat-card>
+      <label>Security Details</label>
+      <div class="row">
+        <div class="col-sm-4">
+            <label>Secret Question</label>
+            <select [(ngModel)]="SecretQuestn" name="SecretQuestn" class="form-control">
+                <option value="notSelected">Not Selected</option>
+                <option value="firstPhoneNo">First phone number?</option>
+                <option value="firstTeacher">First Teacher's Name?</option>
+                <option value="oldestCousin">Oldest cousin's Name?</option>
+                <option value="favUncle">Name of your Favorite Uncle?</option>
+                <option value="fatherBornPlace">Town your father was born in?</option>
+                <option value="motherBornPlace">Town your mother was born in?</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+          <label>Enter Secret Answer</label>
+          <input name="SecretAnswer" [(ngModel)]="SecretAnswer" type="text" class="form-control" style="margin-bottom: 10px;">
+        </div>
+        <div class="col-sm-4">
+          <label>Enter Password</label>
+          <input [(ngModel)]="PIN" name="PIN" type="password" minlength="8" class="form-control" style="margin-bottom: 10px;">
+        </div>
+    </div>
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+          <a  class="btn btn-success" style="color: white;">Term and Conditions</a>  
+          </mat-panel-title> 
+          
+        </mat-expansion-panel-header>
+        
+        <div  *ngIf="showTerm">
+        <p>3.1. To apply for an account you must be of legal age (18 years and above) and register personally. You must provide your age in the provided fields and confirm the same in the registration field. The Company reserves the right to ask for proof of age from any customer and suspend their account until satisfactory documentation is provided. The name of the player MUST be the same as the name used when registering with the Company and must correspond with the registered mobile number. Where this is not the case, the relevant account will be suspended. Where an account is suspended, the relevant customer should contact us. All bets/stakes that are placed prior to an account being suspended will stand-win or lose. Should any underage account owner be discovered at any point during the lifetime of the account, the account will immediately be closed indefinitely and all funds deposited to the account will be forfeited. In any such suspected circumstance, the Company may report the activity to the appropriate authorities and the player may suffer the consequences thereto. You agree to provide all such information as we require in connection with such verification checks. We shall be entitled to suspend or restrict your account in any manner that we may deem in our absolute discretion to be appropriate, until such time as the relevant checks are completed to our satisfaction.
+  
+          3.2. You agree to abide by these "Terms and Conditions" at all times, and:
+          
+          (a) not to act in the interests of any third party; 
+          (b) not to utilize money obtained from ill-gotten means;
+          (c) not to credit accounts with bank/credit card/s you are not authorized to use;
+          (d) not to try to hack the Company’s Mobile service, Website and all other media/electronic platforms, or to alter its code in any way in an attempt to cheat, override or manipulate the system or in any way commit fraud or any other crime;
+          (e) not to adopt any criminal behaviour against the Company, its affiliates, agents, service providers, its customers or any third party;
+          (f) not to mislead the Company by intentionally providing false information which may be in the form of but not limited to invalid account details, forged documentation, concealing one's identity, untruthful behaviour or hiding one's true location and/or age.
+          
+          3.3. In the event that you breach one or more of the Account rules as mentioned in 3.1 and 3.2, the Company reserves the right to close your account and seize any available funds. In any such suspected circumstance, the Company may report the activity to the appropriate authorities and the player may suffer the consequences thereto. Contractual obligations will be honoured unless there is any breach of any of the Terms and Conditions on your part or breach of any international law and laws of Kenya. The specific games/products shall be strictly guided by these rules and guidelines herein and all other rules and guidelines that shall be issued from time to time by the Company. The products, guidelines and rules shall remain at all times the property of the Company.
+          
+          3.4. At all times during the subsistence of your subscription/ participation, it is your responsibility to ensure that you are not infringing on any laws in your jurisdiction when opening an account and conducting business with the Company.
+          
+          3.5. You must submit the correct information during your registration. You agree to update this information should there be any changes to your registration data.
+          
+          3.6. The Company will accept no liability from third parties whatsoever, resulting from your providing incorrect or false data.
+          
+          3.7. Each customer must open only one account. Should we identify any customer with more than one account, we reserve the right to close these accounts.
+          
+          3.8. If the Company detects multiple accounts which have been setup deliberately with misleading information, have displayed criminal behaviour, or if the Company concludes that the account-owner has fraudulent intentions, the Company shall be entitled to close the accounts and confiscate all funds, including the initial deposit. In any such suspected circumstance, the Company will report the activity to the appropriate authorities and the player may suffer the consequences thereto. If you nominate another person as an authorized user of your account, you shall be responsible for all transactions such person makes using the relevant account details. Should you lose your account details or feel that someone else may have your account details, please contact us immediately. The Company will however not be responsible for any loss or damage that you may suffer as a result of transaction made by that other person. Please note that personal registration details and any other sensitive data should never be shared with third parties or sent to us in any unencrypted form.
+          
+          
+          3.23. In the event of a cancellation made in accordance with these Terms and Conditions, any charges levied may be reversible. Reversed charges will be credited to your account.</p>
+         </div>
+        <div class="row">
+          <div class="col-sm-4" style="margin: 2%;">
+            <input type="checkbox" [(ngModel)]="exceptTerm"   style="width:20px;height:20px"  > &nbsp; &nbsp;<label> I accept <strong style="color:blue"><a >Terms and Conditions</a></strong> </label>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <div class="btn btn-block">
+          <div class="alert alert-primary" *ngIf="isConnecting==true" style="color: blue;">
+            <label>Uploading registration...</label>
+            <div class="spinner-border" role="status">
+            </div>
+          </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="errorMsg!='' && isConnecting==false">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {{errorMsg}}
+          </div>
+          <button *ngIf="isConnecting==false&&ClientType==1" mat-raised-button color="primary" style="margin-top: 10px;" class="button" (click)="Save(ClientType,Constituency,Ward,Village, Firstname,Othernames,Surname,MobileNo,DOB,NatIdNo,EmailAddress,Gender,LevelOfEducation,Empstatus,PostalAddress,BName,BRegDate,BKRA,BForm, BType,SecretQuestn,SecretAnswer,PIN,personalKRA,AlternativePhoneNumber,LegalStatus,RegistrationNo,ConfirmEmailAddress,exceptTerm,BusinessPhysicalAddress)">Save&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+          <button *ngIf="isConnecting==false&&ClientType==2" mat-raised-button color="primary" style="margin-top: 10px;" class="button" (click)="SaveCompany(CompanyName,CompanyCertNumber,CompanyRegDate,CompanyKRAPIN,CompanyBForm,CompanyBType,CompanyCellNumber,CompanyEmailAddress,ContactPerson,ContactPersonPosition,CompanyPostalAddress,SecretQuestn,SecretAnswer,PIN,Telephone2,ConfirmCompanyEmailAddress,exceptTerm)">Save Company Details&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+  </mat-card>
+  </div>
+ 
+  
+            
+    

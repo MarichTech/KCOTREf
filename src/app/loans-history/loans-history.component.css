@@ -1,0 +1,11 @@
+img{
+    height: 25%;
+    width: 40%;
+    margin: 0 auto;
+    /*margin-top: 10px;
+    //margin-left: 25%;*/
+    }
+.card{
+    margin: 0.5% auto;
+    /*border-radius: 5% !important;*/
+    }

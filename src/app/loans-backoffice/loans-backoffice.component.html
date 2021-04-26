@@ -1,0 +1,254 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Loans
+  <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Apply Loan
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/Loans"> <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;Mobile Loans</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/Loans-BackOffice"> <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Back-Office Loans</a>
+          </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Guarantorship
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/ApproveNominations"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Approve Guarantorship</a>
+            <a class="dropdown-item" routerLink="/NominateGuarantors"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Request Guarantorship</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/LoanNominations"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View Outgoing Requests</a>
+          </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+   <!--page starts here-->
+   <div style="position:relative">
+    <div class="alert alert-light" *ngIf="Connecting==true&&!disconnected&&fetchingLoanTypes==true"> 
+        <div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+          <hr>
+          <img src="assets/imgs/loan-application_former.png">
+          <br>
+            <label>Getting loans ready..</label>
+     </div>
+
+  <div class="alert alert-light" *ngIf="loanProducts&&hideProductSelection==false" style="color: black;">
+  <label>Select Loan Product</label>
+  <select class="form-control" name="LoanTypeId" [(ngModel)]="LoanTypeId">
+    <option selected>-Not Selected-</option>
+    <option *ngFor="let loanProduct of loanProducts" value="{{loanProduct.LoanTypeId}}" name="LoanTypeId">{{loanProduct.Description}} | {{loanProduct.Frequency}} | {{loanProduct.InterestRate}}%</option>
+  </select>
+  <button class="btn btn-info btn-block" *ngIf="LoanTypeId>0" (click)="fetchData(LoanTypeId)" style="margin-top: 10px;">Proceed</button>
+  </div>
+
+   <div *ngIf="!disconnected">
+      <div class="alert alert-light" *ngIf="!showPreview&&!disconnected&&!Connecting&&!generatingPaySchedule&&LoanTypeId>0&&fetchingLoanType==false">
+          <label>Your Loan Eligibility is:</label>
+                <p class="circle"><span>{{loanlimit| currency:'ksh ':true:'1.0'}}</span></p>
+            <label>Enter Loan Details to proceed</label>
+            <br>
+            <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Loan Amount</span>
+            </div>
+                <input [(ngModel)]="LoanAmount" name="LoanAmount" maxlength="7" maxlength="10" placeholder="Enter Loan Amount" class="form-control">
+            </div>
+                <label>Select period ({{Freq}})</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Period</span>
+                  </div>
+                      <input [(ngModel)]="enteredPeriod" name="enteredPeriod" maxlength="2" maxlength="10" placeholder="Enter Period" class="form-control">
+                  </div>
+             <!-- <ion-range min="0" max="{{resPeriod}}" [(ngModel)]="Period" name="Period" step="2" snaps="true" pin=true>
+                <ion-label range-left class="fonts">0</ion-label>
+                <ion-label range-right class="fonts">{{resPeriod}}</ion-label>
+              </ion-range> {{Period}}-->
+              <div style="margin: 7.5px auto;">
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&!LoanAmount"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Loan Amount</button>
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&LoanAmount&&LoanAmount<=0"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Invalid Loan Amount</button>
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&LoanAmount&&LoanAmount>0&&LoanAmount<resMinimumAmount"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Loan Amount Less {{resMinimumAmount}}</button>
+        
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&LoanAmount&&LoanAmount>0&&LoanAmount>loanlimit"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Loan Amount Exceeds {{loanlimit}}</button>
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&LoanAmount&&LoanAmount>0&&LoanAmount<=loanlimit&&LoanAmount>=resMinimumAmount&&!enteredPeriod||enteredPeriod<=0"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Period</button>           
+                  <button class="btn btn-danger btn-block" *ngIf="touched&&LoanAmount&&LoanAmount>0&&LoanAmount<=loanlimit&&LoanAmount>=resMinimumAmount&&enteredPeriod>resPeriod"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Period exceeds {{resPeriod}} {{Freq}}</button>
+              <button class="btn btn-info btn-block" (click)="LoanSchedule(LoanTypeId,LoanAmount,enteredPeriod)">Continue&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+      
+              </div>
+      </div>
+        <div class="alert alert-light" *ngIf="showPreview&&!disconnected&&!generatingPaySchedule&&uploadingLoan==false">
+            <label>You'll Pay:</label>
+                <p class="circle"><span color="Purple">{{totalLoan| currency:'ksh ':true:'1.0'}}</span></p>
+              <label>See Details below</label>
+              <br>
+                <table class="table table-hover table-bordered table-striped">
+                  <thead class="thead-dark">
+                  <tr>
+                    <td>
+                       Due Date
+                    </td>
+                    <td>
+                      Amount to Pay
+                    </td>
+                    <td>
+                      Balance
+                    </td>
+                  </tr>
+                  </thead>
+                    <tr  *ngFor="let respDat of respDataSchedule">
+                      <td>
+                          {{respDat.DueDate|date:'dd-MMM-yyyy'}}
+                      </td>
+                      <td>
+                          {{respDat.GrossAmount| currency:'Kes ':true:'1.1'}}
+                      </td>
+                      <td>
+                          {{respDat.ClosingBalance| currency:'Kes ':true:'1.1'}}
+                      </td>
+                   </tr>
+                   </table>
+                        
+                        <input type="checkbox" name="IsAccepted" value=true [(ngModel)]="IsAccepted">&nbsp;
+                        <b (click)="TNCs()" style="color:#488aff">Terms and Conditions</b> 
+                        <div class="button-group" style="margin-top: 10px;">
+                        <button class="btn btn-primary" (click)="PrevCard()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>&nbsp;&nbsp;Back&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button><button class="submit btn btn-info"  data-toggle="modal" data-target="#popUpModal">&nbsp;&nbsp;&nbsp;Submit Application <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</button>  
+                      </div>
+                      
+                      <!--modal-->
+                      <div class="modal" tabindex="-1" role="dialog" id="popUpModal" *ngIf="IsAccepted!=true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Terms and Conditions</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <label>Please accept the Terms and Conditions to proceed. Click on the checkbox</label>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-info" style="width: 40%;" data-dismiss="modal">OK</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="modal" tabindex="-1" role="dialog" id="popUpModal" *ngIf="IsAccepted==true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Confirmation</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <label>You are about to apply for a loan of <i>Kes. {{principal}}</i>, to be repaid in <i>{{Period}} {{Freq}}</i></label>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="SubmitLoanApplication(IsAccepted)">Proceed</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+                        <p style="color: white;">{{spinnerContent}}</p>
+                    </ngx-spinner>
+                      
+        </div>
+    
+    <div style="position:relative">
+    <!--<div class="alert alert-light" *ngIf="Connecting==true&&!disconnected&&"> 
+        <div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+          <hr>
+          <img src="assets/imgs/loan-application_former.png">
+          <br>
+            <label>Getting loans ready..</label>
+     </div>-->
+   <!--<div class="alert alert-light" *ngIf="!isLoanApplicationSuccess&&!Connecting&&!disconnected">
+          <label color=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Existing Loan Notification</label>
+          <hr> 
+          <label text-wrap>You have an active loan(s).Please see the Loan Balance below:</label>
+          <i>Kes.</i><label style="font-size: 150%; color: purple; font-weight: bolder;">{{totalLoanBalance}}</label>
+          <button class="btn btn-info btn-block" (click)="PayPage()"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pay Now</button>
+    </div>
+    <div class="alert alert-light" *ngIf="isLoanApplicationSuccess&&isEligible=='false'&&!Connecting&&!disconnected">
+      <label style="color: purple;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Sorry, you do not qualify for a loan at the moment</label>
+      <hr> 
+      <label text-wrap>{{ineligibilityReason}}</label>
+      <button class="btn btn-info btn-block" (click)="HomePage()"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;OK</button>
+  </div>-->
+        <section class="alert alert-light" *ngIf="generatingPaySchedule">
+                
+            <p class="lead" style="color: #161c42;">Please wait..</p>
+                <hr>
+                <img src="assets/imgs/loan-application_former.png">
+                <p class="lead" style="color: #161c42;">Generating Loan Schedule..</p>
+                <br>
+         </section>
+
+         <div class="alert alert-light" *ngIf="uploadingLoan==true"> 
+          <div class="spinner-grow"></div><label style="font-weight: bold;">Please Wait</label>
+            <hr>
+            <img src="assets/imgs/loan-application_former.png">
+            <br>
+              <label>Uploading Loan Application</label>
+       </div>
+    </div>
+    </div>
+    <div *ngIf="disconnected">
+        <!--connection status starts here-->
+        <div class="networkCard">
+            <div class="card">
+            <div style="color: gray;">
+                <label color="purple">No Internet Connection</label>
+            </div>
+            <hr>
+            <br>
+            <div class="circle_Connection">
+              <i class="fa fa-wifi" aria-hidden="true"></i>
+              <i class="fa fa-times-circle" class="smallIcon" aria-hidden="true"></i>
+            </div>
+            <br>
+            <label text-wrap>Please check your connection and try again</label>
+              <hr>
+              <div style="color: gray;">
+                  <button class="btn btn-block btn-primary" (click)="Reload()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</button>
+              </div> 
+            </div>
+        </div>
+        </div>
+    

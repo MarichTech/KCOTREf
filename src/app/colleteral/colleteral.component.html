@@ -1,0 +1,52 @@
+
+   <h5 style="color: blue;">Collaterals</h5>
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" >
+        <input type="hidden" name="LoanCollateralId"   #LoanCollateralId="ngModel" [(ngModel)]="formColleteral.LoanCollateralId" >
+        <input type="hidden" name="loanid"   #loanid="ngModel" [(ngModel)]="formColleteral.loanid"  >
+        <div class="row">
+            <div class="col-md-6">
+                <label>Collateral Name</label>
+                <select  class="form-control" name="Collateralname"   #Collateralname="ngModel" [(ngModel)]="formColleteral.Collateralname" 
+                [class.is-invalid]="!isValid && formColleteral.Collateralname==''">
+                <option value="0">-select-</option>
+                <option *ngFor="let items of  collaterallist" >{{items.ColleteralName}}</option>
+            </select>
+            </div>
+            <div class="col-md-6">
+                <label> owner Name</label>
+                <input class="form-control" name="ownername"   #ownername="ngModel" [(ngModel)]="formColleteral.ownername"  placeholder="owner Name"
+                [class.is-invalid]="!isValid && formColleteral.ownername==''" >
+                
+            </div>
+        </div>
+      
+      
+        <div class="row">
+     
+            <div class="col-md-6">
+                <label>Owner Document</label>
+                <input class="form-control" name="ownerdocument"   #ownerdocument="ngModel" [(ngModel)]="formColleteral.ownerdocument"  placeholder="Owner document" 
+                [class.is-invalid]="!isValid && formColleteral.ownerdocument==''">
+                
+            </div>
+            <div class="col-md-6">
+                <label> collateral remarks/Comment</label>
+                <input class="form-control" name="collateralremarks"   #collateralremarks="ngModel" [(ngModel)]="formColleteral.collateralremarks"  placeholder="collateral remarks/comments" >
+                
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            <label> collateral Value</label>
+            <input class="form-control" name="collateralvalue" (blur)="transformcollateralvalue($event)"    #collateralvalue="ngModel" [(ngModel)]="formColleteral.collateralvalue"  placeholder="collateral Value" 
+            [class.is-invalid]="!isValid && formColleteral.collateralvalue==0">
+            
+        </div>
+       </div>
+       <br>
+        <button type="submit" class=" btn btn-info"><i class="fa fa-database"></i> Submit</button>
+
+        </form>
+      
+
+

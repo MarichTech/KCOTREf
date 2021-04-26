@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+   Make Payment
+  <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+      </li>
+      <li class="nav-item" active>
+          <a class="nav-link" routerLink="/Loans"> <i class="fa fa-money"></i>&nbsp;Apply Loan</a>
+        </li>  
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+      <div class="alert alert-light">
+            <div *ngIf="totalLoanBalance>0">
+              <label text-wrap color="">Pay conveniently to our MPESA Paybill</label>
+              <hr>
+              <label>See your total loan balance below</label>
+              <br>
+              <i>Kes.</i><label style="font-size: 150%; color: purple; font-weight: bolder;">{{totalLoanBalance}}</label>
+                <input type="number" color="secondary" [(ngModel)]="PayAmount" name="PayAmount" type="number" maxlength="7" placeholder="Enter Amount To Pay" class="form-control">
+              </div>
+              <div *ngIf="totalLoanBalance<=0">
+                    <label>Deposit conveniently to our MPESA Paybill</label>
+                  <hr>
+                    <label>You do not have active loans with us. Payment done will be deposited to your collection account.</label>
+                    <input type="number" color="secondary" [(ngModel)]="PayAmount" name="PayAmount" type="number" maxlength="7" placeholder="Enter Amount To Pay" class="form-control">
+              </div>
+              <div *ngIf="touched==true&&PayAmount<=0">
+                <button class="btn btn-danger btn-block" style="margin-top: 10px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;Enter Amount</button>
+                </div>
+              <button class="btn btn-block btn-info" style="margin-top: 6.5px;" (click)="Pay(PayAmount)"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pay Now</button>
+     </div>
+</div>
