@@ -109,15 +109,16 @@
 <div class="item border-bottom py-3">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
-  <div class="item-label"><strong>Names </strong></div>
-    <div class="item-data">{{fName}} {{oNames}} {{lName}}</div>
+  <div class="item-label"><strong>Name </strong></div>
+    <div class="item-data">{{FullNames}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
 <div class="item border-bottom py-3">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
-  <div class="item-label"><strong>National ID Number</strong></div>
+  <div class="item-label" *ngIf="ClientTypeId=='1'"><strong>National ID Number</strong></div>
+  <div class="item-label" *ngIf="ClientTypeId=='2'"><strong>Registration Number</strong></div>
     <div class="item-data">{{natId}}</div>
 </div><!--//col-->
 </div><!--//row-->
@@ -125,16 +126,17 @@
 <div class="item border-bottom py-3">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
-  <div class="item-label"><strong>Date of Birth</strong></div>
-    <div class="item-data">{{dob | date: 'dd/MM/yyyy'}}</div>
+  <div class="item-label" *ngIf="ClientTypeId=='1'"><strong>Date of Birth</strong></div>
+  <div class="item-label" *ngIf="ClientTypeId=='2'"><strong>Registration Date</strong></div>
+    <div class="item-data">{{BusinessRegistrationDate | date: 'dd/MM/yyyy'}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
 <div class="item border-bottom py-3">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
-  <div class="item-label"><strong>Mobile Phone Number</strong></div>
-    <div class="item-data">{{cellNo}}</div>
+  <div class="item-label"><strong>Phone Number</strong></div>
+    <div class="item-data">{{TelephoneNumber}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
@@ -142,7 +144,7 @@
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
   <div class="item-label"><strong>Email Address</strong></div>
-    <div class="item-data">{{email}}</div>
+    <div class="item-data">{{Email}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
@@ -174,7 +176,7 @@
 </div>
 <div class="app-card-body px-4 w-100">
 
-<div class="item border-bottom py-3">
+<div class="item border-bottom py-3" *ngIf="ClientTypeId=='1'">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
   <div class="item-label"><strong>BusinessName </strong></div>
@@ -182,6 +184,17 @@
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
+
+<div class="item border-bottom py-3" *ngIf="ClientTypeId=='2'">
+  <div class="row justify-content-between align-items-center">
+  <div class="col-auto">
+    <div class="item-label"><strong>Business KRA </strong></div>
+      <div class="item-data">{{KRAPin}}</div>
+  </div><!--//col-->
+  </div><!--//row-->
+  </div><!--//item-->
+
+
 <div class="item border-bottom py-3">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
@@ -194,7 +207,8 @@
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
   <div class="item-label"><strong>PhysicalAddress</strong></div>
-    <div class="item-data">{{PhysicalAddress}}</div>
+    <div class="item-data" *ngIf="ClientTypeId=='1'">{{PhysicalAddress}}</div>
+    <div class="item-data" *ngIf="ClientTypeId=='2'">{{Address}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
@@ -202,11 +216,11 @@
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
   <div class="item-label"><strong>Nature Of Business</strong></div>
-    <div class="item-data">{{NatureOfBusiness}}</div>
+    <div class="item-data" >{{NatureOfBusiness}}</div>
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
-<div class="item border-bottom py-3">
+<div class="item border-bottom py-3" *ngIf="ClientTypeId=='1'">
 <div class="row justify-content-between align-items-center">
 <div class="col-auto">
   <div class="item-label"><strong>Legal Status</strong></div>
@@ -214,6 +228,25 @@
 </div><!--//col-->
 </div><!--//row-->
 </div><!--//item-->
+
+<div class="item border-bottom py-3" *ngIf="ClientTypeId=='2'">
+  <div class="row justify-content-between align-items-center">
+  <div class="col-auto">
+    <div class="item-label"><strong>Entity Contact Person</strong></div>
+      <div class="item-data">{{ContactPerson}}</div>
+  </div><!--//col-->
+  </div><!--//row-->
+  </div><!--//item-->
+
+  <div class="item border-bottom py-3" *ngIf="ClientTypeId=='2'">
+    <div class="row justify-content-between align-items-center">
+    <div class="col-auto">
+      <div class="item-label"><strong>Contact Person Position</strong></div>
+        <div class="item-data">{{ContactPersonPosition}}</div>
+    </div><!--//col-->
+    </div><!--//row-->
+    </div><!--//item-->
+
 </div><!--//app-card-body-->
 <div class="app-card-footer p-4 mt-auto">
 <a class="btn app-btn-secondary" (click)="toEditBusinessDetails()">View full profile</a>

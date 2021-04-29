@@ -65,6 +65,26 @@ export class HomeComponent implements OnInit {
   NatureOfBusiness:any="";
   LegalStatus:any="";
 
+  IdNo:any="";
+  MemberId:any="";
+  FullNames:any="";
+  RegNo:any="";
+  BusinessRegistrationDate:any="";
+  KRAPin:any="";
+  StationId:any="";
+  DepartmentId:any="";
+  EmployerId:any="";
+  PostalAddress:any="";
+  Email:any="";
+  TelephoneNumber:any="";
+  LevelOfEducation:any="";
+  ClientTypeId:any="";
+  ContactPerson:any="";
+  ContactPersonPosition:any="";
+  Address:any="";
+
+  
+
   constructor( private service:UserService, private loanservice:LoanApplicationService, public navCtrl: NgxNavigationWithDataComponent,private alert2:AlertService) {
     this.Connecting=true;
     this.SharesToDate=0.00;
@@ -123,7 +143,7 @@ export class HomeComponent implements OnInit {
   //Get No of loan Applications
   this.getLoanApplicationNo();
   ////////////////////////
-
+  this.getUserDetails();
   //Get Bussiness Details
   this.getBusinessDetails();
   window.localStorage.setItem('selectedIndex', '0');
@@ -259,17 +279,48 @@ getSurname(){
     });
   }
 
+ 
+
+  getUserDetails(){
+
+    this.IdNo = localStorage.getItem('natIdNo');
+    this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
+          
+          this.MemberId=Response.member.memberid;
+          console.log(this.MemberId);
+          this.FullNames=Response.member.mfirstname +' '+Response.member.msurname +' '+ Response.member.mothername;
+          this.IdNo=Response.member.IDNO;
+          this.RegNo=Response.member.IDNO;
+          this.BusinessRegistrationDate=Response.member.mdob;
+          this.KRAPin=Response.member.personalKRA;
+          this.FormOfBusiness=Response.member.FormOfBusiness;
+          this.StationId = Response.member.stationid;
+          this.Address = Response.member.maddress;
+          this.DepartmentId = Response.member.deptid;
+          this.EmployerId = Response.member.employerid;
+          this.PostalAddress=Response.member.mpostaladdress;
+          this.Email=Response.member.memail;
+          this.TelephoneNumber=Response.member.mcell;
+          this.LevelOfEducation=Response.member.LevelOfEducation;
+          this.ClientTypeId=Response.member.ClientTypeid;
+          this.ContactPerson = Response.member.ContantPerson;
+          this.ContactPersonPosition = Response.member.ContantPersonPosition;
+          
+          this.getBusinessDetails();
+        });
+  }
+
   getBusinessDetails(){
-    this.loanservice.getBusinessDetailsById(parseInt(this.localMemberId)).subscribe(Response =>{
+    this.loanservice.getBusinessDetailsById(this.MemberId).subscribe(Response =>{
       this.BusinessName=Response.businessDetails.BusinessName;
-      this.FormOfBusiness=Response.businessDetails.FormOfBusiness;
+      if(this.ClientTypeId==1){this.FormOfBusiness=Response.businessDetails.FormOfBusiness;}
       this.PhysicalAddress=Response.businessDetails.PhysicalAddress;
       this.NatureOfBusiness=Response.businessDetails.BusinessType;
+      console.log('Biz'+Response.businessDetails.BusinessType);
       this.LegalStatus=Response.businessDetails.LegalStatus;
      
   
   })
   }
-
 
 }

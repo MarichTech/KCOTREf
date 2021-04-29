@@ -689,7 +689,7 @@
           <label>Total Debts</label>
           <div class="input-group mb-3">
             <span class="input-group-text">Ksh</span>
-          <input class="form-control"  value="{{CurrentDebts -- LongTermDebts}}" readonly>
+          <input class="form-control" (keyup)=formulation()  [(ngModel)]="TotalDebts" disabled style="background-color:white;">
           </div> 
           </div>
           </div>
@@ -720,7 +720,7 @@
                         <label>Amount of loan required Sh</label>
                         <div class="input-group mb-3">
                           <span class="input-group-text">Ksh</span>
-                          <input type="number" class="form-control" (blur)="transformAmount($event)" [(ngModel)]="loanAmount" >
+                          <input type="number" class="form-control" [(ngModel)]="loanAmount" >
                         </div>
                       </div>
                     <div class="col-sm-8">

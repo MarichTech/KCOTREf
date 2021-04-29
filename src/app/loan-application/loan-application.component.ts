@@ -145,9 +145,7 @@ export class LoanApplicationComponent implements OnInit {
   BankBranch:any="";
   BankAccountNo:any="";
   PrivateDebts:any=0;
-  formatedPrivateDebts:any=0;
   BusinessDebts:any=0;
-  formatedBusinessDebts:any=0;
   TotalDebts:any=0;
   formatedTotalDebts:any;
   BusinessLicence:any;
@@ -598,6 +596,10 @@ getUserDetails(){
         console.log(this.MemberId);
         this.FullNames=Response.member.mfirstname +' '+Response.member.msurname +' '+ Response.member.mothername;
         this.IdNo=Response.member.IDNO;
+        this.RegNo=Response.member.IDNO;
+        this.BusinessRegistrationDate=Response.member.mdob;
+        this.KRAPin=Response.member.personalKRA;
+        this.FormOfBusiness=Response.member.FormOfBusiness;
         this.StationId = Response.member.stationid;
         this.DepartmentId = Response.member.deptid;
         this.EmployerId = Response.member.employerid;
@@ -655,7 +657,7 @@ getVillage(id: any){
 getBusinessDetails(id: any){
   this.loanservice.getBusinessDetailsById(parseInt(id)).subscribe(Response =>{
     this.BusinessName=Response.businessDetails.BusinessName;
-    this.FormOfBusiness=Response.businessDetails.FormOfBusiness;
+    if(this.ClientTypeId==1){this.FormOfBusiness=Response.businessDetails.FormOfBusiness;}
     this.PhysicalAddress=Response.businessDetails.PhysicalAddress;
     this.NatureOfBusiness=Response.businessDetails.BusinessType;
     this.LegalStatus=Response.businessDetails.LegalStatus;
@@ -763,4 +765,9 @@ getUserApplicationFormDetails(passedLoanId){
    }
 });
 }
+
+     formulation(){
+      
+      this.TotalDebts = this.BusinessDebts +  this.PrivateDebts;   
+     }
 }
