@@ -27,6 +27,7 @@ export class ViewLoanApplicationComponent implements OnInit {
   ErrorDescription:any;
   Resp: any;
   memberId:any;
+  StoredfirstName:any;
 
 
   constructor(private navCtrl: NgxNavigationWithDataComponent, private userservice:UserService, public service : LoanApplicationService,private router:Router,private toastr: ToastrService,private spinner:NgxSpinnerService,
@@ -36,6 +37,7 @@ export class ViewLoanApplicationComponent implements OnInit {
       this.isDisconnected=false;
       this.ErrorDescription ='';
       this.memberId = 0;
+      this.StoredfirstName= window.localStorage.getItem('firstName')
     }
 
   ngOnInit(): void {

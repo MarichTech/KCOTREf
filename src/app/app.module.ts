@@ -67,6 +67,8 @@ import { ViewLoanApplicationComponent } from './view-loan-application/view-loan-
 import { ViewDetailedLoanApplicationComponent } from './view-detailed-loan-application/view-detailed-loan-application.component';
 import { ApplicationsPendingDisbursementComponent } from './applications-pending-disbursement/applications-pending-disbursement.component';
 import { ApplicationsPendingApprovalComponent } from './applications-pending-approval/applications-pending-approval.component';
+import { UpdateBusinessProfileComponent } from './update-business-profile/update-business-profile.component';
+import { UpdatePersonalProfileComponent } from './update-personal-profile/update-personal-profile.component';
 
 
 const routes: Routes = [
@@ -190,6 +192,16 @@ const routes: Routes = [
     
   },
   {
+    path:'EditPersonalProfile',
+    component:UpdatePersonalProfileComponent
+    
+  },
+  {
+    path:'EditBusinessProfile',
+    component:UpdateBusinessProfileComponent
+    
+  },
+  {
     path: 'MemberPendingAppraisals',
     component: MemberPendingAppraisalsComponent
   }
@@ -233,7 +245,9 @@ const routes: Routes = [
     ViewDetailedLoanApplicationComponent,
     MemberPendingAppraisalsComponent,
     ApplicationsPendingDisbursementComponent,
-    ApplicationsPendingApprovalComponent
+    ApplicationsPendingApprovalComponent,
+    UpdateBusinessProfileComponent,
+    UpdatePersonalProfileComponent
   ],
   imports: [
     CommonModule,

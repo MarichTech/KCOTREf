@@ -140,4 +140,55 @@ export class UserService {
   getLoanAppDetails(LoanId){
     return this.http.get('http://micropointlive.com/Demo/Loan/getLoansByLoanId?LoanId=' + LoanId);
   }
+
+  getMemberProfile(MemberId):any{
+    return this.http.get('http://3.13.237.46/demo/App/getMemberProfile?memberId='+MemberId);
+    //http://localhost:51042/App/getMemberProfile?memberId=53
+  }
+
+  updateMemberProfile(memberId,mobileNo,Telephone1,EmailAddress,LevelofEducation,PostalAddress,KRAPIN){
+    return this.http.get('http://micropointlive.com/demo/App/UpdateUserProfile?memberId='+memberId+'&&mobileNo='+mobileNo+'&&Telephone1='+Telephone1+'&&EmailAddress='+EmailAddress+'&&LevelofEducation='+LevelofEducation+'&&PostalAddress='+PostalAddress+'&&KRAPIN='+KRAPIN+'');
+    //http://localhost:51042/App/UpdateUserProfile?memberId=53&&mobileNo=0738087365&&Telephone1=60333&&EmailAddress=gfgg1@gmail.com&&LevelofEducation=compus&&PostalAddress=135&&KRAPIN=11222&&securityQuestion=0653434&&securityAnswer=1''
+  }
+
+  getMemberBusinessDetails(MemberId):any{
+    return this.http.get('http://3.13.237.46/demo/App/getMemberBusinessDetails?memberId='+MemberId);
+    //http://localhost:51042/App/getMemberBusinessDetails?memberId=53
+  }
+
+  updateMemberBusinessDetails(memberId,BusinessName,LegalStatus,FormOfBusiness,RegistrationNo,RegDate,KRAPIN,physicalAddress,BusinessType){
+    return this.http.get('http://micropointlive.com/App/UpdateBusinessProfile?memberId='+memberId+'&&BusinessName='+BusinessName+'&&LegalStatus='+LegalStatus+'&&FormOfBusiness='+FormOfBusiness+'&&RegistrationNo='+RegistrationNo+'&&RegDate='+RegDate+'&&KRAPIN='+KRAPIN+'&&physicalAddress='+physicalAddress+'&&BusinessType='+BusinessType+'');
+    //http://localhost:51042/App/UpdateBusinessProfile?memberId=53&&BusinessName=1&&LegalStatus=1&&FormOfBusiness=1&&RegistrationNo=1&&RegDate=1&&KRAPIN=1&&physicalAddress=1&&BusinessType=1
+
+  }
+
+  getCompanyOtherInfo(MemberId):any{
+    return this.http.get('http://3.13.237.46/demo/App/getCompanyOtherInfo?MemberId='+MemberId);
+    //http://localhost:51042/App/getCompanyOtherInfo?MemberId=48
+  }
+
+  updateCompanyOtherInfo(MemberId,PhoneNumber,Email,FormBusiness,PostalAddress,ContactPerson,ContantPersonPosition){
+    return this.http.get('http://micropointlive.com/App/UpdateOtherCompanyInfoProfile?MemberId='+MemberId+'&&PhoneNumber='+PhoneNumber+'&&Email='+Email+'&&FormBusiness='+FormBusiness+'&&PostalAddress='+PostalAddress+'&&ContactPerson='+ContactPerson+'&&ContantPersonPosition='+ContantPersonPosition+'');
+   //http://localhost:51042/App/UpdateOtherCompanyInfoProfile?MemberId=48&&PhoneNumber=1&&Email=1&&FormBusiness=1PostalAddress=1&&ContactPerson=1&&ContantPersonPosition=1&&SecurityQuestion=1&&SecurityAnswer=1
+
+  }
+
+  getCompanyBusinessDetails(MemberId):any{
+    return this.http.get('http://3.13.237.46/demo/App/getCompanyBusinessDetails?MemberId='+MemberId);
+    //http://localhost:51042/App/getCompanyBusinessDetails?MemberId=1
+  }
+
+  updateCompanyBusinessDetails(MemberId,BusinessType,BusinessName,FormOfBusiness,postalAddress,physicalAddress,LegalStatus,BusinessRegistrationNo){
+    return this.http.get('http://micropointlive.com/App/UpdateCompanyBusinessProfile?MemberId='+MemberId+'&&BusinessType='+BusinessType+'&&BusinessName='+BusinessName+'&&FormOfBusiness='+FormOfBusiness+'&&postalAddress='+postalAddress+'&&physicalAddress='+physicalAddress+'&&LegalStatus='+LegalStatus+'&&BusinessRegistrationNo='+BusinessRegistrationNo+'');
+    //http://localhost:51042/App/UpdateCompanyBusinessProfile?MemberId=1&&BusinessType=1&&BusinessName=MICROPOINT&&FormOfBusiness=Juakali&&postalAddress=112&&physicalAddress=kwale&&LegalStatus=2&&BusinessRegistrationNo=112
+    
+  }
+
+  
+  
+
+  
+  
+  
+
 }

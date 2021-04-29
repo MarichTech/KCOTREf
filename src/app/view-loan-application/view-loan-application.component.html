@@ -12,28 +12,38 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
-          </li>
-          <li class="nav-item" active>
-              <a class="nav-link" routerLink="/Loans"> <i class="fa fa-money"></i>&nbsp;Apply Loan</a>
-            </li>  
-            
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/LoansHistory"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;My Loans</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/Pay"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Make Payment</a>
+          <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
         </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/ChangePin"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Change PIN</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
-          </li>
-    </ul>
+        <li class="dropdown">
+          <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fa fa-money"></i>&nbsp;Loans</a>
+         
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" routerLink="/Loans">Apply Loan</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" >Loan History</a></li>
+          </ul>
+      </li>
+  
+      <li class="nav-item">
+          <a class="nav-link" ><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Notifications</a>
+      </li>
+        
+        <li class="dropdown">
+          <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{StoredfirstName}}</a>
+         
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Profile</a></li>
+             
+          </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>
+          Help</a> 
+      </li>
+      </ul>
     </div>
   </nav>
 

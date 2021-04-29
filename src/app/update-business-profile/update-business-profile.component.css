@@ -1,0 +1,29 @@
+.form-control,.input-group-text{
+  border: 1px solid #0080ff;
+  border-radius: 4px;
+ 
+}
+.is-invalid{
+  border: 1px solid red;
+}
+.container {
+  height: 120vh;
+  margin: 0 auto;
+}
+.row{
+    padding: 0.5%;
+}
+input[readonly] {
+  background-color: white;
+  
+}
+.displayOnly{
+  background-color: #F5FAFA;
+}
+.card{
+  margin: 0.5% auto;
+  margin-top: 10px;
+  border-radius: 5px !important;
+  text-align: center;
+  width:50%;
+}

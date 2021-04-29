@@ -62,7 +62,7 @@ export class LoanApplicationService {
     insertLoanApplication(MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
       MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
       KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
-      GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,IsComplete,GOneId,GTwoId){
+      GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,IsComplete,GOneId,GTwoId,LoantypeId,loanRepayPeriod,CreatedBy){
         //http://micropointlive.com/Demo/
         
       return this.http.get('http://micropointlive.com/Demo/Loan/loanApplication?memberid='+MemberId+'&&NextofKen='+NextofKen+'&&KinRelationship='+KinRelationship+'&&BusinessTraining='+BusinessTraining+
@@ -73,7 +73,9 @@ export class LoanApplicationService {
       '&&BMonthlyProfit='+BMonthlyProfit+'&&saleAbleStock='+saleAbleStock+'&&BooksOfAccount='+BooksOfAccount+'&&KeepingBooksOfAccount='+KeepingBooksOfAccount+'&&BBankAccount='+BBankAccount+
       '&&BankName='+BankName+'&&BankBranch='+BankBranch+'&&AccountNumber='+AccountNumber+'&&PrivateDebts='+PrivateDebts+'&&BusinessDebts='+BusinessDebts+'&&TotalDebts='+TotalDebts+'&&LoanAmout='+LoanAmout+
       '&&LoanPurposes='+LoanPurposes+'&&CreditorName='+CreditorName+'&&Collateral='+Collateral+'&&GOneName='+GOneName+'&&GOneAddress='+GOneAddress+'&&GOneEmail='+GOneEmail+
-      '&&GOnePhone='+GOnePhone+'&&GTwoName='+GTwoName+'&&GTwoAddress='+GTwoAddress+'&&GTwoEmail='+GTwoEmail+'&&GTwoPhone='+GTwoPhone+'&&IsComplete='+IsComplete+'&&GOneId='+GOneId+'&&GTwoId='+GTwoId+'');
+      '&&GOnePhone='+GOnePhone+'&&GTwoName='+GTwoName+'&&GTwoAddress='+GTwoAddress+'&&GTwoEmail='+GTwoEmail+'&&GTwoPhone='+GTwoPhone+'&&IsComplete='+IsComplete+'&&GOneId='+GOneId+'&&GTwoId='+GTwoId+
+      '&&LoantypeId='+LoantypeId+'&&loanRepayPeriod='+loanRepayPeriod+'&&CreatedBy='+CreatedBy+'');
+      //&&LoantypeId=1&&loanRepayPeriod=1&&CreatedBy=WEB
     }
 
     updateLoanApplication(LoanId,MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,

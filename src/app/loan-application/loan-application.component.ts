@@ -205,6 +205,11 @@ export class LoanApplicationComponent implements OnInit {
   openPdfId:any="No";
   appRespData:any;
 
+  LoantypeId:any;
+  loanRepayPeriod:any;
+  CreatedBy:any;
+  StoredfirstName:any;
+
 
   constructor(private navCtrl:NgxNavigationWithDataComponent,private router:Router, private loanservice:LoanApplicationService,private currencyPipe : CurrencyPipe,
     private toastr: ToastrService,private spinner:NgxSpinnerService, private datePipe: DatePipe,private _snackBar: MatSnackBar, private pdfService: LoanApplicationPdfService,private userService:UserService) {
@@ -217,6 +222,7 @@ export class LoanApplicationComponent implements OnInit {
       this.isSuccess=false;
       this.isDisconnected=false;
       this.errDescription='';
+      this.StoredfirstName= window.localStorage.getItem('firstName')
       
       //this.MemberId=window.localStorage.getItem('MemberId');
 
@@ -232,7 +238,33 @@ export class LoanApplicationComponent implements OnInit {
       this.getUserDetails();
     
      
-    this.getConstituencies();   
+    this.getConstituencies();  
+    this.getLoanType(); 
+  }
+
+  getLoanType(){
+    this.userService.getLoanType(1).subscribe((Response)=>{
+      this.appRespData=Response;
+
+      this.isSuccess = this.appRespData['IsSuccess'];
+        this.errDescription = this.appRespData['ErrorDescription'];
+         
+        if (this.isSuccess==false && this.errDescription!=''){
+            this.openSnackBar(this.errDescription);
+          
+            return;
+          }
+          
+          if (this.isSuccess==true){
+            this.LoantypeId =this.appRespData['LoanTypeId'];
+            this.loanRepayPeriod=this.appRespData['Period'];
+            this.CreatedBy='WebApp';
+          }
+      
+      
+    }),(error)=>{
+      //do nothing for now
+    }
   }
 
   getConstituencies(){
@@ -367,9 +399,9 @@ onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,Bu
       this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
         MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
         KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
-        GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo).subscribe(Response =>{
+        GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
           
-    
+         
         this.loanAppResp = Response;
         this.isSuccess = this.loanAppResp['IsSuccess'];
         this.errDescription = this.loanAppResp['ErrorDescription'];
@@ -487,7 +519,7 @@ onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPe
         this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
           MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
           KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
-          GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo).subscribe(Response1 =>{
+          GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response1 =>{
             
            console.log('IsComplete'+this.IsComplete);
           this.loanAppResp = Response1;
@@ -665,59 +697,61 @@ Reload(){
 getUserApplicationFormDetails(passedLoanId){
   
   this.loanservice.getApplicationDetailsById(passedLoanId).subscribe(Response =>{
-this.MemberId=Response.loan.memberid;
-this.NextOfKin=Response.loan.NextofKen;
-this.Relationship=Response.loan.KinRelationship; 
-this.HasReceivedTraining=Response.loan.BusinessTraining; 
-this.TrainingDescription=Response.loan.BusinessTrainingD;
-this.BeenInBusiness=Response.loan.BusinessPeriod;
-this.BeenInBusinessTime=Response.loan.BusinessPeriod; 
-this.BusinessLength=Response.loan.BusinessPeriod;
-this.PaidEmployment=Response.loan.PaidEmployement; 
-this.UserEmployer=Response.loan.PaidEmployementD; 
-this.IsPysicallyDisabled=Response.loan.Disability; 
-this.PysicallyDisabledDescription=Response.loan.DisabilityD; 
-this.OtherSourcesOfIncome=Response.loan.SourceofIncome; 
-this.BusinessLicence=Response.loan.BusinessLicences; 
-this.PlotNumber=Response.loan.PloatNumber; 
-this.MarketOrRoad=Response.loan.MarketRoad; 
-this.Subcounty=Response.loan.SubCounty; 
-if(Response.loan.KeepingBooksOfAccount != "null"){this.Partners=Response.loan.Partners; }
-this.BeenInOperation=Response.loan.BusinessOperation;
-if(Response.loan.KeepingBooksOfAccount != "null"){this.BeenInOperationTime=Response.loan.BusinessOperation; }
-if(Response.loan.KeepingBooksOfAccount != "null"){this.NoOfEmployees=Response.loan.NoOfEmployee; }
-if(Response.loan.KeepingBooksOfAccount != "null"){this.OwnBuilding=Response.loan.OwnBusinessBuiding; }
-if(Response.loan.BOwnerName != "null"){this.BuildingOwner=Response.loan.BOwnerName; }
-if(Response.loan.BOwenerAddress != "null"){this.BuildingAddress=Response.loan.BOwenerAddress; }
-if(Response.loan.BMonthRent != "null"){this.MonthRent=Response.loan.BMonthRent; }
-if(Response.loan.AverageSales != "null"){this.SalePerMonth=Response.loan.AverageSales; }
-if(Response.loan.AverageExpenses != "null"){this.ExpensesPerMonth=Response.loan.AverageExpenses; }
-if(Response.loan.BMonthlyProfit != "null"){this.MonthProfit=Response.loan.BMonthlyProfit; }
-if(Response.loan.saleAbleStock != "null"){this.SaleAbleStock=Response.loan.saleAbleStock; }
-if(Response.loan.BooksOfAccount != "null"){this.BookofAccount=Response.loan.BooksOfAccount;} 
-if(Response.loan.KeepingBooksOfAccount != "null"){this.PersonalBooks=Response.loan.KeepingBooksOfAccount; }
-if(Response.loan.BBankAccount != "null"){this.BusinessBank=Response.loan.BBankAccount;} 
-if(Response.loan.BankName != "null"){this.BankName=Response.loan.BankName; }
-if(Response.loan.BankBranch != "null"){this.BankBranch=Response.loan.BankBranch;} 
-if(Response.loan.AccountNumber != "null"){this.BankAccountNo=Response.loan.AccountNumber; }
-if(Response.loan.PrivateDebts != "null"){this.PrivateDebts=Response.loan.PrivateDebts; }
-if(Response.loan.BusinessDebts != "null"){this.BusinessDebts=Response.loan.BusinessDebts;} 
-if(Response.loan.loanamount != "null"){this.loanAmount=Response.loan.loanamount;} 
-if(Response.loan.LoanPurposes != "null"){this.loanpurpose=Response.loan.LoanPurposes; }
-if(Response.loan.CreditorName != "null"){this.AppliedLoanCreditor=Response.loan.CreditorName; }
-if(Response.loan.Collateral != "null"){this.collateralType=Response.loan.Collateral; }
-if(Response.loan.GOneName != "null"){this.gurantor1Name=Response.loan.GOneName; }
-if(Response.loan.GOneAddress != "null"){this.gurantor1Address=Response.loan.GOneAddress; }
-if(Response.loan.GOneEmail != "null"){this.gurantor1Email=Response.loan.GOneEmail; }
-if(Response.loan.GOnePhone != "null"){this.gurantor1Telephone=Response.loan.GOnePhone; }
-if(Response.loan.GOneIdNo != "null"){this.gurantor1IdNo=Response.loan.GOneIdNo;}
-if(Response.loan.GTwoName != "null"){this.gurantor2Name=Response.loan.GTwoName; }
-if(Response.loan.GTwoAddress != "null"){this.gurantor2Address=Response.loan.GTwoAddress; }
-if(Response.loan.GTwoEmail != "null"){this.gurantor2Email=Response.loan.GTwoEmail; }
-if(Response.loan.GTwoPhone != "null"){this.gurantor2Telephone=Response.loan.GTwoPhone;}
-if(Response.loan.GTwoIdNo != "null"){this.gurantor2IdNo=Response.loan.GTwoIdNo;}
-this.LoanTransactionDate=Response.loan.loantransdate;
-this.LoanStatus=Response.loan.loanstatus;
+    if(Response.loan.memberid != 0){this.MemberId=Response.loan.memberid;}
+    if(Response.loan.NextofKen != "null"){this.NextOfKin=Response.loan.NextofKen;}
+    if(Response.loan.KinRelationship != "null"){this.Relationship=Response.loan.KinRelationship; }
+    if(Response.loan.BusinessTraining != "null"){this.HasReceivedTraining=Response.loan.BusinessTraining; }
+    if(Response.loan.BusinessTrainingD != "null"){this.TrainingDescription=Response.loan.BusinessTrainingD;}
+    if(Response.loan.BusinessPeriod != "null"){this.BeenInBusiness=Response.loan.BusinessPeriod;}
+    if(Response.loan.BusinessPeriod != "null"){this.BusinessLength=Response.loan.BusinessPeriod;}
+    if(Response.loan.PaidEmployement != "null"){this.PaidEmployment=Response.loan.PaidEmployement; }
+    if(Response.loan.PaidEmployementD != "null"){this.UserEmployer=Response.loan.PaidEmployementD; }
+    if(Response.loan.Disability != "null"){ this.IsPysicallyDisabled=Response.loan.Disability; }
+    if(Response.loan.DisabilityD != "null"){this.PysicallyDisabledDescription=Response.loan.DisabilityD; }
+    if(Response.loan.SourceofIncome != "null"){this.OtherSourcesOfIncome=Response.loan.SourceofIncome; }
+    if(Response.loan.BusinessLicences != "null"){this.BusinessLicence=Response.loan.BusinessLicences; }
+    if(Response.loan.PloatNumber != "null"){this.PlotNumber=Response.loan.PloatNumber; }
+    if(Response.loan.MarketRoad != "null"){this.MarketOrRoad=Response.loan.MarketRoad; }
+    if(Response.loan.SubCounty != "null"){this.Subcounty=Response.loan.SubCounty; }
+    if(Response.loan.Partners != "null"){this.Partners=Response.loan.Partners; }
+    if(Response.loan.BusinessOperation != "null"){this.BeenInOperation=Response.loan.BusinessOperation;}
+    if(Response.loan.BusinessOperation != "null"){this.BeenInOperationTime=Response.loan.BusinessOperation; }
+    if(Response.loan.NoOfEmployee != "null"){this.NoOfEmployees=Response.loan.NoOfEmployee; }
+    if(Response.loan.OwnBusinessBuiding != "null"){this.OwnBuilding=Response.loan.OwnBusinessBuiding; }
+    if(Response.loan.BOwnerName != "null"){this.BuildingOwner=Response.loan.BOwnerName; }
+    if(Response.loan.BOwenerAddress != "null"){this.BuildingAddress=Response.loan.BOwenerAddress; }
+    if(Response.loan.BMonthRent != "null"){this.MonthRent=Response.loan.BMonthRent; }
+    if(Response.loan.AverageSales != "null"){this.SalePerMonth=Response.loan.AverageSales; }
+    if(Response.loan.AverageExpenses != "null"){this.ExpensesPerMonth=Response.loan.AverageExpenses; }
+    if(Response.loan.BMonthlyProfit != "null"){this.MonthProfit=Response.loan.BMonthlyProfit; }
+    if(Response.loan.saleAbleStock != "null"){this.SaleAbleStock=Response.loan.saleAbleStock; }
+    if(Response.loan.BooksOfAccount != "null"){this.BookofAccount=Response.loan.BooksOfAccount;} 
+    if(Response.loan.KeepingBooksOfAccount != "null"){this.PersonalBooks=Response.loan.KeepingBooksOfAccount; }
+    if(Response.loan.BBankAccount != "null"){this.BusinessBank=Response.loan.BBankAccount;} 
+    if(Response.loan.BankName != "null"){this.BankName=Response.loan.BankName; }
+    if(Response.loan.BankBranch != "null"){this.BankBranch=Response.loan.BankBranch;} 
+    if(Response.loan.AccountNumber != "null"){this.BankAccountNo=Response.loan.AccountNumber; }
+    if(Response.loan.PrivateDebts != "null"){this.PrivateDebts=Response.loan.PrivateDebts; }
+    if(Response.loan.BusinessDebts != "null"){this.BusinessDebts=Response.loan.BusinessDebts;} 
+    if(Response.loan.loanamount != "null"){this.loanAmount=Response.loan.loanamount;} 
+    if(Response.loan.LoanPurposes != "null"){this.loanpurpose=Response.loan.LoanPurposes; }
+    if(Response.loan.CreditorName != "null"){this.AppliedLoanCreditor=Response.loan.CreditorName; }
+    if(Response.loan.Collateral != "null"){this.collateralType=Response.loan.Collateral; }
+    if(Response.loan.GOneName != "null"){this.gurantor1Name=Response.loan.GOneName; }
+    if(Response.loan.GOneAddress != "null"){this.gurantor1Address=Response.loan.GOneAddress; }
+    if(Response.loan.GOneEmail != "null"){this.gurantor1Email=Response.loan.GOneEmail; }
+    if(Response.loan.GOnePhone != "null"){this.gurantor1Telephone=Response.loan.GOnePhone; }
+    if(Response.loan.GOneIdNo != "null"){this.gurantor1IdNo=Response.loan.GOneIdNo;}
+    if(Response.loan.GTwoName != "null"){this.gurantor2Name=Response.loan.GTwoName; }
+    if(Response.loan.GTwoAddress != "null"){this.gurantor2Address=Response.loan.GTwoAddress; }
+    if(Response.loan.GTwoEmail != "null"){this.gurantor2Email=Response.loan.GTwoEmail; }
+    if(Response.loan.GTwoPhone != "null"){this.gurantor2Telephone=Response.loan.GTwoPhone;}
+    if(Response.loan.GTwoIdNo != "null"){this.gurantor2IdNo=Response.loan.GTwoIdNo;}
+    if(Response.loan.loantransdate != "null"){this.LoanTransactionDate=Response.loan.loantransdate;}
+    if(Response.loan.loanstatus != "null"){this.LoanStatus=Response.loan.loanstatus;}
+    
+
+
 
  if(this.openPdfId == 'Yes'){
 

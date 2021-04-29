@@ -1,0 +1,141 @@
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 10px;">
+      <a class="navbar-brand" href="#"></a>
+      <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+       Home 
+       <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Home"> <i class="fa fa-home"></i>&nbsp;Home</a>
+          </li>
+          <li class="dropdown">
+            <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fa fa-money"></i>&nbsp;Loans</a>
+           
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" routerLink="/Loans">Apply Loan</a></li>
+                <li class="dropdown-divider"></li>
+                <li><a class="nav-link" routerLink="/UserLoanApplication">Loan History</a></li>
+            </ul>
+        </li>
+   
+        <li class="nav-item">
+            <a class="nav-link" ><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Notifications</a>
+        </li>
+          
+          <li class="dropdown">
+            <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{StoredfirstName}}</a>
+           
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Profile</a></li>
+               
+            </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+      </li>
+        </ul>
+        
+      </div>
+    </nav>
+
+    <mat-card style="margin-top: 5px;">
+      <div>
+        
+      <label>Entity Details</label>
+      <div class="row">
+        <div class="col-sm-4">
+          <label>Enter Entity Name</label>
+            <input [(ngModel)]="CompanyName" name="CompanyName" type="text" class="form-control" style="margin-bottom: 10px;">
+        </div>
+       
+        <div class="col-sm-4"> 
+          <label>Select form of Business</label>
+        <select class="form-control" name="CompanyBForm" [(ngModel)]="CompanyBForm" style="margin-bottom: 10px;">
+          <option selected value="">-Not Selected-</option>
+          <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+          <option value="Partnership" name="Partnership">Partnership</option>
+          <option value="Limited Company" name="Limited Company">Limited Company</option>
+          <option value="SILC" name="SILC">SILC</option>
+          <option value="VSLA" name="VSLA">VSLA</option>
+          <option value="Juakali" name="Juakali">Juakali </option>
+        </select>
+        </div>
+
+        <div class="col-sm-4">
+          <label>Enter Registration Number</label>
+          <input [(ngModel)]="CompanyCertNumber" name="CompanyCertNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <label>Entity Registration Date</label>
+              <input type="date" name="CompanyRegDate" [(ngModel)]="CompanyRegDate" displayFormat="DD MM YYYY" class="form-control">
+        </div>
+        <div class="col-sm-3">
+          <label> Business Type</label>
+          <input  class="form-control" name="CompanyBType" [(ngModel)]="CompanyBType" maxlength="50" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-md-3">
+            <label for="file">Attach Registration Certificates</label>
+            <input type="file" id="file" >
+
+          </div>
+        <div class="col-sm-3">
+          <label>Enter Entity KRA PIN</label>
+            <input [(ngModel)]="CompanyKRAPIN"  name="CompanyKRAPIN" type="text" color="secondary" class="form-control">
+        </div>
+     
+        
+        </div>
+     
+        <div class="row">
+          <div class="col-sm-4">
+            <label>Enter Entity's Email Address</label>
+              <input [(ngModel)]="CompanyEmailAddress"  name="CompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-md-4">
+            <label>Confirm Entity's Email Address</label>
+            <input [(ngModel)]="ConfirmCompanyEmailAddress"  name="ConfirmCompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          <div class="col-sm-4">
+            <label>Enter Entity's Postal Address</label>
+            <input [(ngModel)]="CompanyPostalAddress"  name="CompanyPostalAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <label>Enter Entity's Contact Person</label>
+            <input [(ngModel)]="ContactPerson"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+        
+          <div class="col-md-4">
+            <label>Enter Entity's Contact Person Position</label>
+            <input [(ngModel)]="ContactPersonPosition"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+
+          <div class="col-sm-4">
+            <label>Enter Entity's Phone Number One</label>
+            <input [(ngModel)]="CompanyCellNumber"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+        
+          <div class="col-md-4">
+            <label>Enter Entity's Phone Number Two</label>
+            <input [(ngModel)]="Telephone2"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+          </div>
+          
+        </div>
+        <br>
+        <div class="btn-group mr-2" role="group" aria-label="First group" >
+          <button type="button" (click)="updateEntityDetails(CompanyName,CompanyBForm,CompanyCertNumber,CompanyRegDate,CompanyBType,CompanyKRAPIN,CompanyEmailAddress,
+          CompanyPostalAddress,ContactPerson,ContactPersonPosition,CompanyCellNumber,Telephone2)" class="btn btn-danger"><i class="fa fa-database"></i>&nbsp;Update</button>
+        </div>
+
+      </div>
+    </mat-card>
+    </div>

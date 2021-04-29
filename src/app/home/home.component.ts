@@ -3,6 +3,7 @@ import { UserService } from '../shared/user.service';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { AlertService } from 'ngx-alerts';
 import { AccountComponent } from '../account/account.component';
+import { LoanApplicationService } from '../shared/loan-application.service';
 
 @Component({
   selector: 'app-home',
@@ -57,7 +58,14 @@ export class HomeComponent implements OnInit {
   dob:any;
   cellNo:any;
 
-  constructor( private service:UserService, public navCtrl: NgxNavigationWithDataComponent,private alert2:AlertService) {
+  //Business Details
+  BusinessName:any="";
+  FormOfBusiness:any="";
+  PhysicalAddress:any="";
+  NatureOfBusiness:any="";
+  LegalStatus:any="";
+
+  constructor( private service:UserService, private loanservice:LoanApplicationService, public navCtrl: NgxNavigationWithDataComponent,private alert2:AlertService) {
     this.Connecting=true;
     this.SharesToDate=0.00;
     this.fetchingShares=false;
@@ -75,6 +83,7 @@ export class HomeComponent implements OnInit {
     this.isLoanApplicationSuccess=false;
     this.storage=window.localStorage;
     this.isLoanApplicationSuccess=false;
+    this.localMemberId=window.localStorage.getItem('MemberId');
   }
   ngOnInit(){
 
@@ -114,6 +123,10 @@ export class HomeComponent implements OnInit {
   //Get No of loan Applications
   this.getLoanApplicationNo();
   ////////////////////////
+
+  //Get Bussiness Details
+  this.getBusinessDetails();
+  window.localStorage.setItem('selectedIndex', '0');
 
 }
 getTime(){
@@ -228,6 +241,15 @@ getSurname(){
     this.navCtrl.navigate('UserLoanApplication');
   }
 
+  toEditPersonalDetails(){
+    this.navCtrl.navigate('EditPersonalProfile');
+  }
+  toEditBusinessDetails(){
+    this.navCtrl.navigate('EditPersonalProfile');
+    //this.navCtrl.navigate('EditBusinessProfile');
+    window.localStorage.setItem('selectedIndex', '1');
+  }
+
   getLoanApplicationNo(){
     this.service.getMemberPendingAppraisals(this.localMemberId).subscribe(Response => {
      
@@ -235,6 +257,18 @@ getSurname(){
     },(error)=>{
       this.isDisconnected=true;
     });
+  }
+
+  getBusinessDetails(){
+    this.loanservice.getBusinessDetailsById(parseInt(this.localMemberId)).subscribe(Response =>{
+      this.BusinessName=Response.businessDetails.BusinessName;
+      this.FormOfBusiness=Response.businessDetails.FormOfBusiness;
+      this.PhysicalAddress=Response.businessDetails.PhysicalAddress;
+      this.NatureOfBusiness=Response.businessDetails.BusinessType;
+      this.LegalStatus=Response.businessDetails.LegalStatus;
+     
+  
+  })
   }
 
 

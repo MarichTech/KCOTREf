@@ -17,9 +17,10 @@ export class AccountComponent implements OnInit {
   cellNo:any;
   messages:any;
   callLogs:any;
+  StoredfirstName:any;
 
   constructor() {
-
+    this.StoredfirstName= window.localStorage.getItem('firstName')
    }
 
   ngOnInit(): void {
