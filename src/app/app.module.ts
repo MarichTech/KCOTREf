@@ -62,12 +62,12 @@ import { ExceptConditionComponent } from './except-condition/except-condition.co
 import { SitemappingComponent } from './sitemapping/sitemapping.component';
 import { LoanAppraisalComponent } from './loan-appraisal/loan-appraisal.component';
 import { PendingAppraisalListComponent } from './pending-appraisal-list/pending-appraisal-list.component';
-import { ViewDetailedApplicationComponent } from './view-detailed-application/view-detailed-application.component';
+
 import { ViewLoanApplicationComponent } from './view-loan-application/view-loan-application.component';
-import { ViewDetailedLoanApplicationComponent } from './view-detailed-loan-application/view-detailed-loan-application.component';
+
 import { ApplicationsPendingDisbursementComponent } from './applications-pending-disbursement/applications-pending-disbursement.component';
 import { ApplicationsPendingApprovalComponent } from './applications-pending-approval/applications-pending-approval.component';
-import { UpdateBusinessProfileComponent } from './update-business-profile/update-business-profile.component';
+
 import { UpdatePersonalProfileComponent } from './update-personal-profile/update-personal-profile.component';
 
 
@@ -196,11 +196,7 @@ const routes: Routes = [
     component:UpdatePersonalProfileComponent
     
   },
-  {
-    path:'EditBusinessProfile',
-    component:UpdateBusinessProfileComponent
-    
-  },
+  
   {
     path: 'MemberPendingAppraisals',
     component: MemberPendingAppraisalsComponent
@@ -240,13 +236,10 @@ const routes: Routes = [
     SitemappingComponent,
     LoanAppraisalComponent,
     PendingAppraisalListComponent,
-    ViewDetailedApplicationComponent,
     ViewLoanApplicationComponent,
-    ViewDetailedLoanApplicationComponent,
     MemberPendingAppraisalsComponent,
     ApplicationsPendingDisbursementComponent,
     ApplicationsPendingApprovalComponent,
-    UpdateBusinessProfileComponent,
     UpdatePersonalProfileComponent
   ],
   imports: [

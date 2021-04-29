@@ -207,6 +207,7 @@ export class LoanApplicationComponent implements OnInit {
   loanRepayPeriod:any;
   CreatedBy:any;
   StoredfirstName:any;
+  FullName:any="";
 
 
   constructor(private navCtrl:NgxNavigationWithDataComponent,private router:Router, private loanservice:LoanApplicationService,private currencyPipe : CurrencyPipe,
@@ -220,7 +221,8 @@ export class LoanApplicationComponent implements OnInit {
       this.isSuccess=false;
       this.isDisconnected=false;
       this.errDescription='';
-      this.StoredfirstName= window.localStorage.getItem('firstName')
+      this.StoredfirstName= window.localStorage.getItem('firstName');
+      this.FullName=window.localStorage.getItem('CompanyName');
       
       //this.MemberId=window.localStorage.getItem('MemberId');
 
@@ -412,6 +414,7 @@ onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,Bu
           
           if (this.isSuccess==true){
             this.toastr.success('Application Progresss Submited','');
+            window.localStorage.setItem('LoanIdParam', '0');
             this.spinner.hide();
             this.router.navigate(['/Home']);
           }
@@ -430,7 +433,7 @@ onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,Bu
       this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
         MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
         KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
-        GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo).subscribe(Response =>{
+        GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
           
     
         this.loanAppResp = Response;
@@ -532,6 +535,7 @@ onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPe
             
             if (this.isSuccess==true){
               this.toastr.success('Application Submited','');
+              window.localStorage.setItem('LoanIdParam', '0');
               this.spinner.hide();
               this.router.navigate(['/Home']);
             }
@@ -550,7 +554,7 @@ onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPe
         this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
           MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
           KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
-          GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo).subscribe(Response =>{
+          GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
             
             console.log('IsComplete'+this.IsComplete);
           this.loanAppResp = Response;

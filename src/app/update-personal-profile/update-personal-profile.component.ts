@@ -42,7 +42,7 @@ export class UpdatePersonalProfileComponent implements OnInit {
   EmployerId:any="";
   ClientTypeId:any="";
   SecretQuestion:any="";
-  SecretAnswer:any="";
+  PysicalLocation:any="";
 
    //Business Details
    BName:any="";
@@ -53,6 +53,9 @@ export class UpdatePersonalProfileComponent implements OnInit {
    BKRA:any="";
    BType:any="";
    BusinessPhysicalAddress:any="";
+   ContactPersonPosition:any="";
+   ContactPerson:any="";
+
  
    RegValue:any;
    show:any=false;
@@ -62,13 +65,16 @@ export class UpdatePersonalProfileComponent implements OnInit {
     isDisconnected: boolean = false;
     appRespData:any;
     MemberId:any=0;
+    FullNames:any="";
+
 
 
 
   constructor(private userService: UserService, private router:Router, private _snackBar: MatSnackBar,
     private toastr: ToastrService,private spinner:NgxSpinnerService, private loanService: LoanApplicationService) { 
 
-    this.StoredfirstName= window.localStorage.getItem('firstName');
+      this.StoredfirstName= window.localStorage.getItem('firstName');
+      this.FullNames=window.localStorage.getItem('CompanyName');
     this.MemberId= window.localStorage.getItem('MemberId');
     this.selectedIndex = parseInt(window.localStorage.getItem('selectedIndex'));
     this.spinnerContent='';
@@ -179,14 +185,17 @@ export class UpdatePersonalProfileComponent implements OnInit {
                   }
                   //if (this.isSuccess==true){
                     if(Response.member.memberid != null){this.MemberId=Response.member.memberid;}
+                    this.BForm=Response.member.FormOfBusiness;
                     if(Response.member.mfirstname != null){this.Firstname=Response.member.mfirstname;}
                     if(Response.member.mothername != null){this.Othernames=Response.member.mothername;}
                     if(Response.member.msurname != null){this.Surname=Response.member.msurname;}
                     if(Response.member.stationid != null){this.StationId = Response.member.stationid;}
-                    console.log('UpdateStation'+this.StationId);
+                    this.PysicalLocation = Response.member.maddress;
                     if(Response.member.deptid != null){this.DepartmentId = Response.member.deptid;}
                     if(Response.member.employerid != null){this.EmployerId = Response.member.employerid;}
                     if(Response.member.ClientTypeid != null){this.ClientTypeId=Response.member.ClientTypeid;}
+                    this.ContactPerson = Response.member.ContantPerson;
+                    this.ContactPersonPosition = Response.member.ContantPersonPosition;
                     
                   
                   //}
@@ -216,7 +225,7 @@ export class UpdatePersonalProfileComponent implements OnInit {
          // if (this.isSuccess==true){
           if(Response.IndividualbusinessDetails.BusinessName != null){this.BName=Response.IndividualbusinessDetails.BusinessName;}
           if(Response.IndividualbusinessDetails.LegalStatus != null){this.LegalStatus=Response.IndividualbusinessDetails.LegalStatus;}
-          if(Response.IndividualbusinessDetails.FormOfBusiness != null){this.BForm=Response.IndividualbusinessDetails.FormOfBusiness;}
+          if(Response.IndividualbusinessDetails.FormOfBusiness != null && this.ClientTypeId==1){this.BForm=Response.IndividualbusinessDetails.FormOfBusiness;}
           if(Response.IndividualbusinessDetails.BusinessRegistrationNo != null){this.RegistrationNo=Response.IndividualbusinessDetails.BusinessRegistrationNo;}
           if(Response.IndividualbusinessDetails.Regdate != null){this.BRegDate=Response.IndividualbusinessDetails.Regdate;}
           if(Response.IndividualbusinessDetails.Telephone1 != null){this.BKRA=Response.IndividualbusinessDetails.Telephone1;}
@@ -270,6 +279,35 @@ export class UpdatePersonalProfileComponent implements OnInit {
       //do nothing for now
     }
 
+  }
+
+  updateCompanyDetails(MobileNo,EmailAddress,BForm,PostalAddress,ContactPerson,ContactPersonPosition){
+
+    this.spinnerContent='Updating Profile....';
+    this.spinner.show();
+
+    this.userService.updateCompanyOtherInfo(this.MemberId,MobileNo,EmailAddress,BForm,PostalAddress,ContactPerson,ContactPersonPosition).subscribe((Response)=>{
+      this.appRespData=Response;
+
+      this.isSuccess = this.appRespData['IsSuccess'];
+        this.errDescription = this.appRespData['ErrorDescription'];
+         
+        if (this.isSuccess==false && this.errDescription!=''){
+            this.openSnackBar(this.errDescription);
+            this.spinner.hide();
+            return;
+          }
+          
+          if (this.isSuccess==true){
+            this.toastr.success('Profile Updated','');
+            this.spinner.hide();
+          }
+      
+      
+    }),(error)=>{
+      //do nothing for now
+    }
+    
   }
 
   getId(id: number) {

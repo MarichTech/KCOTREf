@@ -29,8 +29,8 @@
         </li>
           
           <li class="dropdown">
-            <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{StoredfirstName}}</a>
-           
+            <a *ngIf="ClientTypeId=='2'" href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{FullNames}}</a>
+        <a *ngIf="ClientTypeId=='1'" href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{StoredfirstName}}</a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Profile</a></li>
                
@@ -53,13 +53,10 @@
     <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
       <p style="color: white;">{{spinnerContent}}</p>
     </ngx-spinner>
-    <mat-card>
-
-    
+    <mat-card *ngIf="ClientTypeId=='1'">
 
     <mat-tab-group [selectedIndex]="selectedIndex"  (selectedIndexChange)="informChange($event)">
       <mat-tab [label]=Tab1>
-
 
     <div >
           <h3>Personal Details</h3>
@@ -251,6 +248,97 @@
       </mat-tab>
       </mat-tab-group>
 
+    </mat-card>
+
+    <mat-card *ngIf="ClientTypeId=='2'">
+      <h3>Entity Details</h3>
+      <div class="row" style="margin:2px">
+        <div class="col-sm-6">
+          <label>Entity Name</label>
+            <input [(ngModel)]="Surname"  name="Surname" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        <div class="col-sm-6">
+          <label> Business Type</label>
+            <input [(ngModel)]="BType" type="text" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+        
+      </div>
+
+      <div class="row" style="margin:2px">
+        <div class="col-sm-4">
+          <label>Registration Number</label>
+            <input [(ngModel)]="NatIdNo"  name="Othernames" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+        <div class="col-sm-4">
+          <label>Registration Date</label>
+          <input type="text" name="DOB" displayFormat="dd/MM/yyyy" [(ngModel)]="DOB" class="form-control" disabled>
+        </div>
+
+        <div class="col-sm-4">
+          <label>KRA Pin</label>
+            <input [(ngModel)]="personalKRA"  type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+      </div>
+
+      <hr>
+      <h3>You can Update the following details only</h3>
+
+      <div class="row" style="margin:2px">
+        <div class="col-sm-4">
+          <label>Select form of Business</label>
+              <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;">
+                <option selected value="">-Not Selected-</option>
+                <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+                <option value="Partnership" name="Partnership">Partnership</option>
+                <option value="Limited Company" name="Limited Company">Limited Company</option>
+                <option value="SILC" name="SILC">SILC</option>
+                <option value="VSLA" name="VSLA">VSLA</option>
+                <option value="Juakali" name="Juakali">Juakali </option>
+                <option value="Sole-Proprietor" name="Juakali">Sole-Proprietor</option>
+    
+              </select>
+        </div>
+
+        <div class="col-sm-4">
+          <label>Email</label>
+          <input type="text" [(ngModel)]="EmailAddress" class="form-control">
+          
+        </div>
+
+        <div class="col-sm-4">
+          <label>Postal Address </label>
+            <input [(ngModel)]="PostalAddress"  type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+        </div>
+
+      
+      </div>
+
+      <div class="row" style="margin:2px">
+        
+        <div class="col-sm-4">
+          <label> Contact Person</label>
+            <input [(ngModel)]="ContactPerson" type="text" class="form-control" style="margin-bottom: 10px;">
+        </div>
+        <div class="col-sm-4">
+          <label>Contact Person Position </label>
+            <input [(ngModel)]="ContactPersonPosition"   type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+        </div>
+        
+        <div class="col-sm-4">
+          <label>Contact Telephone Number</label>
+          <input type="text"  [(ngModel)]="MobileNo" class="form-control">
+          
+        </div>
+      </div>
+
+      <div class="btn-group mr-2" role="group" aria-label="First group" >
+        <button type="button" (click)="updateCompanyDetails(MobileNo,EmailAddress,BForm,PostalAddress,ContactPerson,ContactPersonPosition)" class="btn btn-danger  ml-2"><i class="fa fa-database"></i>&nbsp;Update</button>
+      </div>
+
+      
     </mat-card>
 
     </div>

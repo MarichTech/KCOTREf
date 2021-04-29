@@ -168,7 +168,7 @@ export class UserService {
   }
 
   updateCompanyOtherInfo(MemberId,PhoneNumber,Email,FormBusiness,PostalAddress,ContactPerson,ContantPersonPosition){
-    return this.http.get('http://micropointlive.com/App/UpdateOtherCompanyInfoProfile?MemberId='+MemberId+'&&PhoneNumber='+PhoneNumber+'&&Email='+Email+'&&FormBusiness='+FormBusiness+'&&PostalAddress='+PostalAddress+'&&ContactPerson='+ContactPerson+'&&ContantPersonPosition='+ContantPersonPosition+'');
+    return this.http.get('http://micropointlive.com/demo/App/UpdateOtherCompanyInfoProfile?MemberId='+MemberId+'&&PhoneNumber='+PhoneNumber+'&&Email='+Email+'&&FormBusiness='+FormBusiness+'&&PostalAddress='+PostalAddress+'&&ContactPerson='+ContactPerson+'&&ContantPersonPosition='+ContantPersonPosition+'');
    //http://localhost:51042/App/UpdateOtherCompanyInfoProfile?MemberId=48&&PhoneNumber=1&&Email=1&&FormBusiness=1PostalAddress=1&&ContactPerson=1&&ContantPersonPosition=1&&SecurityQuestion=1&&SecurityAnswer=1
 
   }

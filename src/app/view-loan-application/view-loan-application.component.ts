@@ -28,19 +28,24 @@ export class ViewLoanApplicationComponent implements OnInit {
   Resp: any;
   memberId:any;
   StoredfirstName:any;
+  FullName:any="";
+  ClientTypeId:any;
+  IdNo:any;
 
 
-  constructor(private navCtrl: NgxNavigationWithDataComponent, private userservice:UserService, public service : LoanApplicationService,private router:Router,private toastr: ToastrService,private spinner:NgxSpinnerService,
+  constructor(private navCtrl: NgxNavigationWithDataComponent,private loanservice:LoanApplicationService, private userservice:UserService, public service : LoanApplicationService,private router:Router,private toastr: ToastrService,private spinner:NgxSpinnerService,
     private _snackBar: MatSnackBar) { 
     this.spinnerContent='';
       this.IsSuccess = false;
       this.isDisconnected=false;
       this.ErrorDescription ='';
       this.memberId = 0;
-      this.StoredfirstName= window.localStorage.getItem('firstName')
+      this.StoredfirstName= window.localStorage.getItem('firstName');
+      this.FullName=window.localStorage.getItem('CompanyName');
     }
 
   ngOnInit(): void {
+    this.getClientType();
     this.UserName = localStorage.getItem('UserName');
     this.memberId = localStorage.getItem('MemberId');
     this.getData();
@@ -88,6 +93,16 @@ generatePdf(LoanId) {
     window.location.reload();
     //this.router.navigate(['/A-Dashboard']);
   }
+
+  getClientType(){
+    this.IdNo = localStorage.getItem('natIdNo');
+    this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
+          
+          this.ClientTypeId=Response.member.ClientTypeid;
+         
+        });
+  }
+
   
 
 }

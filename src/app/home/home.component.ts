@@ -211,7 +211,9 @@ getSurname(){
 }
 
   getFirstName(){
-    this.StoredfirstName= window.localStorage.getItem('firstName')
+    this.StoredfirstName= window.localStorage.getItem('firstName');
+    
+    
   }
   LoanPage(){
     this.navCtrl.navigate('Loans');
@@ -267,7 +269,7 @@ getSurname(){
   toEditBusinessDetails(){
     this.navCtrl.navigate('EditPersonalProfile');
     //this.navCtrl.navigate('EditBusinessProfile');
-    window.localStorage.setItem('selectedIndex', '1');
+    if(this.ClientTypeId==1){window.localStorage.setItem('selectedIndex', '1');}
   }
 
   getLoanApplicationNo(){
@@ -282,6 +284,7 @@ getSurname(){
  
 
   getUserDetails(){
+    window.localStorage.setItem('LoanIdParam', '0');
 
     this.IdNo = localStorage.getItem('natIdNo');
     this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
@@ -289,6 +292,8 @@ getSurname(){
           this.MemberId=Response.member.memberid;
           console.log(this.MemberId);
           this.FullNames=Response.member.mfirstname +' '+Response.member.msurname +' '+ Response.member.mothername;
+          
+          
           this.IdNo=Response.member.IDNO;
           this.RegNo=Response.member.IDNO;
           this.BusinessRegistrationDate=Response.member.mdob;
@@ -313,10 +318,10 @@ getSurname(){
   getBusinessDetails(){
     this.loanservice.getBusinessDetailsById(this.MemberId).subscribe(Response =>{
       this.BusinessName=Response.businessDetails.BusinessName;
+      if(this.ClientTypeId==2){localStorage.setItem('CompanyName', this.FullNames)}
       if(this.ClientTypeId==1){this.FormOfBusiness=Response.businessDetails.FormOfBusiness;}
       this.PhysicalAddress=Response.businessDetails.PhysicalAddress;
-      this.NatureOfBusiness=Response.businessDetails.BusinessType;
-      console.log('Biz'+Response.businessDetails.BusinessType);
+      this.NatureOfBusiness=Response.businessDetails.BusinessType
       this.LegalStatus=Response.businessDetails.LegalStatus;
      
   
