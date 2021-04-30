@@ -21,7 +21,9 @@
           <ul class="dropdown-menu">
               <li><a class="nav-link" >Apply Loan</a></li>
               <li class="dropdown-divider"></li>
-              <li><a class="nav-link" routerLink="/UserLoanApplication">Loan History</a></li>
+              <li><a class="nav-link" routerLink="/UserLoanApplication">Loan Applications</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" routerLink="/LoansHistory">Loan History</a></li>
           </ul>
       </li>
  
@@ -234,6 +236,7 @@
                         <div class="col-sm-4">
                             <label>Have you received any business or technical training? </label>
                             <select class="form-control" [(ngModel)]="HasReceivedTraining">
+                              <option value="">--Select--</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>
                             </select>
@@ -253,18 +256,19 @@
                       <div class="col-sm-4">
                         <label>For how long have you been in business </label>
                         <div class="row" *ngIf="passedLoanId ==0">
-                          <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInBusiness"></div>
+                          <div class="col-sm-4"><input class="form-control" (keyup)=formulation() [(ngModel)]="BeenInBusiness"></div>
                           <div class="col-sm-8">
-                            <select class="form-control" [(ngModel)]="BeenInBusinessTime">
-                              <option value="Day">Day(s)</option>
-                              <option value="Month">Month(s)</option>
-                              <option value="Year">Year(s)</option>
+                            <select class="form-control" (keyup)=formulation() [(ngModel)]="BeenInBusinessTime">
+                              <option value="">-select-</option>
+                              <option value="Days">Day(s)</option>
+                              <option value="Months">Month(s)</option>
+                              <option value="Years">Year(s)</option>
                             </select>
                           </div>
                         </div>
                         <div class="row" *ngIf="passedLoanId !=0">
                           <div class="col-sm-12">
-                            <input class="form-control" [(ngModel)]="BeenInBusiness">
+                            <input class="form-control" [(ngModel)]="BeenInBusinessEdit">
                           </div>
                         </div>
                         
@@ -345,6 +349,7 @@
                         <label >Sub County.</label>
                         <select class="form-control" [(ngModel)]="Subcounty">
                           <option value="">-select-</option>
+                          <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" >{{Constituency.EmployerName}}</option>
                         </select>
                       </div>
                     </div>
@@ -362,9 +367,9 @@
               
 
                   <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
-                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
-                    MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
-                     MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
+                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                    MarketOrRoad,Subcounty,Partners,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                     MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,TotalDebts,loanAmount,loanpurpose,
                      AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Save Progress </button>
                     <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
                   </div>
@@ -487,18 +492,19 @@
                 <div class="col-sm-4">
                   <label >How long has the business been in operation?</label> 
                   <div class="row" *ngIf="passedLoanId ==0">
-                    <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInOperation" value="BeenInOperation"></div>
+                    <div class="col-sm-4"><input class="form-control" (keyup)=formulation() [(ngModel)]="BeenInOperation" ></div>
                     <div class="col-sm-8">
-                      <select class="form-control" [(ngModel)]="BeenInOperationTime">
-                        <option value="Day">Day(s)</option>
-                        <option value="Month">Month(s)</option>
-                        <option value="Year">Year(s)</option>
+                      <select class="form-control" (keyup)=formulation() [(ngModel)]="BeenInOperationTime">
+                        <option value="">-select-</option>
+                        <option value="Days">Day(s)</option>
+                        <option value="Months">Month(s)</option>
+                        <option value="Years">Year(s)</option>
                       </select>
                     </div>
                   </div>
                   <div class="row" *ngIf="passedLoanId !=0">
                     <div class="col-sm-12">
-                      <input class="form-control" [(ngModel)]="BeenInOperation">
+                      <input class="form-control" [(ngModel)]="BeenInOperationEdit">
                     </div>
                   </div>
                 </div>
@@ -701,10 +707,10 @@
 
               <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
                 <button type="button" (click)="previousStep()" class="btn btn-primary">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
-                <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
-                MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
-                MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
-                AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Save Progress <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
+                <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmitProgress(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                MarketOrRoad,Subcounty,Partners,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                 MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,TotalDebts,loanAmount,loanpurpose,
+                 AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Save Progress <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
                 <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
               </div>
            
@@ -864,10 +870,10 @@
                   <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
                     <button type="button" (click)="previousStep()" class="btn btn-primary  ">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
                     <button type="button" (click)="generatePdf()" class="btn btn-secondary  ml-2">Preview In PDf &nbsp; <i class="fas fa-file-pdf"></i></button>
-                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmit(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,BeenInBusiness+BeenInBusinessTime,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
-                      MarketOrRoad,Subcounty,Partners,BeenInOperation+BeenInOperationTime,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
-                      MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,PrivateDebts -- BusinessDebts,loanAmount,loanpurpose,
-                      AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Apply Loan <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
+                    <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmit(NextOfKin,Relationship,HasReceivedTraining,TrainingDescription,PaidEmployment,UserEmployer,IsPysicallyDisabled,PysicallyDisabledDescription,OtherSourcesOfIncome,BusinessLicence,PlotNumber,
+                    MarketOrRoad,Subcounty,Partners,NoOfEmployees,OwnBuilding,BuildingOwner,BuildingAddress,MonthRent,SalePerMonth,ExpensesPerMonth,
+                     MonthProfit,SaleAbleStock,BookofAccount,PersonalBooks,BusinessBank,BankName,BankBranch,BankAccountNo,PrivateDebts,BusinessDebts ,TotalDebts,loanAmount,loanpurpose,
+                     AppliedLoanCreditor,collateralType,gurantor1Name,gurantor1Address,gurantor1Email,gurantor1Telephone,gurantor2Name,gurantor2Address,gurantor2Email,gurantor2Telephone,gurantor1IdNo,gurantor2IdNo)" ><i class="fa fa-database"></i>&nbsp;Apply Loan <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> </button>
                   </div>
                
         

@@ -19,6 +19,8 @@ export class ViewLoanApplicationComponent implements OnInit {
   spinnerContent:any;
   UserName:any;
 
+  LoanTypeList:[];
+
   isDisconnected: boolean = false;
   Today:any;
   welcomeNote:any;
@@ -42,6 +44,10 @@ export class ViewLoanApplicationComponent implements OnInit {
       this.memberId = 0;
       this.StoredfirstName= window.localStorage.getItem('firstName');
       this.FullName=window.localStorage.getItem('CompanyName');
+
+      this.loanservice.getLoanType().subscribe(res=>{
+        this.LoanTypeList=res as [];
+      });
     }
 
   ngOnInit(): void {
@@ -103,8 +109,20 @@ generatePdf(LoanId) {
         });
   }
 
-  
-
+  getLoanDetail(id: any) : string {
+    var name: string;
+    if(this.LoanTypeList){
+    if(id>0){
+    this.LoanTypeList.some((obj)=>{
+      //var dim=obj as Element;
+      if(obj["LoanTypeId"]==id){
+        name=obj["LoanTypeName"];
+        return true;
+      }
+    })}}
+    return name;
+  }
+ 
 }
 
 

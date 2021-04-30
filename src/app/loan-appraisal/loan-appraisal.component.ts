@@ -16,7 +16,7 @@ export class LoanAppraisalComponent implements OnInit {
 
   //Tab Manipulation
   selectedIndex: number = 0;
-  maxNumberOfTabs: number = 5;
+  maxNumberOfTabs: number = 6;
 
   //Tab Labels
   Tab1: any="(A.) PERSONAL DETAILS";
@@ -24,6 +24,7 @@ export class LoanAppraisalComponent implements OnInit {
   Tab3: any="(C.) BUSINESS PERFORMANCE ANALYSIS";
   Tab4: any="(D.) OTHER DETAILS";
   Tab5: any="(E.) Loan Appraisal Score Sheet";
+  Tab6: any="Recommendations";
 
   //Table Tab Manipulation
   selectedIndex1: number = 0;
@@ -45,6 +46,7 @@ export class LoanAppraisalComponent implements OnInit {
   TypeofBusiness:any="";
   BeenInOperation:any="";
   BeenInOperationTime:any="";
+  BeenInOperationEdit:any="";
   IsRegistered:any="";
   CompanyBForm:any="";
   TradeLicense:any="";
@@ -97,6 +99,7 @@ export class LoanAppraisalComponent implements OnInit {
   TotalRemarks:any="";
   BoardRecommendations:any="";
   RecommDate:any="";
+  RecommName:any="";
 
   //CASH FLOW ANALYSIS FORM
   //(A.) Cash in the bank
@@ -297,6 +300,7 @@ export class LoanAppraisalComponent implements OnInit {
 
 
   formulation(){
+    this.BeenInOperationEdit =  this.BeenInOperation + " "+this.BeenInOperationTime; 
 
     this.TotalActualScore = this.AmountActualScore + this.AbilityActualScore + this.PurposeActualScore + this.SecurityActualScore + this.CharacterActualScore;
 
@@ -371,7 +375,7 @@ export class LoanAppraisalComponent implements OnInit {
            OS1,OS2,OS3,OS4,OS5,OS6,PM1,PM2,PM3,PM4,PM5,PM6,GBC1,GBC2,GBC3,GBC4,GBC5,GBC6,CS1,CS2,CS3,CS4,CS5,CS6,DE1,DE2,DE3,DE4,DE5,DE6,AF1,AF2,AF3,AF4,AF5,AF6,
            OE1,OE2,OE3,OE4,OE5,OE6,GH1,GH2,GH3,GH4,GH5,GH6,SecurityType,ApproximateValOfSecurity,AdequacyofSecurity,Competitors,GeneralSafety,Regulations,TechnologyUsed,
            DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
-           AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks){
+           AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks,BoardRecommendations,RecommName,RecommDate){
     this.appraisalPdf.getAppraisalApplicationPDF(this.FullNames,this.IdNo,this.PinNo,this.PostalAddress,this.Email,this.Telephone, TypeofBusiness,BeenInOperation,BeenInOperationTime,IsRegistered,CompanyBForm,TradeLicense,
       TypeofBuilding,Condition,OwnBuilding,BuildingOwnerName,BuildingOwnerAddress,BuildingRent,LayoutAndCleanliness,CashBook,CreditLedger,
              StockBooks,OtherBooks,OtherBooksDescription,IsBooksUpToDate,WhoKeepsBooks,IsPersonalDrawingsRecorded,HaveBusinessBank,
@@ -380,7 +384,7 @@ export class LoanAppraisalComponent implements OnInit {
              OS1,OS2,OS3,OS4,OS5,OS6,PM1,PM2,PM3,PM4,PM5,PM6,GBC1,GBC2,GBC3,GBC4,GBC5,GBC6,CS1,CS2,CS3,CS4,CS5,CS6,DE1,DE2,DE3,DE4,DE5,DE6,AF1,AF2,AF3,AF4,AF5,AF6,
              OE1,OE2,OE3,OE4,OE5,OE6,GH1,GH2,GH3,GH4,GH5,GH6,SecurityType,ApproximateValOfSecurity,AdequacyofSecurity,Competitors,GeneralSafety,Regulations,TechnologyUsed,
              DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
-             AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks);
+             AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks,BoardRecommendations,RecommName,RecommDate);
     }
 
 }

@@ -216,6 +216,7 @@ export class ApplicationsPendingApprovalComponent implements OnInit {
   }
 
   viewLoanAppraisal(){
+
     
   }
 
@@ -432,7 +433,8 @@ export class ApplicationsPendingApprovalComponent implements OnInit {
         
       }
     }
-  
+
+   
 
 }
 

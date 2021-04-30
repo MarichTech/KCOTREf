@@ -20,7 +20,9 @@
           <ul class="dropdown-menu">
               <li><a class="nav-link" routerLink="/Loans">Apply Loan</a></li>
               <li class="dropdown-divider"></li>
-              <li><a class="nav-link" >Loan History</a></li>
+              <li><a class="nav-link" routerLink="/UserLoanApplication">Loan Applications</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" routerLink="/LoansHistory">Loan History</a></li>
           </ul>
       </li>
   
@@ -95,9 +97,9 @@
                   <tbody>
                    
                   <tr *ngFor="let items of ApplicationList">
-                           <td>{{items.Loanproduct}}</td> 
+                           <td>{{getLoanDetail(items.Loanproduct)}}</td> 
                            <td>{{items.LoanAmout}}</td>
-                           <td>Loan Approved</td>
+                           <td>{{items.ApproveAmount}}</td>
                            <td>{{items.loanApplicationDate | date: 'dd/MM/yyyy'}}</td>
                            <td>{{items.ApprovalDate | date: 'dd/MM/yyyy'}}</td>
                            <td>{{items.DisbursementDate | date: 'dd/MM/yyyy'}}</td>

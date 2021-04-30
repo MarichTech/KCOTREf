@@ -126,13 +126,9 @@ export class LoanApplicationComponent implements OnInit {
   OperationTime:any="";
   NoOfEmployees:any="";
   SalePerMonth:any=0;
-  formatedSalePerMonth:any;
   ExpensesPerMonth:any=0;
-  formatedExpensesPerMonth:any;
   MonthProfit:any=0;
-  formatedMonthProfit:any;
   SaleAbleStock:any=0;
-  formatedSaleAbleStock:any;
   OwnBuilding:any="";
   BuildingAddress:any="";
   BuildingOwner:any="";
@@ -148,46 +144,50 @@ export class LoanApplicationComponent implements OnInit {
   BusinessDebts:any=0;
   TotalDebts:any=0;
   formatedTotalDebts:any;
-  BusinessLicence:any;
-  ContactPerson:any;
-  ContactPersonPosition:any;
+  BusinessLicence:any="";
+  ContactPerson:any="";
+  ContactPersonPosition:any="";
 
 
   //Form Number
   FormNumber:any=0;
 
   //Personal Particulars
-  FullNames:any;
-  IdNo:any;
+  FullNames:any="";
+  IdNo:any="";
   SubCountyPerson:any="";
-  Ward:any;
-  Village:any;
-  WardAdministrator:any;
-  VillageAdministrator:any;
-  NextOfKin:any;
-  Relationship:any;
-  PostalAddress:any;
-  Email:any;
-  TelephoneNumber:any;
-  LevelOfEducation:any;
+  Ward:any="";
+  Village:any="";
+  WardAdministrator:any="";
+  VillageAdministrator:any="";
+  NextOfKin:any="";
+  Relationship:any="";
+  PostalAddress:any="";
+  Email:any="";
+  TelephoneNumber:any="";
+  LevelOfEducation:any="";
   HasReceivedTraining:any="";
-  TrainingDescription:any;
+  TrainingDescription:any="";
   BeenInBusinessLength:any;
-  PaidEmployment:any;
-  UserEmployer:any;
+  PaidEmployment:any="";
+  UserEmployer:any="";
   IsPysicallyDisabled:any="";
   PysicallyDisabledDescription:any="";
-  OtherSourcesOfIncome:any;
+  OtherSourcesOfIncome:any="";
 
-  BeenInBusiness:any;
-  BeenInBusinessTime:any;
+  BeenInBusiness:any="";
+  BeenInBusinessTime:any="";
+  BeenInBusinessEdit:any="";
 
-  BeenInOperation:any;
-  BeenInOperationTime:any;
+
+  BeenInOperation:any=""
+  BeenInOperationTime:any="";
+  BeenInOperationEdit:any="";
+
   spinnerContent:any;
   isDisconnected: boolean = false;
-  Constituencies:any;
-  Constituency:any;
+  Constituencies:any="";
+  Constituency:any="";
 
   StationId:any=0;
   DepartmentId:any=0;
@@ -197,7 +197,7 @@ export class LoanApplicationComponent implements OnInit {
   
 
   LoanTransactionDate:any;
-  LoanStatus:any;
+  LoanStatus:any="";
   BusinessLength:any="";
   passedLoanId:any;
   openPdfId:any="No";
@@ -205,7 +205,7 @@ export class LoanApplicationComponent implements OnInit {
 
   LoantypeId:any;
   loanRepayPeriod:any;
-  CreatedBy:any;
+  CreatedBy:any="";
   StoredfirstName:any;
   FullName:any="";
 
@@ -235,11 +235,15 @@ export class LoanApplicationComponent implements OnInit {
   ngOnInit() {
   
     
-      this.getUserDetails();
+    this.getUserDetails();
     
      
     this.getConstituencies();  
     this.getLoanType(); 
+
+  
+    
+
   }
 
   getLoanType(){
@@ -383,10 +387,12 @@ onDeleteColateral(i:number,LoanCollateralId:number){
   this.loancollateralList.splice(i,1)
 }
 
-onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-  MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+  MarketRoad,SubCounty,Partners,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
   KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
   GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,GOneIdNo,GTwoIdNo){
+
+    this.formulation();
 
 
     
@@ -396,8 +402,8 @@ onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,Bu
     if(this.passedLoanId == 0){
       this.spinnerContent='Saving Application Progress....';
     this.spinner.show();
-      this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-        MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+      this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,this.BeenInBusinessEdit,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+        MarketRoad,SubCounty,Partners,this.BeenInOperationEdit,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
         KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
         GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
           
@@ -430,8 +436,8 @@ onSubmitProgress(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,Bu
       this.spinnerContent='Udating Progress....';
     this.spinner.show();
     console.log("LoanIdUpdate"+this.passedLoanId)
-      this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-        MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+      this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,this.BeenInBusinessEdit,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+        MarketRoad,SubCounty,Partners,this.BeenInOperationEdit,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
         KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
         GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=false,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
           
@@ -491,8 +497,8 @@ transformAmount(element){
 
 
 
-onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-  MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+  MarketRoad,SubCounty,Partners,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
   KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
   GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,GOneIdNo,GTwoIdNo){
 
@@ -517,8 +523,8 @@ onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPe
       if(this.passedLoanId == 0){
         this.spinnerContent='Applying Loan....';
       this.spinner.show();
-        this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-          MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+        this.loanservice.insertLoanApplication(this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,this.BeenInBusinessEdit,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+          MarketRoad,SubCounty,Partners,this.BeenInOperationEdit,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
           KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
           GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response1 =>{
             
@@ -551,8 +557,8 @@ onSubmit(NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPe
         this.spinnerContent='Udating Loan....';
       this.spinner.show();
       console.log("LoanIdUpdate"+this.passedLoanId)
-        this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,BusinessPeriod,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
-          MarketRoad,SubCounty,Partners,BusinessOperation,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
+        this.loanservice.updateLoanApplication(this.passedLoanId,this.MemberId,NextofKen,KinRelationship,BusinessTraining,BusinessTrainingD,this.BeenInBusinessEdit,PaidEmployement,PaidEmployementD,Disability,DisabilityD,SourceofIncome,BusinessLicences,PloatNumber,
+          MarketRoad,SubCounty,Partners,this.BeenInOperationEdit,NoOfEmployee,OwnBusinessBuiding,BOwnerName,BOwenerAddress,BMonthRent,AverageSales,AverageExpenses,BMonthlyProfit,saleAbleStock,BooksOfAccount,
           KeepingBooksOfAccount,BBankAccount,BankName,BankBranch,AccountNumber,PrivateDebts,BusinessDebts,TotalDebts,LoanAmout,LoanPurposes,CreditorName,Collateral,GOneName,GOneAddress,GOneEmail,
           GOnePhone,GTwoName,GTwoAddress,GTwoEmail,GTwoPhone,this.IsComplete=true,GOneIdNo,GTwoIdNo,this.LoantypeId,this.loanRepayPeriod,this.CreatedBy).subscribe(Response =>{
             
@@ -708,8 +714,7 @@ getUserApplicationFormDetails(passedLoanId){
     if(Response.loan.KinRelationship != "null"){this.Relationship=Response.loan.KinRelationship; }
     if(Response.loan.BusinessTraining != "null"){this.HasReceivedTraining=Response.loan.BusinessTraining; }
     if(Response.loan.BusinessTrainingD != "null"){this.TrainingDescription=Response.loan.BusinessTrainingD;}
-    if(Response.loan.BusinessPeriod != "null"){this.BeenInBusiness=Response.loan.BusinessPeriod;}
-    if(Response.loan.BusinessPeriod != "null"){this.BusinessLength=Response.loan.BusinessPeriod;}
+    if(Response.loan.BusinessPeriod != "null"){this.BeenInBusinessEdit=Response.loan.BusinessPeriod;}
     if(Response.loan.PaidEmployement != "null"){this.PaidEmployment=Response.loan.PaidEmployement; }
     if(Response.loan.PaidEmployementD != "null"){this.UserEmployer=Response.loan.PaidEmployementD; }
     if(Response.loan.Disability != "null"){ this.IsPysicallyDisabled=Response.loan.Disability; }
@@ -720,8 +725,7 @@ getUserApplicationFormDetails(passedLoanId){
     if(Response.loan.MarketRoad != "null"){this.MarketOrRoad=Response.loan.MarketRoad; }
     if(Response.loan.SubCounty != "null"){this.Subcounty=Response.loan.SubCounty; }
     if(Response.loan.Partners != "null"){this.Partners=Response.loan.Partners; }
-    if(Response.loan.BusinessOperation != "null"){this.BeenInOperation=Response.loan.BusinessOperation;}
-    if(Response.loan.BusinessOperation != "null"){this.BeenInOperationTime=Response.loan.BusinessOperation; }
+    if(Response.loan.BusinessOperation != "null"){this.BeenInOperationEdit=Response.loan.BusinessOperation;}
     if(Response.loan.NoOfEmployee != "null"){this.NoOfEmployees=Response.loan.NoOfEmployee; }
     if(Response.loan.OwnBusinessBuiding != "null"){this.OwnBuilding=Response.loan.OwnBusinessBuiding; }
     if(Response.loan.BOwnerName != "null"){this.BuildingOwner=Response.loan.BOwnerName; }
@@ -738,7 +742,8 @@ getUserApplicationFormDetails(passedLoanId){
     if(Response.loan.BankBranch != "null"){this.BankBranch=Response.loan.BankBranch;} 
     if(Response.loan.AccountNumber != "null"){this.BankAccountNo=Response.loan.AccountNumber; }
     if(Response.loan.PrivateDebts != "null"){this.PrivateDebts=Response.loan.PrivateDebts; }
-    if(Response.loan.BusinessDebts != "null"){this.BusinessDebts=Response.loan.BusinessDebts;} 
+    if(Response.loan.BusinessDebts != "null"){this.BusinessDebts=Response.loan.BusinessDebts;}
+    if(Response.loan.TotalDebts != "null"){this.TotalDebts=Response.loan.TotalDebts;}  
     if(Response.loan.loanamount != "null"){this.loanAmount=Response.loan.loanamount;} 
     if(Response.loan.LoanPurposes != "null"){this.loanpurpose=Response.loan.LoanPurposes; }
     if(Response.loan.CreditorName != "null"){this.AppliedLoanCreditor=Response.loan.CreditorName; }
@@ -772,6 +777,8 @@ getUserApplicationFormDetails(passedLoanId){
 
      formulation(){
       
-      this.TotalDebts = this.BusinessDebts +  this.PrivateDebts;   
+      this.TotalDebts = this.BusinessDebts +  this.PrivateDebts; 
+      this.BeenInBusinessEdit =  this.BeenInBusiness + " "+this.BeenInBusinessTime;
+      this.BeenInOperationEdit =  this.BeenInOperation + " "+this.BeenInOperationTime;  
      }
 }

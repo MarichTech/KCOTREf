@@ -179,6 +179,11 @@ export class LoanApplicationService {
         //http://localhost:51042/Loan/getAllApproveApplications
       }
 
+      getLoanType(){
+        return this.http.get('http://micropointlive.com/Demo/Loan/geteachLoanTypes');
+        //http://micropointlive.com/Demo/Loan/geteachLoanTypes
+      }
+
 
 
 

@@ -100,7 +100,7 @@
 
                 <h4>Business Details </h4>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <div class="col-sm-4">
                         <label>Type of Business</label>
                         <input type="text" class="form-control"   [(ngModel)]="TypeofBusiness" > 
@@ -109,9 +109,10 @@
                     <div class="col-sm-4">
                       <label >How long has the business been in operation?</label> 
                       <div class="row">
-                        <div class="col-sm-4"><input class="form-control" [(ngModel)]="BeenInOperation"></div>
+                        <div class="col-sm-4"><input class="form-control" (keyup)=formulation() [(ngModel)]="BeenInOperation"></div>
                         <div class="col-sm-8">
-                          <select class="form-control" [(ngModel)]="BeenInOperationTime">
+                          <select class="form-control" (keyup)=formulation() [(ngModel)]="BeenInOperationTime">
+                            <option value="">-select-</option>
                             <option value="Day">Day(s)</option>
                             <option value="Month">Month(s)</option>
                             <option value="Year">Year(s)</option>
@@ -129,11 +130,11 @@
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row"  style="margin:2px">
                     <div class="col-sm-6">
                         <label>Select form of Business</label>
                         <select class="form-control" name="CompanyBForm" [(ngModel)]="CompanyBForm">
-                          <option selected value="None">-Not Selected-</option>
+                          <option selected value="">-Not Selected-</option>
                           <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
                           <option value="Partnership" name="Partnership">Partnership</option>
                           <option value="Limited Company" name="Limited Company">Limited Company</option>
@@ -153,7 +154,7 @@
                   <hr>
                   <h4>Business premises </h4>
 
-                  <div class="row">
+                  <div class="row"  style="margin:2px">
                     <div class="col-sm-4">
                         <label>Type of Building </label>
                         <input type="text" class="form-control"   [(ngModel)]="TypeofBuilding" > 
@@ -174,7 +175,7 @@
                     </div>
                   </div>
 
-                  <div class="row" *ngIf="OwnBuilding=='Rented'">
+                  <div class="row"  style="margin:2px" *ngIf="OwnBuilding=='Rented'">
                     <div class="col-sm-4">
                         <label >Owner's Name(Landloard/LandLady)</label>
                         <input type="text" class="form-control" [(ngModel)]="BuildingOwnerName"> 
@@ -190,7 +191,7 @@
                     </div>
                   </div> 
 
-                  <div class="row">
+                  <div class="row"  style="margin:2px">
                     <div class="col-sm-12">
                         <label>Layout and cleanliness </label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="LayoutAndCleanliness"></textarea>    
@@ -200,7 +201,7 @@
                   <hr>
                   <h4>Business Records: </h4>
 
-                  <div class="row">
+                  <div class="row"  style="margin:2px">
                     <div class="col-sm-3">
                         <label>Cash Book </label>
                         <select class="form-control" [(ngModel)]="CashBook">
@@ -228,7 +229,7 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" >
                       <label >Others</label>
                       <select class="form-control" [(ngModel)]="OtherBooks">
                         <option value="">-select-</option>
@@ -238,14 +239,14 @@
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row" *ngIf="OtherBooks=='Yes'">
                     <div class="col-sm-12">
                         <label>Describe the other books used</label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="OtherBooksDescription"></textarea>    
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row"  style="margin:2px">
                     <div class="col-sm-3">
                         <label >Are Books kept up-to-date? </label>
                         <select class="form-control" [(ngModel)]="IsBooksUpToDate">
@@ -276,13 +277,51 @@
                     </div>
                   </div>
 
-                  <div class="row" *ngIf="HaveBusinessBank=='Yes'" >
+                  <div class="row"  style="margin:2px" *ngIf="HaveBusinessBank=='Yes'" >
                     <div class="col-sm-4">
                         <label>Bank Name</label>
                         <select class="form-control" [(ngModel)]="BankName">
-                          <option value="">-select-</option>
-                          <option value="Equity Bank">Equity Bank</option>
-                          <option value="KCB Bank">KCB Bank</option>
+                            <option value="">-select-</option>
+                            <option value="The Co-operative Bank">The Co-operative Bank</option>
+                            <option value="Suntra Investment Bank Ltd">Suntra Investment Bank Ltd</option>
+                            <option value="Sterling Investment Bank">Sterling Investment Bank</option>
+                            <option value="Standard Investment Bank">Standard Investment Bank</option>
+                            <option value="Standard Chartered">Standard Chartered</option>
+                            <option value="Prime Bank">Prime Bank</option>
+                            <option value="Paramount Bank">Paramount Bank</option>
+                            <option value="Oriental Commercial Bank Ltd">Oriental Commercial Bank Ltd.</option>
+                            <option value="NIC Bank">NIC Bank</option>
+                            <option value="ABC Bank">ABC Bank</option>
+                            <option value="National Bank">National Bank</option>
+                            <option value="K-Rep Bank">K-Rep Bank</option>
+                            <option value="Kenya Post Office Savings Bank">Kenya Post Office Savings Bank</option>
+                            <option value="KCB Bank">KCB Bank</option>
+                            <option value="Investments & Mortgages Bank Limited – I&M Bank">Investments & Mortgages Bank Limited – I&M Bank</option>
+                            <option value="Imperial Bank Limited">Imperial Bank Limited</option>
+                            <option value="Housing Finance">Housing Finance</option>
+                            <option value="Guardian Bank Ltd">Guardian Bank Ltd.</option>
+                            <option value="Giro Commercial Bank Ltd">Giro Commercial Bank Ltd</option>
+                            <option value="Fina Bank">Fina Bank</option>
+                            <option value="Fidelity Bank">Fidelity Bank</option>
+                            <option value="Faida Investment Bank – FIB">Faida Investment Bank – FIB</option>
+                            <option value="Equity Bank">Equity Bank</option>
+                            <option value="Equatorial Investment Bank">Equatorial Investment Bank</option>
+                            <option value="Equatorial Commercial Bank Limited">Equatorial Commercial Bank Limited</option>
+                            <option value="Dyer & Blair Investment Bank">Dyer & Blair Investment Bank</option>
+                            <option value="Dubai Bank Kenya Ltd">Dubai Bank Kenya Ltd</option>
+                            <option value="Dry Associates Limited">Dry Associates Limited</option>
+                            <option value="Development Bank Of Kenya Ltd">Development Bank Of Kenya Ltd</option>
+                            <option value="Co-operative Bank">Co-operative Bank</option>
+                            <option value="Consolidated Bank">Consolidated Bank</option>
+                            <option value="Commercial Bank of Africa">Commercial Bank of Africa</option>
+                            <option value="Citibank N A">Citibank N A</option>
+                            <option value="CFC Stanbic Bank Limited">CFC Stanbic Bank Limited</option>
+                            <option value="Central Bank of Kenya">Central Bank of Kenya</option>
+                            <option value="Bank Of Baroda (Kenya) Ltd">Bank Of Baroda (Kenya) Ltd.</option>
+                            <option value="Bank of Africa Kenya Ltd">Bank of Africa Kenya Ltd</option>
+                            <option value="Afrika Investment Bank">Afrika Investment Bank</option>
+                            <option value="African Development Bank Group">African Development Bank Group</option>
+                            <option value="African Banking Corporation">African Banking Corporation</option>
                       </select>
                     </div>
 
@@ -306,7 +345,7 @@
                     <mat-tab [label]=Tabs1>
                         <h2>(i) CASH FLOW ANALYSIS FORM</h2>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>a) Cash in the bank at the start of the month</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -336,7 +375,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>b) Cash in hand at the start of the month</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -366,7 +405,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>C) Cash  sales</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -396,37 +435,37 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>Total cash (A+B+C)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC1" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABC1" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>2nd</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC2" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABC2" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>3rd</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC3" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABC3" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>4th</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC4" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABC4" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>5th</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC5" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control"  (keyup)=formulation() [(ngModel)]="ABC5" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>6th</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABC6" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABC6" disabled style="background-color:white;"> 
                             </div>
                         </div>
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>d) Other monies expected</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -456,37 +495,37 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>Total cash inflows (A+B+C+D)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
-                                <input type="number" class="form-control"   [(ngModel)]="ABCD1" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="ABCD1" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>2nd</label>
-                                <input type="number" class="form-control"    [(ngModel)]="ABCD2" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="ABCD2" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>3rd</label>
-                                <input type="number" class="form-control"    [(ngModel)]="ABCD3" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="ABCD3" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>4th</label>
-                                <input type="number" class="form-control"    [(ngModel)]="ABCD4" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="ABCD4" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>5th</label>
-                                <input type="number" class="form-control"    [(ngModel)]="ABCD5" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control" (keyup)=formulation()   [(ngModel)]="ABCD5" disabled style="background-color:white;"> 
                             </div>
                             <div class="col-sm-2">
                                 <label>6th</label>
-                                <input type="number" class="form-control"    [(ngModel)]="ABCD6" disabled style="background-color:white;"> 
+                                <input type="number" class="form-control"  (keyup)=formulation()  [(ngModel)]="ABCD6" disabled style="background-color:white;"> 
                             </div>
                         </div>
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>e) Cash  Purchases</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -516,7 +555,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>f) Cash Payments</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -546,7 +585,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>Total Cash outflows(E+F)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -576,7 +615,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>Surplus/Deficit </h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -615,7 +654,7 @@
                     <mat-tab [label]=Tabs2>
                         <h2>(ii) PROFIT AND LOSS STATEMENT </h2>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>a) Monthly sales</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -645,7 +684,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>b) opening stock </h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -675,7 +714,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>c) Purchases  for that month</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -705,7 +744,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>d)Goods available for sale(B+C)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -735,7 +774,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>e) Closing Stock</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -765,7 +804,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>f) Cost of goods Sold(D-E)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -795,7 +834,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>g) Gross Profit(A-F)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -825,7 +864,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>h) Operating expenses</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -855,7 +894,7 @@
 
                         <hr>
 
-                        <div class="row">
+                        <div class="row"  style="margin:2px">
                             <h3>i)  Net Profit(G-H)</h3>
                             <div class="col-sm-2">
                                 <label>1st</label>
@@ -901,7 +940,7 @@
 
                 <h3>(i) Security</h3>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <div class="col-sm-4">
                         <label >Type of security </label>
                         <select class="form-control" [(ngModel)]="SecurityType">
@@ -912,7 +951,7 @@
                       </select>
                     </div>
                     <div class="col-sm-4">
-                        <label>Approximate value of security</label>
+                        <label>Approximate value of security(Ksh)</label>
                         <input type="text" class="form-control"   [(ngModel)]="ApproximateValOfSecurity" >
                     </div>
                     <div class="col-sm-4">
@@ -925,7 +964,7 @@
 
                 <h3>(ii) Business environment</h3>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <div class="col-sm-6">
                         <label>Competitors</label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Competitors"></textarea>
@@ -936,7 +975,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <div class="col-sm-6">
                         <label>Regulations (Licenses)</label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Regulations"></textarea>
@@ -947,7 +986,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <div class="col-sm-6">
                         <label>Date of visit(s) </label>
                         <input type="date" class="form-control"   [(ngModel)]="DateofVisit" >
@@ -965,7 +1004,7 @@
             <mat-tab [label]=Tab5>
                 <h3> Loan Appraisal Score Sheet</h3>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>ISSUE/PARAMETERS</h3>
                     <h3>1. Purpose</h3>
                     <div class="col-sm-4">
@@ -984,7 +1023,7 @@
 
                 <hr>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>2. Character </h3>
                     <div class="col-sm-4">
                         <label>Maximum score (%)</label>
@@ -1002,7 +1041,7 @@
 
                 <hr>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>3. Security </h3>
                     <div class="col-sm-4">
                         <label>Maximum score (%)</label>
@@ -1020,7 +1059,7 @@
 
                 <hr>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>4. Ability</h3>
                     <div class="col-sm-4">
                         <label>Maximum score (%)</label>
@@ -1038,7 +1077,7 @@
 
                 <hr>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>5. Amount</h3>
                     <div class="col-sm-4">
                         <label>Maximum score (%)</label>
@@ -1056,7 +1095,7 @@
 
                 <hr>
 
-                <div class="row">
+                <div class="row"  style="margin:2px">
                     <h3>Total</h3>
                     <div class="col-sm-4">
                         <label>Maximum score (%)</label>
@@ -1075,6 +1114,36 @@
                 <br>
                 <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
                     <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
+                    <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2">Next &nbsp; <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+                               
+                </div>
+                        
+            </mat-tab>
+
+            <mat-tab [label]=Tab6>
+                <h3> Recommendations(Can be left unfilled and filled after printing the form in PDF)</h3>
+                <div class="row"  style="margin:2px">
+                    <div class="col-sm-12">
+                        <label>Board Treasurer /Secretary’s Comments/Recommendations</label>
+                        <textarea class="form-control" aria-label="With textarea" [(ngModel)]="BoardRecommendations"></textarea> 
+                    </div>
+                </div>
+
+                <div class="row"  style="margin:2px">
+                    <div class="col-sm-6">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" [(ngModel)]="RecommName" > 
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Date:</label>
+                        <input type="date" class="form-control"  [(ngModel)]="RecommDate" >
+                    </div>
+                </div>
+                <br>
+
+                <div class="btn-group mr-2" role="group" aria-label="First group" style="float: right;">
+                    <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2">Previous &nbsp; <i class="fas fa-step-backward"></i></button>
                     <button type="button" (click)="openAppraisalPdf(TypeofBusiness,BeenInOperation,BeenInOperationTime,IsRegistered,CompanyBForm,TradeLicense,TypeofBuilding,
                     Condition,OwnBuilding,BuildingOwnerName,BuildingOwnerAddress,BuildingRent,LayoutAndCleanliness,CashBook,CreditLedger,
                     StockBooks,OtherBooks,OtherBooksDescription,IsBooksUpToDate,WhoKeepsBooks,IsPersonalDrawingsRecorded,HaveBusinessBank,
@@ -1083,7 +1152,7 @@
                     OS1,OS2,OS3,OS4,OS5,OS6,PM1,PM2,PM3,PM4,PM5,PM6,GBC1,GBC2,GBC3,GBC4,GBC5,GBC6,CS1,CS2,CS3,CS4,CS5,CS6,DE1,DE2,DE3,DE4,DE5,DE6,AF1,AF2,AF3,AF4,AF5,AF6,
                     OE1,OE2,OE3,OE4,OE5,OE6,GH1,GH2,GH3,GH4,GH5,GH6,SecurityType,ApproximateValOfSecurity,AdequacyofSecurity,Competitors,GeneralSafety,Regulations,TechnologyUsed,
                     DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
-                    AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks)" class="btn btn-secondary  ml-2">Preview In PDf &nbsp; <i class="fas fa-file-pdf"></i></button>
+                    AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks,BoardRecommendations,RecommName,RecommDate)" class="btn btn-secondary  ml-2">Preview In PDf &nbsp; <i class="fas fa-file-pdf"></i></button>
                     <button style="padding-bottom: 2%;" type="submit" class="btn  btn-danger ml-2"  (click)="onSubmit(TypeofBusiness,BeenInOperation,BeenInOperationTime,IsRegistered,CompanyBForm,TradeLicense,TypeofBuilding,
                               Condition,OwnBuilding,BuildingOwnerName,BuildingOwnerAddress,BuildingRent,LayoutAndCleanliness,CashBook,CreditLedger,
                               StockBooks,OtherBooks,OtherBooksDescription,IsBooksUpToDate,WhoKeepsBooks,IsPersonalDrawingsRecorded,HaveBusinessBank,
@@ -1094,7 +1163,7 @@
                               DateofVisit,PurposeActualScore,PurposeRemarks,CharacterActualScore,CharacterRemarks,SecurityActualScore,SecurityRemarks,AbilityActualScore,AbilityRemarks,
                               AmountActualScore,AmountRemarks,TotalActualScore,TotalRemarks)" ><i class="fa fa-database"></i>&nbsp;Submit Form</button>
                 </div>
-                        
+
             </mat-tab>
 
         </mat-tab-group>
