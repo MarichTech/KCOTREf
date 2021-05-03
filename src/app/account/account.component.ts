@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoanApplicationService } from '../shared/loan-application.service';
 
 @Component({
   selector: 'app-account',
@@ -19,11 +20,17 @@ export class AccountComponent implements OnInit {
   callLogs:any;
   StoredfirstName:any;
 
-  constructor() {
-    this.StoredfirstName= window.localStorage.getItem('firstName')
+  FullName:any="";
+  ClientTypeId:any;
+  IdNo:any;
+
+  constructor( private loanservice:LoanApplicationService) {
+    this.StoredfirstName= window.localStorage.getItem('firstName');
+    this.FullName=window.localStorage.getItem('CompanyName');
    }
 
   ngOnInit(): void {
+    this.getClientType();
     this.fName=window.localStorage.getItem('firstName');
     this.oNames=window.localStorage.getItem('otherNames');
     this.lName=window.localStorage.getItem('lastName');
@@ -38,5 +45,14 @@ export class AccountComponent implements OnInit {
     console.log(this.cellNo);
     console.log(this.dob);
     console.log(this.natId);
+  }
+
+  getClientType(){
+    this.IdNo = localStorage.getItem('natIdNo');
+    this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
+          
+          this.ClientTypeId=Response.member.ClientTypeid;
+         
+        });
   }
 }

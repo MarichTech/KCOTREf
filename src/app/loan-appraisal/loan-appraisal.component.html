@@ -125,7 +125,11 @@
             
                     <div class="col-sm-4">
                         <label>Is the business registered? </label>
-                        <input type="text" class="form-control"   [(ngModel)]="IsRegistered" > 
+                        <select class="form-control" [(ngModel)]="IsRegistered">
+                            <option value="">-select-</option>
+                            <option value="Registered">Registered</option>
+                            <option value="Unregistered">Unregistered</option>
+                          </select>
                         
                     </div>
                   </div>

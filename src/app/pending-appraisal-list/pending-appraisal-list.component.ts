@@ -411,6 +411,7 @@ export class PendingAppraisalListComponent implements OnInit {
    if(Response.loan.GTwoIdNo != "null"){this.gurantor2IdNo=Response.loan.GTwoIdNo;}
    
        this.generatePdf();
+       console.log('genpdf');
       
    });
    }

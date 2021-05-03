@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
+import { LoanApplicationService } from '../shared/loan-application.service';
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -34,12 +35,19 @@ export class LoansHistoryComponent implements OnInit {
   isActiveLoans:any;
   isAllLoans:any;
   subTitle:any;
-  constructor( private navCtrl:NgxNavigationWithDataComponent,private lenderService:UserService) { 
+
+  FullName:any="";
+  ClientTypeId:any;
+  IdNo:any;
+  constructor( private navCtrl:NgxNavigationWithDataComponent,private lenderService:UserService, private loanservice:LoanApplicationService) { 
     this.isConnecting=true;
     this.isConnectingHistory=false;
+    this.StoredfirstName= window.localStorage.getItem('firstName');
+    this.FullName=window.localStorage.getItem('CompanyName');
   }
 
   ngOnInit(): void {
+    this.getClientType();
     this.getStorageMemberId();
   }
   getStorageMemberId(){
@@ -140,6 +148,16 @@ historyDetails(loanId,LoanAmount,StartDate,Balance){
 }
 Reload(){
   this.navCtrl.navigate('LoansHistory');
+}
+
+
+getClientType(){
+  this.IdNo = localStorage.getItem('natIdNo');
+  this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
+        
+        this.ClientTypeId=Response.member.ClientTypeid;
+       
+      });
 }
 
 }

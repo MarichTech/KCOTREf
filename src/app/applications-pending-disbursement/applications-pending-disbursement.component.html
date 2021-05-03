@@ -65,6 +65,7 @@
                           <th>Loan Purpose</th>
                           <th>Approved Amount</th>
                           <th>Approved Date</th>
+                          <th>Preview</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +80,17 @@
                           <td (click)="onView()">{{items.LoanPurposes}}</td>
                           <td (click)="onView()">{{items.ApproveAmount}}</td>
                           <td (click)="onView()">{{items.ApprovalDate}}</td>
-                                                      
+                          <td>
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button"  (click)="viewLoanApplication(items.NationalId,items.LoanId)">View LoanApplicaton Form</button>
+                                <button class="dropdown-item" type="button" (click)=" getAppraisalDetails(items.LoanId)">View LoanAppraisal Form</button>
+                              </div>
+                            </div>
+                          </td>                            
                     </tr>    
             </tbody>
           

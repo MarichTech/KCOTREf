@@ -184,7 +184,15 @@ export class LoanApplicationService {
         //http://micropointlive.com/Demo/Loan/geteachLoanTypes
       }
 
+      getAppraisalDetailsByLoanId1(id):any{
+        return this.http.get('http://3.13.237.46/Demo/Appriasal/getloanApraisals?loanId='+id);
+        //http://localhost:51042/Appriasal/getloanApraisals?loanId=218
+      }
 
+      getAppraisalDetailsByLoanId2(id):any{
+        return this.http.get('http://3.13.237.46/Demo/Appriasal/getOtherloanApraisals?loanId='+id);
+        //http://localhost:51042/Appriasal/getOtherloanApraisals?loanId=218
+      }
 
 
 }
