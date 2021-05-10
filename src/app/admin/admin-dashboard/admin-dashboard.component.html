@@ -15,9 +15,22 @@
           <a class="nav-link" routerLink="/A-Dashboard"> <i class="fa fa-home"></i>&nbsp;Home</a>
         </li>
 
+        <li class="dropdown">
+          <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fa fa-money"></i>&nbsp;Loans</a>
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" routerLink="/Pending-Appraisal-List">Pending appraisals</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" routerLink="/Pending-Approval-List">Pending approvals</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" routerLink="/Pending-Disbursement-List">Pending disbursements</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="nav-link" routerLink="/Rejected-Loans-List">Rejected loans</a></li>
+          </ul>
+      </li>
+
     
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Account"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;My Details</a>
+          <a class="nav-link" routerLink="/AdminProfile"><i class="fas fa-user"></i>&nbsp;My Details</a>
         </li>
     
         <li class="nav-item">
@@ -62,7 +75,7 @@
   </div>
 
   <div class="col-6 col-lg-3">
-    <div class="app-card app-card-stat shadow-sm h-100" (click)="allApplications()">
+    <div class="app-card app-card-stat shadow-sm h-100" (click)="rejectedApplications()">
       <div class="app-card-body p-3 p-lg-4">
         <h4 class="stats-type mb-1">Rejected Applications</h4>
         <div class="stats-figure">{{AllApplications}}</div>
@@ -98,9 +111,6 @@
     <div class="item-label"><strong>Principal</strong></div>
       <div class="item-data">Ksh {{KocotrefPrincipal}}</div>
   </div><!--//col-->
-  <div class="col text-right">
-    <a class="btn-sm app-btn-secondary" href="#">View</a>
-  </div><!--//col-->
   </div><!--//row-->
   </div><!--//item-->
   <div class="item border-bottom py-3">
@@ -109,9 +119,6 @@
     <div class="item-label"><strong>Intrest</strong></div>
       <div class="item-data">Ksh {{KocotrefInterest}}</div>
   </div><!--//col-->
-  <div class="col text-right">
-    <a class="btn-sm app-btn-secondary" href="#">View</a>
-  </div><!--//col-->
   </div><!--//row-->
   </div><!--//item-->
   <div class="item border-bottom py-3">
@@ -119,9 +126,6 @@
     <div class="col-auto">
       <div class="item-label"><strong>Penalty</strong></div>
         <div class="item-data">Ksh {{KocotrefPenalty}}</div>
-    </div><!--//col-->
-    <div class="col text-right">
-      <a class="btn-sm app-btn-secondary" href="#">View</a>
     </div><!--//col-->
     </div><!--//row-->
     </div><!--//item-->
@@ -216,9 +220,6 @@
         <div class="item-label"><strong>Principal Paid</strong></div>
           <div class="item-data">Ksh {{PrincipalPaid}} </div>
       </div><!--//col-->
-      <div class="col text-right">
-        <a class="btn-sm app-btn-secondary" href="#">View</a>
-      </div><!--//col-->
       </div><!--//row-->
       </div><!--//item-->
       <div class="item border-bottom py-3">
@@ -226,9 +227,6 @@
       <div class="col-auto">
         <div class="item-label"><strong>Interest Paid</strong></div>
           <div class="item-data">Ksh {{InterestPaid}}</div>
-      </div><!--//col-->
-      <div class="col text-right">
-        <a class="btn-sm app-btn-secondary" href="#">View</a>
       </div><!--//col-->
       </div><!--//row-->
       </div><!--//item-->
@@ -238,9 +236,6 @@
           <div class="item-label"><strong>Penalty Paid</strong></div>
             <div class="item-data">Ksh {{PenaltyPaid}}</div>
         </div><!--//col-->
-        <div class="col text-right">
-          <a class="btn-sm app-btn-secondary" href="#">View</a>
-        </div><!--//col-->
         </div><!--//row-->
         </div><!--//item-->
         <div class="item border-bottom py-3">
@@ -248,9 +243,6 @@
           <div class="col-auto">
             <div class="item-label"><strong>Total</strong></div>
               <div class="item-data">Ksh {{TotalRepayments}}</div>
-          </div><!--//col-->
-          <div class="col text-right">
-            <a class="btn-sm app-btn-secondary" href="#">View</a>
           </div><!--//col-->
           </div><!--//row-->
           </div><!--//item-->
@@ -288,9 +280,6 @@
         <div class="item-label"><strong>Total Loans</strong></div>
           <div class="item-data">Ksh {{KocotrefTotalLoans}}</div>
       </div><!--//col-->
-      <div class="col text-right">
-        <a class="btn-sm app-btn-secondary" href="#">View</a>
-      </div><!--//col-->
       </div><!--//row-->
       </div><!--//item-->
       <div class="item border-bottom py-3">
@@ -298,9 +287,6 @@
       <div class="col-auto">
         <div class="item-label"><strong>No. of Loans</strong></div>
           <div class="item-data">{{KocotrefNoOfLoans}}</div>
-      </div><!--//col-->
-      <div class="col text-right">
-        <a class="btn-sm app-btn-secondary" href="#">View</a>
       </div><!--//col-->
       </div><!--//row-->
       </div><!--//item-->

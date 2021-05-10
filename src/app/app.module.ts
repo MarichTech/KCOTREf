@@ -69,6 +69,9 @@ import { ApplicationsPendingDisbursementComponent } from './applications-pending
 import { ApplicationsPendingApprovalComponent } from './applications-pending-approval/applications-pending-approval.component';
 
 import { UpdatePersonalProfileComponent } from './update-personal-profile/update-personal-profile.component';
+import { RejectedLoansListComponent } from './rejected-loans-list/rejected-loans-list.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 const routes: Routes = [
@@ -187,6 +190,11 @@ const routes: Routes = [
     
   },
   {
+    path:'Rejected-Loans-List',
+    component:RejectedLoansListComponent
+    
+  },
+  {
     path:'UserLoanApplication',
     component:ViewLoanApplicationComponent
     
@@ -194,6 +202,12 @@ const routes: Routes = [
   {
     path:'EditPersonalProfile',
     component:UpdatePersonalProfileComponent
+    
+  },
+
+  {
+    path:'AdminProfile',
+    component:AdminProfileComponent
     
   },
   
@@ -240,7 +254,9 @@ const routes: Routes = [
     MemberPendingAppraisalsComponent,
     ApplicationsPendingDisbursementComponent,
     ApplicationsPendingApprovalComponent,
-    UpdatePersonalProfileComponent
+    UpdatePersonalProfileComponent,
+    RejectedLoansListComponent,
+    AdminProfileComponent
   ],
   imports: [
     CommonModule,
@@ -256,6 +272,7 @@ const routes: Routes = [
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
+    MatBadgeModule,
     MatButtonModule,
     MatDividerModule,
     MatSnackBarModule,

@@ -76,8 +76,8 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/Pending-Disbursement-List']);
   }
 
-  allApplications(){
-
+  rejectedApplications(){
+    this.router.navigate(['/Rejected-Loans-List']);
   }
 
   unApprovedMembers(){

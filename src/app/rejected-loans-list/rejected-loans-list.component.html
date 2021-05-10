@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#"></a>
       <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
-        Pending Approval
+        Rejected Loans
       <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,11 @@
             <ul class="dropdown-menu">
                 <li><a class="nav-link" routerLink="/Pending-Appraisal-List">Pending appraisals</a></li>
                 <li class="dropdown-divider"></li>
-                <li><a class="nav-link" >Pending approvals</a></li>
+                <li><a class="nav-link" routerLink="/Pending-Approval-List">Pending approvals</a></li>
                 <li class="dropdown-divider"></li>
                 <li><a class="nav-link" routerLink="/Pending-Disbursement-List">Pending disbursements</a></li>
                 <li class="dropdown-divider"></li>
-                <li><a class="nav-link" routerLink="/Rejected-Loans-List">Rejected loans</a></li>
+                <li><a class="nav-link" >Rejected loans</a></li>
             </ul>
         </li>
   
@@ -71,7 +71,7 @@
   
   <div *ngIf="isDisconnected==false" class="container-fluid">
   
-          <h4 class="mat-h1">Applications Pending Approval</h4>  
+          <h4 class="mat-h1">Rejected Applications</h4>  
           <div class="table-responsive">
               <table datatable class="table table table-striped table-bordered" *ngIf="this.temp">
     
@@ -83,14 +83,14 @@
                           <th>Village</th>
                           <th>Loan Amount</th>
                           <th>Loan Purpose</th>
-                          <th>Application Date</th>
+                          <th>Rejected Amount</th>
+                          <th>Rejected Date</th>
                           <th>Preview</th>
-                          <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                      
-                    <tr *ngFor="let items of AppraisalList">
+                    <tr *ngFor="let items of ApprovalList">
   
                           <td (click)="onView()">{{items.FirstName}}&nbsp;{{items.Surname}}&nbsp;{{items.OtherNames}}</td>
                           <td (click)="onView()">{{getSubCounty(items.SubcountyId)}}</td>
@@ -98,7 +98,8 @@
                           <td (click)="onView()">{{getVillages(items.VillageId)}}</td>
                           <td (click)="onView()">{{items.LoanAmout}}</td>
                           <td (click)="onView()">{{items.LoanPurposes}}</td>
-                          <td (click)="onView()">{{items.loanApplicationDate}}</td>
+                          <td (click)="onView()">{{items.ApproveAmount}}</td>
+                          <td (click)="onView()">{{items.ApprovalDate}}</td>
                           <td>
                             <div class="dropdown">
                               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,22 +107,10 @@
                               </button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <button class="dropdown-item" type="button"  (click)="viewLoanApplication(items.NationalId,items.LoanId)">View LoanApplicaton Form</button>
-                                <button class="dropdown-item" type="button" (click)="  viewLoanAppraisal(items.NationalId,items.LoanId)">View LoanAppraisal Form</button>
+                                <button class="dropdown-item" type="button" (click)=" getAppraisalDetails(items.LoanId)">View LoanAppraisal Form</button>
                               </div>
                             </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Select
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item" type="button"  (click)="approveLoan(items.FirstName,items.Surname,items.OtherNames,items.LoanAmout)">Approve Loan</button>
-                                <button class="dropdown-item" type="button" (click)="rejectLoan(items.FirstName,items.Surname,items.OtherNames,items.LoanAmout)">Reject Loan</button>
-                              </div>
-                            </div>
-                          </td>
-                            
+                          </td>                            
                     </tr>    
             </tbody>
           
