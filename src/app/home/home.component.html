@@ -26,9 +26,46 @@
         </ul>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" ><i class="fas fa-bell"></i>&nbsp;Notifications <span matBadge="4" matBadgeSize="small" matBadgeOverlap="false"></span></a>
-    </li>
+   
+   
+      <div class="app-utility-item app-notifications-dropdown dropdown" style="margin-top: 7px;">    
+        <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications" >
+          <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+          </svg>
+          <span class="icon-badge">3</span>
+      </a><!--//dropdown-toggle-->
+      
+      <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+          <div class="dropdown-menu-header p-3">
+            <h5 class="dropdown-menu-title mb-0">Notifications</h5>
+        </div><!--//dropdown-menu-title-->
+        <div class="dropdown-menu-content">
+         <div class="item p-3">
+            <div class="row gx-2 justify-content-between align-items-center">
+             
+              <div class="col">
+                <div class="info"> 
+                  <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+                  <div class="meta"> 2 hrs ago</div>
+                </div>
+              </div><!--//col--> 
+            </div><!--//row-->
+            <a class="link-mask" href="notifications.html"></a>
+         </div><!--//item-->
+       
+        
+        </div><!--//dropdown-menu-content-->
+        
+        <div class="dropdown-menu-footer p-2 text-center">
+          <a href="notifications.html">View all</a>
+        </div>
+                  
+  </div><!--//dropdown-menu-->					        
+    </div><!--//app-utility-item-->
+    
+ 
       
       <li class="dropdown">
         <a *ngIf="ClientTypeId=='2'" href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-user-circle"></i>&nbsp;{{FullNames}}</a>

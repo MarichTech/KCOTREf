@@ -132,7 +132,7 @@
             <div class="col-sm-4">
               <label>Employment Status</label>
               <select class="form-control" name="Empstatus" [(ngModel)]="Empstatus" style="margin-bottom: 10px;"  disabled>
-                <option selected value="">-Not Selected-</option>
+               
                 <option value="Employed" name="Employed">Employed</option>
                 <option value="Unemployed" name="Unemployed">Not Employed</option>
               </select>
@@ -141,7 +141,7 @@
             <div class="col-md-4">
               <label>Level Of Education</label>
               <select class="form-control" name="LevelOfEducation" [(ngModel)]="LevelOfEducation" style="margin-bottom: 10px;"  disabled>
-                <option selected value="">-Not Selected-</option>
+                
                 <option value="Primary" name="Primary">Primary</option>
                 <option value="Secondary" name="Secondary">Secondary</option>
                 <option value="Certificate" name="Certificate">Certificate</option>
@@ -154,10 +154,11 @@
             </div>
             
           </div> 
-
-        
-          
-        
+          <div class="btn-group mr-2" role="group" aria-label="First group" >
+            <button type="button" (click)="onBack()" class="btn btn-danger  ml-2"><i class="fas fa-home"></i>&nbsp;Home</button>
+            <button type="button" (click)="nextStep()" class="btn btn-primary  ml-2"><i class="fas fa-arrow-right"></i>&nbsp;Next</button>
+          </div>
+          <br>
         
         </div>
 
@@ -178,7 +179,7 @@
               <div class="col-sm-6">
                 <label>Legal Status</label>
                 <select class="form-control" name="LegalStatus" [(ngModel)]="LegalStatus" style="margin-bottom: 10px;" (change)="getId($event.target.value)"  disabled>
-                  <option selected value="0">-Not Selected-</option>
+                  
                   <option  value="1"  >Registered Business</option>
                   <option  value="2"> Unregistered Business</option>
                 </select>
@@ -187,10 +188,10 @@
           </div>
         <div> 
           <div  class="row" style="margin:2px">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <label>Form of Business</label>
               <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;"  disabled>
-                <option selected value="">-Not Selected-</option>
+                
                 <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
                 <option value="Partnership" name="Partnership">Partnership</option>
                 <option value="Limited Company" name="Limited Company">Limited Company</option>
@@ -201,23 +202,20 @@
     
               </select>
               </div> 
-              <div class="col-sm-4">
+              <div class="col-sm-6">
                 <label>Business Registration Number</label>
                 <input [(ngModel)]="RegistrationNo"  name="RegistrationNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
               </div>
-            <div class="col-sm-4">
-              <label>Registration Date</label>
-              <input type="date" name="BRegDate" displayFormat="DD MM YYYY" [(ngModel)]="BRegDate" class="form-control"  disabled>
-            </div>
+  
           </div> 
           <div  class="row" style="margin:2px">
             <div class="col-sm-6">
-              <label>Business KRA PIN</label>
-              <input [(ngModel)]="BKRA"  name="BKRA" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+              <label>Registration Date</label>
+              <input type="date" name="BRegDate" displayFormat="DD MM YYYY" [(ngModel)]="BRegDate" class="form-control"  disabled>
             </div>
             <div class="col-sm-6">
-              <label for="file">Attach Registration Certificates</label>
-              <input type="file" id="file"  class="form-control" style="border: 0;">
+              <label>Business KRA PIN</label>
+              <input [(ngModel)]="BKRA"  name="BKRA" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
             </div>
            
           </div> 
@@ -238,10 +236,12 @@
               </div>
           </div>
 
-         
-          <br>
+        
         </div>
-
+        <div class="btn-group mr-2" role="group" aria-label="First group" >
+          <button type="button" (click)="previousStep()" class="btn btn-primary  ml-2"><i class="fas fa-arrow-left"></i>&nbsp;Previous</button>
+          <button type="button" (click)="onBack()" class="btn btn-danger  ml-2"><i class="fas fa-home"></i>&nbsp;Home</button>
+        </div>
 
       </mat-tab>
       </mat-tab-group>
@@ -287,7 +287,7 @@
         <div class="col-sm-4">
           <label>Form of Business</label>
               <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;"  disabled>
-                <option selected value="">-Not Selected-</option>
+                
                 <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
                 <option value="Partnership" name="Partnership">Partnership</option>
                 <option value="Limited Company" name="Limited Company">Limited Company</option>
@@ -329,8 +329,12 @@
           <input type="text"  [(ngModel)]="MobileNo" class="form-control" disabled>
           
         </div>
-      </div>
 
+      
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="First group" >
+        <button type="button" (click)="onBack()" class="btn btn-danger  ml-2"><i class="fas fa-home"></i>&nbsp;Home</button>
+      </div>
 
       
     </mat-card>

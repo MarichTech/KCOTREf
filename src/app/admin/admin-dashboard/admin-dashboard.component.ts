@@ -21,6 +21,8 @@ export class AdminDashboardComponent implements OnInit {
   EntityList:any; 
   IndividualList:any; 
 
+  LoanBalancesList:any;
+
   spinnerContent:any;
   UserName:any;
   Connecting:any;
@@ -72,6 +74,8 @@ export class AdminDashboardComponent implements OnInit {
     this.getNoofAllClients();
     this.getNoofEntities();
     this.getNoofIndividuals();
+
+    this.getLoanBalances();
   
   }
 
@@ -150,6 +154,25 @@ export class AdminDashboardComponent implements OnInit {
     },(error)=>{
       this.isDisconnected=true;
     });
+  }
+
+  getLoanBalances(){
+
+    
+    this.userService.getLoanBalances(0).subscribe(Response => {
+      this.LoanBalancesList = Response;
+
+      for(var items of this.LoanBalancesList){
+        this.KocotrefPrincipal = items.Principal;
+        this.KocotrefPenalty = items.Penalty;
+        this.KocotrefInterest = items.Interest;
+      }
+
+
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+
   }
 
 }

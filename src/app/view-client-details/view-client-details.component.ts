@@ -141,7 +141,7 @@ Tab2: any='Business Details';
          if(Response.Individualmember.EmploymentStatus != null){ this.Empstatus=Response.Individualmember.EmploymentStatus;}
          if(Response.Individualmember.personalKRA != null){this.personalKRA=Response.Individualmember.personalKRA;}
           
-           this.loanService.getUserDetails(parseInt(this.NatIdNo)).subscribe(Response =>{
+           this.loanService.getUserDetails(this.NatIdNo).subscribe(Response =>{
              this.appRespData=Response;
 
              this.isSuccess = this.appRespData['IsSuccess'];
@@ -154,7 +154,7 @@ Tab2: any='Business Details';
                    return;
                  }
                 // if (this.isSuccess==true){
-                   if(Response.member.memberid != null){this.MemberId=Response.member.memberid;}
+                  // if(Response.member.memberid != null){this.MemberId=Response.member.memberid;}
                    if(Response.member.FormOfBusiness != null){this.BForm=Response.member.FormOfBusiness;}
                    if(Response.member.mfirstname != null){this.Firstname=Response.member.mfirstname;}
                    if(Response.member.mothername != null){this.Othernames=Response.member.mothername;}
@@ -180,6 +180,7 @@ Tab2: any='Business Details';
  }
 
  getUserBusinessDetails(){
+   console.log("Biz"+this.MemberId)
    this.userService.getMemberBusinessDetails(this.MemberId).subscribe((Response)=>{
      this.appRespData=Response;
 
@@ -192,7 +193,6 @@ Tab2: any='Business Details';
            return;
          }
          
-        // if (this.isSuccess==true){
          if(Response.IndividualbusinessDetails.BusinessName != null){this.BName=Response.IndividualbusinessDetails.BusinessName;}
          if(Response.IndividualbusinessDetails.LegalStatus != null){this.LegalStatus=Response.IndividualbusinessDetails.LegalStatus;}
          if(Response.IndividualbusinessDetails.FormOfBusiness != null && this.ClientTypeId==1){this.BForm=Response.IndividualbusinessDetails.FormOfBusiness;}
@@ -203,7 +203,7 @@ Tab2: any='Business Details';
          if(Response.IndividualbusinessDetails.PhysicalAddress != null){this.BusinessPhysicalAddress=Response.IndividualbusinessDetails.PhysicalAddress;}
        
 
-         //}
+         
      
      
    }),(error)=>{
@@ -234,5 +234,11 @@ Tab2: any='Business Details';
      this.show=false;
    }  
  }
+
+ onBack(){
+  this.router.navigate(['/A-Dashboard']);
+ }
+
+ 
 
 }

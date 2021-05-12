@@ -218,6 +218,13 @@ export class UserService {
     return this.http.get('http://micropointlive.com/Demo/app/getUserRole?RoleId='+RoleId);
     //http://localhost:51042/app/getUserRole?RoleId=1
   }
+
+  getAdminDetails(UserId){
+    return this.http.get('http://micropointlive.com/Demo/app/getUserDetails?UserId='+UserId);
+    //http://localhost:51042/app/getUserDetails?UserId=4
+  }
+
+  
   
   
   
