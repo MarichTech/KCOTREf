@@ -1,0 +1,338 @@
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <div style="position: relative; contain: layout; display: flex; justify-content: space-between;">
+         Clients Details
+        <img src="assets/imgs/RLogo.png" style="width: 40% !important;height: 40% !important;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/A-Dashboard"> <i class="fa fa-home"></i>&nbsp;Home</a>
+            </li>
+    
+            <li class="dropdown">
+              <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fa fa-money"></i>&nbsp;Loans</a>
+              <ul class="dropdown-menu">
+                  <li><a class="nav-link" routerLink="/Pending-Appraisal-List">Pending appraisals</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="nav-link" >Pending approvals</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="nav-link" routerLink="/Pending-Disbursement-List">Pending disbursements</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="nav-link" routerLink="/Rejected-Loans-List">Rejected loans</a></li>
+              </ul>
+          </li>
+    
+          <li class="dropdown">
+            <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-users"></i>&nbsp;Clients</a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" routerLink="/AllClients">All Clients</a></li>
+                <li class="dropdown-divider"></li>
+                <li><a class="nav-link" routerLink="/Individuals">Individuals</a></li>
+                <li class="dropdown-divider"></li>
+                <li><a class="nav-link" routerLink="/Entities">Entities</a></li>
+            </ul>
+        </li>
+    
+        
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/AdminProfile"><i class="fas fa-user"></i>&nbsp;My Details</a>
+            </li>
+        
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/Logout"><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout</a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/help"><i class="fa fa-question-circle"></i>Help</a> 
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+      <p style="color: white;">{{spinnerContent}}</p>
+    </ngx-spinner>
+    <mat-card *ngIf="ClientTypeId=='1'">
+
+    <mat-tab-group [selectedIndex]="selectedIndex"  (selectedIndexChange)="informChange($event)">
+      <mat-tab [label]=Tab1>
+
+    <div >
+          <h3>Personal Details</h3>
+          <div class="row" style="margin:2px">
+            <div class="col-sm-3">
+              <label> First Name</label>
+                <input [(ngModel)]="Firstname" name="Firstname" type="text" class="form-control" style="margin-bottom: 10px;" disabled>
+            </div>
+            <div class="col-sm-3">
+              <label>Middle Name</label>
+                <input [(ngModel)]="Othernames"  name="Othernames" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+            </div>
+            <div class="col-sm-3">
+              <label>Surname</label>
+                <input [(ngModel)]="Surname"  name="Surname" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+            </div>
+            <div class="col-sm-3">
+              <label>Date of Birth</label>
+              <input type="text" name="DOB" displayFormat="DD MM YYYY" [(ngModel)]="DOB" class="form-control" disabled>
+              
+            </div>
+          </div>
+  
+          <div class="row" style="margin:2px">
+            <div class="col-sm-4">
+              <label>Gender</label>
+              <input type="text" name="Gender" [(ngModel)]="Gender" class="form-control" disabled>
+         
+           </div>
+         <div class="col-sm-4">
+          <label> Personal KRA Pin</label>
+          <input type="text" class="form-control" name="personalKRA" [(ngModel)]="personalKRA" style="margin-bottom: 10px;" disabled>
+         
+        </div>
+        <div class="col-sm-4">
+          <label> National Id No.</label>
+          <input [(ngModel)]="NatIdNo"  name="NatIdNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+       </div>
+          
+       </div>
+       
+  
+            <div class="row" style="margin:2px">
+                <div class="col-sm-4">
+                  <label>Mobile Number</label>
+                  <input [(ngModel)]="MobileNo"  name="MobileNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+                </div>
+                <div class="col-sm-4">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" name="AlternativePhoneNumber" [(ngModel)]="AlternativePhoneNumber" style="margin-bottom: 10px;"  disabled>
+                 </div>
+                 <div class="col-sm-4">
+                  <label>Email Address</label>
+                   <input [(ngModel)]="EmailAddress"  name="EmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+                 </div>
+                 
+                 
+            </div>
+                
+          <br>
+          <div class="row" style="margin:2px">
+            <div class="col-sm-4">
+              <label>Postal Address</label>
+              <input [(ngModel)]="PostalAddress"  name="PostalAddress" type="text" color="secondary" class="form-control"  disabled>
+            </div>  
+
+            <div class="col-sm-4">
+              <label>Employment Status</label>
+              <select class="form-control" name="Empstatus" [(ngModel)]="Empstatus" style="margin-bottom: 10px;"  disabled>
+                <option selected value="">-Not Selected-</option>
+                <option value="Employed" name="Employed">Employed</option>
+                <option value="Unemployed" name="Unemployed">Not Employed</option>
+              </select>
+            </div>
+           
+            <div class="col-md-4">
+              <label>Level Of Education</label>
+              <select class="form-control" name="LevelOfEducation" [(ngModel)]="LevelOfEducation" style="margin-bottom: 10px;"  disabled>
+                <option selected value="">-Not Selected-</option>
+                <option value="Primary" name="Primary">Primary</option>
+                <option value="Secondary" name="Secondary">Secondary</option>
+                <option value="Certificate" name="Certificate">Certificate</option>
+                <option value="Diploma" name="Diploma">Diploma</option>
+                <option value="UnderGraduate" name="UnderGraduate">UnderGraduate</option>
+                <option value="PostGraduate" name="PostGraduate">PostGraduate</option>
+                <option value="Uneducated" name="Uneducated">Informal</option> 
+              </select>
+              
+            </div>
+            
+          </div> 
+
+        
+          
+        
+        
+        </div>
+
+      </mat-tab>
+
+      <mat-tab [label]=Tab2>
+        <div >
+          <label>Business Details</label>
+         
+          <label>Business Details</label>
+          <div class="row" style="margin:2px">
+            <div class="col-sm-6">
+              <label> Business Name</label>
+              <input [(ngModel)]="BName"  name="BName" type="text" color="secondary"  class="form-control" style="margin-bottom: 10px;"  disabled>
+            </div>
+  
+  
+              <div class="col-sm-6">
+                <label>Legal Status</label>
+                <select class="form-control" name="LegalStatus" [(ngModel)]="LegalStatus" style="margin-bottom: 10px;" (change)="getId($event.target.value)"  disabled>
+                  <option selected value="0">-Not Selected-</option>
+                  <option  value="1"  >Registered Business</option>
+                  <option  value="2"> Unregistered Business</option>
+                </select>
+             </div>
+             
+          </div>
+        <div> 
+          <div  class="row" style="margin:2px">
+            <div class="col-sm-4">
+              <label>Form of Business</label>
+              <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;"  disabled>
+                <option selected value="">-Not Selected-</option>
+                <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+                <option value="Partnership" name="Partnership">Partnership</option>
+                <option value="Limited Company" name="Limited Company">Limited Company</option>
+                <option value="SILC" name="SILC">SILC</option>
+                <option value="VSLA" name="VSLA">VSLA</option>
+                <option value="Juakali" name="Juakali">Juakali </option>
+                <option value="Sole-Proprietor" name="Juakali">Sole-Proprietor</option>
+    
+              </select>
+              </div> 
+              <div class="col-sm-4">
+                <label>Business Registration Number</label>
+                <input [(ngModel)]="RegistrationNo"  name="RegistrationNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+              </div>
+            <div class="col-sm-4">
+              <label>Registration Date</label>
+              <input type="date" name="BRegDate" displayFormat="DD MM YYYY" [(ngModel)]="BRegDate" class="form-control"  disabled>
+            </div>
+          </div> 
+          <div  class="row" style="margin:2px">
+            <div class="col-sm-6">
+              <label>Business KRA PIN</label>
+              <input [(ngModel)]="BKRA"  name="BKRA" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+            </div>
+            <div class="col-sm-6">
+              <label for="file">Attach Registration Certificates</label>
+              <input type="file" id="file"  class="form-control" style="border: 0;">
+            </div>
+           
+          </div> 
+          </div>
+  
+          <div class="row" style="margin:2px">
+            
+          <div class="col-sm-6">
+             <label> Business Type</label>
+              <input class="form-control" maxlength="50" name="BType" [(ngModel)]="BType" style="margin-bottom: 10px;"  disabled>
+                
+              </div>
+            
+              <div class="col-sm-6" >
+                <label>Physical Location</label>
+              <input  maxlength="50" name="BusinessPhysicalAddress" [(ngModel)]="BusinessPhysicalAddress" class="form-control" style="margin-bottom: 10px;"  disabled> 
+              
+              </div>
+          </div>
+
+         
+          <br>
+        </div>
+
+
+      </mat-tab>
+      </mat-tab-group>
+
+    </mat-card>
+
+    <mat-card *ngIf="ClientTypeId=='2'">
+      <h3>Entity Details</h3>
+      <div class="row" style="margin:2px">
+        <div class="col-sm-6">
+          <label>Entity Name</label>
+            <input [(ngModel)]="Surname"  name="Surname" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        <div class="col-sm-6">
+          <label> Business Type</label>
+            <input [(ngModel)]="BType" type="text" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+        
+      </div>
+
+      <div class="row" style="margin:2px">
+        <div class="col-sm-4">
+          <label>Registration Number</label>
+            <input [(ngModel)]="NatIdNo"  name="Othernames" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+        <div class="col-sm-4">
+          <label>Registration Date</label>
+          <input type="text" name="DOB" displayFormat="dd/MM/yyyy" [(ngModel)]="DOB" class="form-control" disabled>
+        </div>
+
+        <div class="col-sm-4">
+          <label>KRA Pin</label>
+            <input [(ngModel)]="personalKRA"  type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+      </div>
+
+      
+
+      <div class="row" style="margin:2px">
+        <div class="col-sm-4">
+          <label>Form of Business</label>
+              <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;"  disabled>
+                <option selected value="">-Not Selected-</option>
+                <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
+                <option value="Partnership" name="Partnership">Partnership</option>
+                <option value="Limited Company" name="Limited Company">Limited Company</option>
+                <option value="SILC" name="SILC">SILC</option>
+                <option value="VSLA" name="VSLA">VSLA</option>
+                <option value="Juakali" name="Juakali">Juakali </option>
+                <option value="Sole-Proprietor" name="Juakali">Sole-Proprietor</option>
+    
+              </select>
+        </div>
+
+        <div class="col-sm-4">
+          <label>Email</label>
+          <input type="text" [(ngModel)]="EmailAddress" class="form-control"  disabled>
+          
+        </div>
+
+        <div class="col-sm-4">
+          <label>Postal Address </label>
+            <input [(ngModel)]="PostalAddress"  type="text" color="secondary" class="form-control" style="margin-bottom: 10px;"  disabled>
+        </div>
+
+      
+      </div>
+
+      <div class="row" style="margin:2px">
+        
+        <div class="col-sm-4">
+          <label> Contact Person</label>
+            <input [(ngModel)]="ContactPerson" type="text" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        <div class="col-sm-4">
+          <label>Contact Person Position </label>
+            <input [(ngModel)]="ContactPersonPosition"   type="text" color="secondary" class="form-control" style="margin-bottom: 10px;" disabled>
+        </div>
+        
+        <div class="col-sm-4">
+          <label>Contact Telephone Number</label>
+          <input type="text"  [(ngModel)]="MobileNo" class="form-control" disabled>
+          
+        </div>
+      </div>
+
+
+      
+    </mat-card>
+
+    </div>

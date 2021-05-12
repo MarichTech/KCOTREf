@@ -72,6 +72,10 @@ import { UpdatePersonalProfileComponent } from './update-personal-profile/update
 import { RejectedLoansListComponent } from './rejected-loans-list/rejected-loans-list.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { AllClientsComponent } from './all-clients/all-clients.component';
+import { IndividualClientsComponent } from './individual-clients/individual-clients.component';
+import { EntityClientsComponent } from './entity-clients/entity-clients.component';
+import { ViewClientDetailsComponent } from './view-client-details/view-client-details.component';
 
 
 const routes: Routes = [
@@ -204,10 +208,31 @@ const routes: Routes = [
     component:UpdatePersonalProfileComponent
     
   },
+  {
+    path:'AllClients',
+    component:AllClientsComponent
+    
+  },
+  {
+    path:'Entities',
+    component:EntityClientsComponent
+    
+  },
+  {
+    path:'Individuals',
+    component:IndividualClientsComponent
+    
+  },
 
   {
     path:'AdminProfile',
     component:AdminProfileComponent
+    
+  },
+
+  {
+    path:'ViewClient',
+    component:ViewClientDetailsComponent
     
   },
   
@@ -256,7 +281,11 @@ const routes: Routes = [
     ApplicationsPendingApprovalComponent,
     UpdatePersonalProfileComponent,
     RejectedLoansListComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    AllClientsComponent,
+    IndividualClientsComponent,
+    EntityClientsComponent,
+    ViewClientDetailsComponent
   ],
   imports: [
     CommonModule,

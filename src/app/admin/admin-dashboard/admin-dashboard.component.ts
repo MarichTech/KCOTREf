@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/shared/user.service';
 import { AdminServiceService } from './../../shared/admin-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,6 +16,10 @@ export class AdminDashboardComponent implements OnInit {
   ApplicationList:any;//Pending Appraisal
   AppraisalList:any;//Pending Approval
   ApprovalList:any; //Pending Disbursement
+
+  AllClientsList:any; 
+  EntityList:any; 
+  IndividualList:any; 
 
   spinnerContent:any;
   UserName:any;
@@ -51,7 +56,7 @@ export class AdminDashboardComponent implements OnInit {
 
   
   constructor(public service : LoanApplicationService,private router:Router,private toastr: ToastrService,private spinner:NgxSpinnerService,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar, public userService: UserService) {
     this.spinnerContent='';
     this.isDisconnected=false;
     this.isConnecting=true;
@@ -63,6 +68,10 @@ export class AdminDashboardComponent implements OnInit {
     this. getNoofPendingAppraisals();
     this.getNoofPendingApproval();
     this.getNoofPendingDisbursement();
+
+    this.getNoofAllClients();
+    this.getNoofEntities();
+    this.getNoofIndividuals();
   
   }
 
@@ -114,6 +123,30 @@ export class AdminDashboardComponent implements OnInit {
   getNoofPendingDisbursement(){
     this.service.getApprovalList().subscribe(Response => {
       this.ApprovalList = Response;
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+  }
+
+  getNoofAllClients(){
+    this.userService.getAllMembers().subscribe(Response => {
+      this.AllClientsList = Response;
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+  }
+
+  getNoofEntities(){
+    this.userService.getMembersByClientType(2).subscribe(Response => {
+      this.EntityList = Response;
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+  }
+
+  getNoofIndividuals(){
+    this.userService.getMembersByClientType(1).subscribe(Response => {
+      this.IndividualList = Response;
     },(error)=>{
       this.isDisconnected=true;
     });

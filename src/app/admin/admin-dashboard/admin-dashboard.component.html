@@ -28,6 +28,17 @@
           </ul>
       </li>
 
+      <li class="dropdown">
+        <a href="" class="nav-link" data-toggle="dropdown"  aria-expanded="true"><i class="fas fa-users"></i>&nbsp;Clients</a>
+        <ul class="dropdown-menu">
+            <li><a class="nav-link" routerLink="/AllClients">All Clients</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a class="nav-link" routerLink="/Individuals">Individuals</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a class="nav-link" routerLink="/Entities">Entities</a></li>
+        </ul>
+    </li>
+
     
         <li class="nav-item">
           <a class="nav-link" routerLink="/AdminProfile"><i class="fas fa-user"></i>&nbsp;My Details</a>
@@ -159,10 +170,10 @@
     <div class="row justify-content-between align-items-center">
     <div class="col-auto">
       <div class="item-label"><strong>Total Members</strong></div>
-        <div class="item-data"> {{KocotrefTotalMembers}} Members</div>
+        <div class="item-data"> {{AllClientsList?.length}} Members</div>
     </div><!--//col-->
     <div class="col text-right">
-      <a class="btn-sm app-btn-secondary" href="#">View</a>
+      <a class="btn-sm app-btn-secondary" routerLink="/AllClients">View</a>
     </div><!--//col-->
     </div><!--//row-->
     </div><!--//item-->
@@ -170,10 +181,10 @@
     <div class="row justify-content-between align-items-center">
     <div class="col-auto">
       <div class="item-label"><strong>Individuals</strong></div>
-        <div class="item-data">{{KocotrefIndividuals}}</div>
+        <div class="item-data">{{IndividualList?.length}}</div>
     </div><!--//col-->
     <div class="col text-right">
-      <a class="btn-sm app-btn-secondary" href="#">View</a>
+      <a class="btn-sm app-btn-secondary" routerLink="/Individuals">View</a>
     </div><!--//col-->
     </div><!--//row-->
     </div><!--//item-->
@@ -181,10 +192,10 @@
       <div class="row justify-content-between align-items-center">
       <div class="col-auto">
         <div class="item-label"><strong>Entities</strong></div>
-          <div class="item-data">{{KocotrefEntities}}</div>
+          <div class="item-data">{{EntityList?.length}}</div>
       </div><!--//col-->
       <div class="col text-right">
-        <a class="btn-sm app-btn-secondary" href="#">View</a>
+        <a class="btn-sm app-btn-secondary" routerLink="/Entities">View</a>
       </div><!--//col-->
       </div><!--//row-->
       </div><!--//item-->

@@ -184,6 +184,42 @@ export class UserService {
     
   }
 
+  getAllReadNotification(memberId){
+    return this.http.get('http://micropointlive.com/Demo/Loan/getAllReadyNotification?MemberId='+memberId);
+    //http://localhost:51042/Loan/getAllReadyNotification?MemberId=56
+  }
+
+  getUnReadNotification(memberId){
+    return this.http.get('http://micropointlive.com/Demo/Loan/getAllUnReadyNotification?MemberId='+memberId);
+    //http://localhost:51042/Loan/getAllUnReadyNotification?MemberId=56
+  }
+
+  updateNotification(Id){
+    return this.http.get('http://micropointlive.com/Demo/Loan/UpdateNotification?Id='+Id);
+    //http://localhost:51042/loan/UpdateNotification?Id=2
+  }
+  
+  getAllMembers(){
+    return this.http.get('http://micropointlive.com/Demo/app/getAllMember');
+     //http://localhost:51042/app/getAllMember
+  }
+ 
+  getMembersByClientType(ClientTypeId){
+    return this.http.get('http://micropointlive.com/Demo/app/getAllMemberByClientType?ClientTypeId='+ClientTypeId);
+    //http://localhost:51042/app/getAllMemberByClientType?ClientTypeId=2
+  }
+  
+  getLoanBalances(memberId){
+    return this.http.get('http://micropointlive.com/Demo/Loan/getLoanBalances?memberId='+memberId+'&&UserId='+0+'');
+    //http://localhost:51042/loan/getLoanBalances?memberId=69&&UserId=0
+  }
+
+  getUserRole(RoleId){
+    return this.http.get('http://micropointlive.com/Demo/app/getUserRole?RoleId='+RoleId);
+    //http://localhost:51042/app/getUserRole?RoleId=1
+  }
+  
+  
   
   
 

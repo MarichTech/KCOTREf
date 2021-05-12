@@ -307,7 +307,6 @@ export class ApplicationsPendingApprovalComponent implements OnInit {
   onAppraiseApplication(NatId,LoanId){
     localStorage.setItem('UserAppraisalNatIdNo', NatId.toString());
     localStorage.setItem('UserAppraisalLoanId', LoanId.toString());
-    console.log('NationalId:'+NatId);
     this.router.navigate(['/Loan-Appraisal']);
   
   }
