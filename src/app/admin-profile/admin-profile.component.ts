@@ -1,4 +1,6 @@
+import { ResetAdminPasswordDialogComponent } from './../reset-admin-password-dialog/reset-admin-password-dialog.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoanApplicationService } from '../shared/loan-application.service';
 import { UserService } from '../shared/user.service';
@@ -90,7 +92,6 @@ export class AdminProfileComponent implements OnInit {
 
 
   changePassword(){
-
+   
   }
-
 }

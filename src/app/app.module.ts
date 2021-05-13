@@ -78,6 +78,7 @@ import { EntityClientsComponent } from './entity-clients/entity-clients.componen
 import { ViewClientDetailsComponent } from './view-client-details/view-client-details.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationNavComponent } from './notification-nav/notification-nav.component';
+import { ResetAdminPasswordDialogComponent } from './reset-admin-password-dialog/reset-admin-password-dialog.component';
 
 
 const routes: Routes = [
@@ -295,7 +296,8 @@ const routes: Routes = [
     EntityClientsComponent,
     ViewClientDetailsComponent,
     NotificationsComponent,
-    NotificationNavComponent
+    NotificationNavComponent,
+    ResetAdminPasswordDialogComponent
   ],
   imports: [
     CommonModule,
