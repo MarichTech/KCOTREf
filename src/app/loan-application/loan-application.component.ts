@@ -210,6 +210,7 @@ export class LoanApplicationComponent implements OnInit {
   FullName:any="";
 
 
+
   constructor(private navCtrl:NgxNavigationWithDataComponent,private router:Router, private loanservice:LoanApplicationService,private currencyPipe : CurrencyPipe,
     private toastr: ToastrService,private spinner:NgxSpinnerService, private datePipe: DatePipe,private _snackBar: MatSnackBar, private pdfService: LoanApplicationPdfService,private userService:UserService) {
       //this.passedLoanId = 0;
@@ -240,9 +241,6 @@ export class LoanApplicationComponent implements OnInit {
      
     this.getConstituencies();  
     this.getLoanType(); 
-
-  
-    
 
   }
 
@@ -484,14 +482,7 @@ formValidation(){
 }
 
 updateRepayAmount(){
-  this.loanrepayamount=parseFloat((this.loanAmount/this.loanrepayperiod).toFixed(2))
-
-}
-transformAmount(element){
-  this.formattedAmount = this.currencyPipe.transform(this.loanAmount, 'Ksh.');
- 
-
-  element.target.value = this.formattedAmount;
+  //this.loanrepayamount=parseFloat((this.loanAmount/this.loanrepayperiod).toFixed(2))
 
 }
 
@@ -781,4 +772,6 @@ getUserApplicationFormDetails(passedLoanId){
       this.BeenInBusinessEdit =  this.BeenInBusiness + " "+this.BeenInBusinessTime;
       this.BeenInOperationEdit =  this.BeenInOperation + " "+this.BeenInOperationTime;  
      }
+
+     
 }

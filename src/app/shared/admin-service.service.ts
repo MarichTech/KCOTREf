@@ -31,5 +31,6 @@ export class AdminServiceService {
     return this.http.get('http://3.13.237.46/Demo/GetMemberDetailsById?MemberId='+MemberId+'');
   }
 
+ 
 
 }

@@ -39,6 +39,9 @@ export class LoansHistoryComponent implements OnInit {
   FullName:any="";
   ClientTypeId:any;
   IdNo:any;
+
+
+
   constructor( private navCtrl:NgxNavigationWithDataComponent,private lenderService:UserService, private loanservice:LoanApplicationService) { 
     this.isConnecting=true;
     this.isConnectingHistory=false;
@@ -159,5 +162,7 @@ getClientType(){
        
       });
 }
+
+
 
 }

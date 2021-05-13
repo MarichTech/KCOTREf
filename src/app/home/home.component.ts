@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit {
   Address:any="";
 
   
-
   constructor( private service:UserService, private loanservice:LoanApplicationService, public navCtrl: NgxNavigationWithDataComponent,private alert2:AlertService) {
     this.Connecting=true;
     this.SharesToDate=0.00;
@@ -147,6 +146,7 @@ export class HomeComponent implements OnInit {
   //Get Bussiness Details
   this.getBusinessDetails();
   window.localStorage.setItem('selectedIndex', '0');
+
 
 }
 getTime(){
@@ -327,5 +327,8 @@ getSurname(){
   
   })
   }
+
+
+
 
 }

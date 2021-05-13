@@ -76,6 +76,8 @@ import { AllClientsComponent } from './all-clients/all-clients.component';
 import { IndividualClientsComponent } from './individual-clients/individual-clients.component';
 import { EntityClientsComponent } from './entity-clients/entity-clients.component';
 import { ViewClientDetailsComponent } from './view-client-details/view-client-details.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationNavComponent } from './notification-nav/notification-nav.component';
 
 
 const routes: Routes = [
@@ -235,6 +237,12 @@ const routes: Routes = [
     component:ViewClientDetailsComponent
     
   },
+
+  {
+    path:'Notifications',
+    component:NotificationsComponent
+    
+  },
   
   {
     path: 'MemberPendingAppraisals',
@@ -285,7 +293,9 @@ const routes: Routes = [
     AllClientsComponent,
     IndividualClientsComponent,
     EntityClientsComponent,
-    ViewClientDetailsComponent
+    ViewClientDetailsComponent,
+    NotificationsComponent,
+    NotificationNavComponent
   ],
   imports: [
     CommonModule,

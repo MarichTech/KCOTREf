@@ -214,24 +214,27 @@ export class UserService {
     //http://localhost:51042/loan/getLoanBalances?memberId=69&&UserId=0
   }
 
-  getUserRole(RoleId){
+  getUserRole(RoleId):any{
     return this.http.get('http://micropointlive.com/Demo/app/getUserRole?RoleId='+RoleId);
     //http://localhost:51042/app/getUserRole?RoleId=1
   }
 
-  getAdminDetails(UserId){
-    return this.http.get('http://micropointlive.com/Demo/app/getUserDetails?UserId='+UserId);
+  getAdminDetails(SystemUserName):any{
+    return this.http.get('http://micropointlive.com/Demo/app/getUserDetails?SystemUserName='+SystemUserName);
     //http://localhost:51042/app/getUserDetails?UserId=4
   }
 
-  
-  
-  
-  
-  
+  getLoanRepayment(){
+    return this.http.get('http://micropointlive.com/Demo/Loan/getLoanRepayment');
+    //http://localhost:51042/Loan/getLoanRepayment
+  }
 
+  getLoans(){
+    return this.http.get('http://micropointlive.com/Demo/Loan/getNoOfCollectLoan');
+    //http://localhost:51042/Loan/getNoOfCollectLoan
+  }
   
-  
+ 
   
 
 }

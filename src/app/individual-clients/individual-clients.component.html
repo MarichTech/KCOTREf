@@ -93,6 +93,7 @@
                       <th>PhoneNumber</th>
                       <th>Email</th>
                       <th>Client Type</th>
+                      <th>Action</th>
                        
                       </tr>
                   </thead>
@@ -105,7 +106,9 @@
                     <td (click)="onView(items.MemberId, items.NationalId)">{{items.CellNo}}</td>
                     <td (click)="onView(items.MemberId, items.NationalId)">{{items.Email}}</td>
                     <td (click)="onView(items.MemberId, items.NationalId)">{{getClientType(items.ClientTypeId)}}</td>
-                  
+                    <td >
+                      <button class="btn btn-primary" type="button"  (click)="onView(items.MemberId, items.NationalId)">View Details</button>
+                    </td>
                   
                           
                   </tr>    

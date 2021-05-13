@@ -34,6 +34,8 @@ export class ViewLoanApplicationComponent implements OnInit {
   ClientTypeId:any;
   IdNo:any;
 
+ 
+
 
   constructor(private navCtrl: NgxNavigationWithDataComponent,private loanservice:LoanApplicationService, private userservice:UserService, public service : LoanApplicationService,private router:Router,private toastr: ToastrService,private spinner:NgxSpinnerService,
     private _snackBar: MatSnackBar) { 
@@ -122,6 +124,8 @@ generatePdf(LoanId) {
     })}}
     return name;
   }
+
+ 
  
 }
 

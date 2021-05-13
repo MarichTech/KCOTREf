@@ -22,6 +22,8 @@ export class AdminDashboardComponent implements OnInit {
   IndividualList:any; 
 
   LoanBalancesList:any;
+  LoanRepaymentList:any;
+  LoansList:any;
 
   spinnerContent:any;
   UserName:any;
@@ -76,6 +78,8 @@ export class AdminDashboardComponent implements OnInit {
     this.getNoofIndividuals();
 
     this.getLoanBalances();
+    this.getLoanRepayment();
+    this.getLoans();
   
   }
 
@@ -174,6 +178,46 @@ export class AdminDashboardComponent implements OnInit {
     });
 
   }
+
+  getLoanRepayment(){
+
+    
+    this.userService.getLoanRepayment().subscribe(Response => {
+      this.LoanRepaymentList = Response;
+
+      for(var items of this.LoanRepaymentList){
+        this.PrincipalPaid = items.Principal;
+        this.InterestPaid = items.Interest;
+        this.PenaltyPaid = items.Penalty;
+        this.TotalRepayments = items.Total;
+      }
+
+
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+
+  }
+
+  getLoans(){
+
+    
+    this.userService.getLoans().subscribe(Response => {
+      this.LoansList = Response;
+
+      for(var items of this.LoansList){
+        this.KocotrefTotalLoans = items.TotalLoanAmout;
+        this.KocotrefNoOfLoans = items.NoOfLoan;
+      }
+
+
+    },(error)=>{
+      this.isDisconnected=true;
+    });
+
+  }
+
+
 
 }
 

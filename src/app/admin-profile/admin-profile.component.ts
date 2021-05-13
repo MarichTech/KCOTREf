@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoanApplicationService } from '../shared/loan-application.service';
 import { UserService } from '../shared/user.service';
 
@@ -12,6 +13,7 @@ export class AdminProfileComponent implements OnInit {
   localMemberId:any=0;
   MemberId:any=0;
   IdNo:any=0;
+  RoleId:any=0;
 
   Role:any="";
   UserName:any="";
@@ -19,30 +21,70 @@ export class AdminProfileComponent implements OnInit {
   UserCode:any="";
   CreatedOn:any="";
 
-  constructor(private loanservice:LoanApplicationService) {
+  isSuccess:any="";
+    errDescription:any="";
+    isDisconnected: boolean = false;
+    appRespData:any;
+
+  constructor(private loanservice:LoanApplicationService,private userService: UserService,private _snackBar: MatSnackBar) {
     this.localMemberId=window.localStorage.getItem('MemberId');
+    this.UserName = window.localStorage.getItem('UserName');
    }
 
   ngOnInit(): void {
 
-    this.getUserDetails();
+    this.getAdminDetails();
 
   }
 
-  getUserDetails(){
-    window.localStorage.setItem('LoanIdParam', '0');
+  openSnackBar(message) {
+    this._snackBar.open(message, 'Ok', {
+      duration: 4000,
+      verticalPosition: 'top'   
+    });
+  }
 
-    this.IdNo = localStorage.getItem('natIdNo');
-    this.loanservice.getUserDetails(parseInt(this.IdNo)).subscribe(Response =>{
+
+  getAdminDetails(){
+    this.userService.getAdminDetails(this.UserName).subscribe((Response)=>{
+      this.appRespData=Response;
+
+      this.isSuccess = this.appRespData['IsSuccess'];
+        this.errDescription = this.appRespData['ErrorDescription'];
+         
+        if (this.isSuccess==false && this.errDescription!=''){
+            this.openSnackBar(this.errDescription);
           
-          this.MemberId=Response.member.memberid;
-          console.log(this.MemberId);
-          this.FullNames=Response.member.mfirstname +' '+Response.member.msurname +' '+ Response.member.mothername;
+            return;
+          }
           
+         // if (this.isSuccess==true){
+          if(Response.userDetails.RoleId != null){this.RoleId=Response.userDetails.RoleId;}
+          if(Response.userDetails.SystemUserName != null){this.UserName=Response.userDetails.SystemUserName;}
+          if(Response.userDetails.SystemUserfullnames != null){this.FullNames=Response.userDetails.SystemUserfullnames;}
+          if(Response.userDetails.SystemUserCode != null){this.UserCode=Response.userDetails.SystemUserCode;}
+          if(Response.userDetails.CreatedOn != null){this.CreatedOn=Response.userDetails.CreatedOn;}
+          this.getRoleType();
           
-          this.IdNo=Response.member.IDNO;
-          
-        });
+
+          //}
+      
+      
+    }),(error)=>{
+      //do nothing for now
+    }
+ 
+  }
+
+  getRoleType(){
+    this.userService.getUserRole(this.RoleId).subscribe((Response)=>{
+      
+          if(Response.userRoles.Roleid != null){this.RoleId=Response.userRoles.Roleid;}
+          if(Response.userRoles.Rolename != null){this.Role=Response.userRoles.Rolename;}
+     
+    }),(error)=>{
+      //do nothing for now
+    }
   }
 
 
