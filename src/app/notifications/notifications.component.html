@@ -103,7 +103,7 @@
                                 <div class="info"> 
                                     <div ><span class="badge bg-success">New</span></div>
                                     <div class="meta"> 
-                                        2 hrs ago
+                                      {{items.CreatedOn | date: 'dd/MM/yyyy'}}
                                     </div>
                                    
                                   <div class="desc">{{items.Message}} </div>
@@ -126,7 +126,8 @@
                             <div class="info"> 
                                 
                                 <div class="meta"> 
-                                    2 hrs ago
+                                  {{item.CreatedOn | date: 'dd/MM/yyyy'}}
+                                    
                                 </div>
                                
                               <div class="desc">{{item.Message}} </div>

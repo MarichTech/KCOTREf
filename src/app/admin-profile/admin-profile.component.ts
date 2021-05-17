@@ -28,7 +28,8 @@ export class AdminProfileComponent implements OnInit {
     isDisconnected: boolean = false;
     appRespData:any;
 
-  constructor(private loanservice:LoanApplicationService,private userService: UserService,private _snackBar: MatSnackBar) {
+  constructor(private loanservice:LoanApplicationService,private userService: UserService,
+    private _snackBar: MatSnackBar, public dialog: MatDialog) {
     this.localMemberId=window.localStorage.getItem('MemberId');
     this.UserName = window.localStorage.getItem('UserName');
    }
@@ -92,6 +93,14 @@ export class AdminProfileComponent implements OnInit {
 
 
   changePassword(){
-   
+    const dialogRef = this.dialog.open(ResetAdminPasswordDialogComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     
+    });
+  
   }
 }
