@@ -157,7 +157,7 @@ export class UserService {
   }
 
   updateMemberBusinessDetails(memberId,BusinessName,LegalStatus,FormOfBusiness,RegistrationNo,RegDate,KRAPIN,physicalAddress,BusinessType){
-    return this.http.get('http://micropointlive.com/App/UpdateBusinessProfile?memberId='+memberId+'&&BusinessName='+BusinessName+'&&LegalStatus='+LegalStatus+'&&FormOfBusiness='+FormOfBusiness+'&&RegistrationNo='+RegistrationNo+'&&RegDate='+RegDate+'&&KRAPIN='+KRAPIN+'&&physicalAddress='+physicalAddress+'&&BusinessType='+BusinessType+'');
+    return this.http.get('http://micropointlive.com/Demo/App/UpdateBusinessProfile?memberId='+memberId+'&&BusinessName='+BusinessName+'&&LegalStatus='+LegalStatus+'&&FormOfBusiness='+FormOfBusiness+'&&RegistrationNo='+RegistrationNo+'&&RegDate='+RegDate+'&&KRAPIN='+KRAPIN+'&&physicalAddress='+physicalAddress+'&&BusinessType='+BusinessType+'');
     //http://localhost:51042/App/UpdateBusinessProfile?memberId=53&&BusinessName=1&&LegalStatus=1&&FormOfBusiness=1&&RegistrationNo=1&&RegDate=1&&KRAPIN=1&&physicalAddress=1&&BusinessType=1
 
   }

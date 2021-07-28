@@ -22,7 +22,7 @@
         <mat-card-content>
          <div class="row">
            <div class="col-sm-3">
-             <label>Select Category</label>
+             <label>Select Category  <strong style="color: red;"> *</strong></label>
              <select class="form-control" name="ClientType" [(ngModel)]="ClientType" style="margin-bottom: 10px;">
                <option selected value="0">-Not Selected-</option>
                <option value="1" name="Individual">Individual</option>
@@ -30,21 +30,21 @@
              </select>
              </div>
              <div class="col-sm-3">
-                 <label>Select Constituency</label>
+                 <label>Select Constituency  <strong style="color: red;"> *</strong></label>
                  <select class="form-control" name="Constituency" [(ngModel)]="Constituency" style="margin-bottom: 10px;" (ngModelChange)="loadStations(Constituency)">
                    <option selected value="0">-Not Selected-</option>
                    <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" name="Constituency">{{Constituency.EmployerName}}</option>
                  </select>
               </div>
               <div class="col-sm-3">
-                 <label>Select Ward</label>
+                 <label>Select Ward  <strong style="color: red;"> *</strong></label>
                  <select class="form-control" name="Ward" [(ngModel)]="Ward" style="margin-bottom: 10px;" (ngModelChange)=" loadDepartments(Ward)">
                    <option selected value="0">-Not Selected-</option>
                    <option *ngFor="let Ward of Wards" value="{{Ward.StationId}}" name="Ward">{{Ward.StationName}}</option>
                  </select>
                 </div>
                 <div class="col-sm-3">
-                 <label>Select Village</label>
+                 <label>Select Village  <strong style="color: red;"> *</strong></label>
                  <select class="form-control" name="Village" [(ngModel)]="Village" style="margin-bottom: 10px;">
                    <option selected value="0">-Not Selected-</option>
                    <option *ngFor="let Village of Villages" value="{{Village.DepartmentId}}" name="Village">{{Village.DepartmentName}}</option>
@@ -67,7 +67,7 @@
         <label>Personal Details</label>
         <div class="row">
           <div class="col-sm-3">
-            <label>Enter First Name</label>
+            <label>Enter First Name  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="Firstname" name="Firstname" type="text" class="form-control" style="margin-bottom: 10px;">
           </div>
           <div class="col-sm-3">
@@ -75,11 +75,11 @@
               <input [(ngModel)]="Othernames"  name="Othernames" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
           </div>
           <div class="col-sm-3">
-            <label>Enter Surname</label>
+            <label>Enter Surname   <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="Surname"  name="Surname" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
           </div>
           <div class="col-sm-3">
-            <label>Date of Birth</label>
+            <label>Date of Birth   <strong style="color: red;"> *</strong></label>
             <input type="date" name="DOB" displayFormat="DD MM YYYY" [(ngModel)]="DOB" class="form-control">
             
           </div>
@@ -87,18 +87,18 @@
 
         <div class="row">
           <div class="col-sm-3">
-            <label>Select Gender</label>
+            <label>Select Gender   <strong style="color: red;"> *</strong></label>
             <select class="form-control" name="Gender" [(ngModel)]="Gender" placeholder="Select Gender" style="margin-bottom: 10px;">
-              <option selected value="None">-Not Selected-</option>
+              <option selected value="">-Not Selected-</option>
               <option value="Male" name="Male">Male</option>
               <option value="Female" name="Female">Female</option>
               <option value="Female" name="Intersex">Intersex</option>
             </select>
          </div>
        <div class="col-sm-3">
-      <label>Select Level Of Education</label>
+      <label>Select Level Of Education   <strong style="color: red;"> *</strong></label>
       <select class="form-control" name="LevelOfEducation" [(ngModel)]="LevelOfEducation" style="margin-bottom: 10px;">
-        <option selected value="None">-Not Selected-</option>
+        <option selected value="">-Not Selected-</option>
         <option value="Primary" name="Primary">Primary</option>
         <option value="Secondary" name="Secondary">Secondary</option>
         <option value="Certificate" name="Certificate">Certificate</option>
@@ -109,18 +109,18 @@
       </select>
       </div>
       <div class="col-sm-3">
-        <label>Enter National Id No.</label>
+        <label>Enter National Id No.   <strong style="color: red;"> *</strong></label>
         <input [(ngModel)]="NatIdNo" (keypress)="onlyNumbersAllowed($event)"  name="NatIdNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
      </div>
       <div class="col-sm-3">
-        <label>Enter Postal Address</label>
+        <label>Enter Postal Address   <strong style="color: red;"> *</strong></label>
         <input [(ngModel)]="PostalAddress"  name="PostalAddress" type="text" color="secondary" class="form-control">
       </div>    
      </div>
 
           <div class="row">
               <div class="col-sm-3">
-                <label>Enter Mobile Number</label>
+                <label>Enter Mobile Number  <strong style="color: red;"> *</strong></label>
                 <input [(ngModel)]="MobileNo"  name="MobileNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
               </div>
               <div class="col-md-3">
@@ -128,7 +128,7 @@
                 <input type="text" class="form-control" name="AlternativePhoneNumber" [(ngModel)]="AlternativePhoneNumber" style="margin-bottom: 10px;">
                </div>
                <div class="col-sm-3">
-                <label>Enter Email Address</label>
+                <label>Enter Email Address   <strong style="color: red;"> *</strong></label>
                  <input [(ngModel)]="EmailAddress"  name="EmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
                </div>
                <div class="col-sm-3">
@@ -141,9 +141,9 @@
         <br>
         <div class="row">
           <div class="col-sm-6">
-            <label>Select Employment Status</label>
+            <label>Select Employment Status   <strong style="color: red;"> *</strong></label>
             <select class="form-control" name="Empstatus" [(ngModel)]="Empstatus" style="margin-bottom: 10px;">
-              <option selected value="None">-Not Selected-</option>
+              <option selected value="">-Not Selected-</option>
               <option value="Employed" name="Employed">Employed</option>
               <option value="Unemployed" name="Unemployed">Not Employed</option>
             </select>
@@ -160,13 +160,13 @@
         <label>Business Details</label>
         <div class="row">
           <div class="col-sm-6">
-            <label> Business Name</label>
+            <label> Business Name   <strong style="color: red;"> *</strong></label>
             <input [(ngModel)]="BName"  name="BName" type="text" color="secondary"  class="form-control" style="margin-bottom: 10px;">
           </div>
 
 
             <div class="col-sm-6">
-              <label>Legal Status</label>
+              <label>Legal Status  <strong style="color: red;"> *</strong></label>
               <select class="form-control" name="LegalStatus" [(ngModel)]="LegalStatus" style="margin-bottom: 10px;" (change)="getId($event.target.value)">
                 <option selected value="0">-Not Selected-</option>
                 <option  value="1"  >Registered Business</option>
@@ -178,9 +178,9 @@
       <div *ngIf="show"> 
         <div  class="row">
           <div class="col-sm-4">
-            <label>Select form of Business</label>
+            <label>Select form of Business  <strong style="color: red;"> *</strong></label>
             <select class="form-control" name="BForm" [(ngModel)]="BForm" style="margin-bottom: 10px;">
-              <option selected value="None">-Not Selected-</option>
+              <option selected value="">-Not Selected-</option>
               <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
               <option value="Partnership" name="Partnership">Partnership</option>
               <option value="Limited Company" name="Limited Company">Limited Company</option>
@@ -192,21 +192,21 @@
             </select>
             </div> 
             <div class="col-sm-4">
-              <label>Enter Business Registration Number</label>
+              <label>Enter Business Registration Number  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="RegistrationNo"  name="RegistrationNo" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
           <div class="col-sm-4">
-            <label>Registration Date</label>
+            <label>Registration Date  <strong style="color: red;"> *</strong></label>
             <input type="date" name="BRegDate" displayFormat="DD MM YYYY" [(ngModel)]="BRegDate" class="form-control" >
           </div>
         </div> 
         <div  class="row">
           <div class="col-sm-6">
-            <label>Enter Business KRA PIN</label>
+            <label>Enter Business KRA PIN  <strong style="color: red;"> *</strong></label>
             <input [(ngModel)]="BKRA"  name="BKRA" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
           </div>
           <div class="col-sm-6">
-            <label for="file">Attach Registration Certificates</label>
+            <label for="file">Attach Registration Certificates   <strong style="color: red;"> *</strong></label>
             <input type="file" id="file"  class="form-control" style="border: 0;">
           </div>
          
@@ -216,13 +216,13 @@
         <div class="row">
           
         <div class="col-sm-6">
-           <label> Business Type</label>
+           <label> Business Type (eg retail shop, wholesale shop)   <strong style="color: red;"> *</strong></label>
             <input class="form-control" maxlength="50" name="BType" [(ngModel)]="BType" style="margin-bottom: 10px;">
               
             </div>
           
             <div class="col-sm-6" >
-              <label>Physical Location</label>
+              <label>Physical Location  <strong style="color: red;"> *</strong></label>
             <input  maxlength="50" name="BusinessPhysicalAddress" [(ngModel)]="BusinessPhysicalAddress" class="form-control" style="margin-bottom: 10px;">
             </div>
         </div>
@@ -240,14 +240,14 @@
         <label>Entity Details</label>
         <div class="row">
           <div class="col-sm-4">
-            <label>Enter Entity Name</label>
+            <label>Enter Entity Name  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="CompanyName" name="CompanyName" type="text" class="form-control" style="margin-bottom: 10px;">
           </div>
          
           <div class="col-sm-4"> 
-            <label>Select form of Business</label>
+            <label>Select form of Business  <strong style="color: red;"> *</strong></label>
           <select class="form-control" name="CompanyBForm" [(ngModel)]="CompanyBForm" style="margin-bottom: 10px;">
-            <option selected value="None">-Not Selected-</option>
+            <option selected value="">-Not Selected-</option>
             <option value="Cooperative society" name="Cooperative society">Cooperative society</option>
             <option value="Partnership" name="Partnership">Partnership</option>
             <option value="Limited Company" name="Limited Company">Limited Company</option>
@@ -258,88 +258,73 @@
           </div>
 
           <div class="col-sm-4">
-            <label>Enter Registration Number</label>
+            <label>Enter Registration Number  <strong style="color: red;"> *</strong></label>
             <input [(ngModel)]="CompanyCertNumber" name="CompanyCertNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">
-            <label>Entity Registration Date</label>
+          <div class="col-sm-4">
+            <label>Entity Registration Date  <strong style="color: red;"> *</strong></label>
                 <input type="date" name="CompanyRegDate" [(ngModel)]="CompanyRegDate" displayFormat="DD MM YYYY" class="form-control">
           </div>
-          <div class="col-sm-3">
-            <label> Business Type</label>
+          <div class="col-sm-4">
+            <label> Business Type(eg retail shop, wholesale shop)  <strong style="color: red;"> *</strong></label>
             <input  class="form-control" name="CompanyBType" [(ngModel)]="CompanyBType" maxlength="50" style="margin-bottom: 10px;">
             </div>
-            <div class="col-md-3">
-              <label for="file">Attach Registration Certificates</label>
+            <div class="col-md-4">
+              <label for="file">Attach Registration Certificates  <strong style="color: red;"> *</strong></label>
               <input type="file" id="file" >
 
             </div>
-          <div class="col-sm-3">
-            <label>Enter Entity KRA PIN</label>
-              <input [(ngModel)]="CompanyKRAPIN"  name="CompanyKRAPIN" type="text" color="secondary" class="form-control">
-          </div>
+          
        
           
           </div>
-          <!--<div class="col-sm-3">
-          <label>Select Co. Sub-County</label>
-          <select class="form-control" name="CompanyBSubCounty" [(ngModel)]="CompanyBSubCounty" style="margin-bottom: 10px;" (ngModelChange)="loadBusinessStations(CompanyBSubCounty)">
-            <option selected value="0">-Not Selected-</option>
-            <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" name="CompanyBSubCounty">{{Constituency.EmployerName}}</option>
-          </select>
-          </div>
-          <div class="col-sm-3">
-            <label>Select Co. Ward</label>
-            <select class="form-control" name="CompanyBWard" [(ngModel)]="CompanyBWard" style="margin-bottom: 10px;" (ngModelChange)="loadBusinessDepartments(CompanyBWard)">
-              <option selected value="0">-Not Selected-</option>
-              <option *ngFor="let Ward of BWards" value="{{Ward.StationId}}" name="CompanyBWard">{{Ward.StationName}}</option>
-            </select>
-            </div>
-        </div>-->
-          <!--<div class="col-sm-3">
-          <label>Select Business Village</label>
-          <select class="form-control" name="CompanyBVillage" [(ngModel)]="CompanyBVillage" style="margin-bottom: 10px;">
-            <option selected value="0">-Not Selected-</option>
-            <option *ngFor="let Village of BVillages" value="{{Village.DepartmentId}}" name="CompanyBVillage">{{Village.DepartmentName}}</option>
-          </select>
-          </div>-->
+         
           <div class="row">
             <div class="col-sm-4">
-              <label>Enter Entity's Email Address</label>
+              <label>Enter Entity KRA PIN  <strong style="color: red;"> *</strong></label>
+                <input [(ngModel)]="CompanyKRAPIN"  name="CompanyKRAPIN" type="text" color="secondary" class="form-control">
+            </div>
+
+            <div class="col-sm-4">
+              <label>Enter Entity's Email Address  <strong style="color: red;"> *</strong></label>
                 <input [(ngModel)]="CompanyEmailAddress"  name="CompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
             <div class="col-md-4">
               <label>Confirm Entity's Email Address</label>
               <input [(ngModel)]="ConfirmCompanyEmailAddress"  name="ConfirmCompanyEmailAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
-            <div class="col-sm-4">
-              <label>Enter Entity's Postal Address</label>
-              <input [(ngModel)]="CompanyPostalAddress"  name="CompanyPostalAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
-            </div>
+            
           </div>
           <div class="row">
             <div class="col-sm-4">
-              <label>Enter Entity's Contact Person</label>
+              <label>Enter Entity's Postal Address  <strong style="color: red;"> *</strong></label>
+              <input [(ngModel)]="CompanyPostalAddress"  name="CompanyPostalAddress" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
+            </div>
+
+            <div class="col-sm-4">
+              <label>Enter Entity's Contact Person  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="ContactPerson"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
           
             <div class="col-md-4">
-              <label>Enter Entity's Contact Person Position</label>
+              <label>Enter Entity's Contact Person Position  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="ContactPersonPosition"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
-
-            <div class="col-sm-4">
-              <label>Enter Entity's Phone Number One</label>
+            
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Enter Entity's Phone Number One  <strong style="color: red;"> *</strong></label>
               <input [(ngModel)]="CompanyCellNumber"  name="CompanyCellNumber" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
           
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label>Enter Entity's Phone Number Two</label>
               <input [(ngModel)]="Telephone2"  name="Telephone2" type="text" color="secondary" class="form-control" style="margin-bottom: 10px;">
             </div>
-            
+
           </div>
           <div class="row">
             <div class="col-sm-3"></div>
@@ -355,9 +340,9 @@
       <label>Security Details</label>
       <div class="row">
         <div class="col-sm-4">
-            <label>Secret Question</label>
+            <label>Secret Question  <strong style="color: red;"> *</strong></label>
             <select [(ngModel)]="SecretQuestn" name="SecretQuestn" class="form-control">
-                <option value="notSelected">Not Selected</option>
+                <option value="">Not Selected</option>
                 <option value="firstPhoneNo">First phone number?</option>
                 <option value="firstTeacher">First Teacher's Name?</option>
                 <option value="oldestCousin">Oldest cousin's Name?</option>
@@ -367,11 +352,11 @@
             </select>
         </div>
         <div class="col-sm-4">
-          <label>Enter Secret Answer</label>
+          <label>Enter Secret Answer  <strong style="color: red;"> *</strong></label>
           <input name="SecretAnswer" [(ngModel)]="SecretAnswer" type="text" class="form-control" style="margin-bottom: 10px;">
         </div>
         <div class="col-sm-4">
-          <label>Enter Password</label>
+          <label>Enter Password  <strong style="color: red;"> *</strong></label>
           <input [(ngModel)]="PIN" name="PIN" type="password" minlength="8" class="form-control" style="margin-bottom: 10px;">
         </div>
     </div>

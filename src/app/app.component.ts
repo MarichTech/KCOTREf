@@ -23,7 +23,7 @@ export class AppComponent {
   ngOninit(){
     console.log('app loaded....');
     console.log('at '+this.router.url);
-    this.idleService.startWatching(60).subscribe((isTimeOut:boolean)=>{
+    this.idleService.startWatching(600).subscribe((isTimeOut:boolean)=>{
       if (isTimeOut == true){
          if (this.router.url != null && this.router.url !='/'){
           console.log('times up!');

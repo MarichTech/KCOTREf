@@ -258,6 +258,21 @@ getSurname(){
   toAccountPage(){
     this.navCtrl.navigate('Account');
   }
+
+  getLegalStatusName(id: any) : string {
+    var name: string;
+    
+    if(id>0){
+    if(id == 1){
+    name = "Registered";
+    }
+    if(id == 2){
+      name = "Unregistered";
+    }
+      }
+    return name;
+  }
+
   
   AllUserApps(){
     this.navCtrl.navigate('UserLoanApplication');

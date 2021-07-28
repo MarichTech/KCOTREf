@@ -222,17 +222,17 @@
             
                       <div class="row" style="margin:2px">
                         <div class="col-sm-4">
-                          <label>Next of Kin</label>
+                          <label>Next of Kin <strong style="color:red">*</strong></label>
                           <input type="text" class="form-control" [(ngModel)]="NextOfKin">
                       </div>
               
                       <div class="col-sm-4">
-                        <label >Relationship with Next of Kin</label>
+                        <label >Relationship with Next of Kin <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="Relationship"> 
                       </div>  
                         
                         <div class="col-sm-4">
-                            <label>Have you received any business or technical training? </label>
+                            <label>Have you received any business or technical training? <strong style="color:red">*</strong></label>
                             <select class="form-control" [(ngModel)]="HasReceivedTraining">
                               <option value="">--Select--</option>
                               <option value="Yes">Yes</option>
@@ -244,7 +244,7 @@
             
                     <div class="row" *ngIf="HasReceivedTraining=='Yes'" style="margin:2px">
                       <div class="col-sm-12">
-                        <label >If yes, Give details</label>
+                        <label >If yes, Give details <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="TrainingDescription"></textarea> 
                       </div> 
             
@@ -252,7 +252,7 @@
             
                     <div class="row" style="margin:2px">
                       <div class="col-sm-4">
-                        <label>For how long have you been in business </label>
+                        <label>For how long have you been in business  <strong style="color:red">*</strong></label>
                         <div class="row" *ngIf="passedLoanId ==0">
                           <div class="col-sm-4"><input class="form-control" (keyup)=formulation() [(ngModel)]="BeenInBusiness"></div>
                           <div class="col-sm-8">
@@ -273,7 +273,7 @@
                     </div>
             
                     <div class="col-sm-4">
-                      <label >Are you in paid employment?</label>
+                      <label >Are you in paid employment? <strong style="color:red">*</strong></label>
                       <select class="form-control" [(ngModel)]="PaidEmployment">
                         <option value="">-select-</option>
                         <option value="Yes">Yes</option>
@@ -283,7 +283,7 @@
                     </div>  
                       
                       <div class="col-sm-4">
-                          <label>Do you have any physical disabilities?</label>
+                          <label>Do you have any physical disabilities? <strong style="color:red">*</strong></label>
                           <select class="form-control" [(ngModel)]="IsPysicallyDisabled">
                             <option value="">-select-</option>
                             <option value="Yes">Yes</option>
@@ -294,7 +294,7 @@
             
                     <div class="row" *ngIf="PaidEmployment=='Yes'" style="margin:2px">
                       <div class="col-sm-12">
-                        <label >If Employed, state the employer</label>
+                        <label >If Employed, state the employer <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="UserEmployer"></textarea>  
                       </div> 
             
@@ -302,7 +302,7 @@
             
                     <div class="row" *ngIf="IsPysicallyDisabled=='Yes'" style="margin:2px">
                       <div class="col-sm-12">
-                        <label >If yes, explain what kind of disability</label>
+                        <label >If yes, explain what kind of disability <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="PysicallyDisabledDescription"></textarea>  
                       </div> 
             
@@ -310,7 +310,7 @@
                     
                     <div class="row" style="margin:2px">
                       <div class="col-sm-12">
-                        <label >Other sources of income</label>
+                        <label >Other sources of income <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="OtherSourcesOfIncome"></textarea> 
                       </div> 
             
@@ -322,11 +322,11 @@
                   <div *ngIf="ClientTypeId=='2'" >
                     <div class="row" style="margin:2px">
                       <div class="col-sm-6">
-                        <label >Business license.</label>
+                        <label >Business license. <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="BusinessLicence" >
                       </div>
                       <div class="col-sm-6">
-                        <label >Attach Business license.</label>
+                        <label >Attach Business license. <strong style="color:red">*</strong></label>
                         <input type="file" class="form-control"   style="border: 0;">
                       </div>
                     
@@ -334,17 +334,17 @@
           
                     <div class="row" style="margin:2px">
                       <div class="col-sm-4">
-                        <label >Plot Number.</label>
+                        <label >Plot Number. <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="PlotNumber" >
                       </div>
           
                       <div class="col-sm-4">
-                        <label >Market/Road</label>
+                        <label >Market/Road <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="MarketOrRoad" >
                       </div>
           
                       <div class="col-sm-4">
-                        <label >Sub County.</label>
+                        <label >Sub County. <strong style="color:red">*</strong></label>
                         <select class="form-control" [(ngModel)]="Subcounty">
                           <option value="">-select-</option>
                           <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" >{{Constituency.EmployerName}}</option>
@@ -354,7 +354,7 @@
         
                     <div class="row" style="margin:2px">
                       <div class="col-sm-12">
-                        <label >Name, address and occupation of each Partners/Directors/Trustees.</label>
+                        <label >Name, address and occupation of each Partners/Directors/Trustees. <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Partners"></textarea>  
                       </div>
                     </div>
@@ -444,11 +444,11 @@
                   <div *ngIf="ClientTypeId=='1'">
                     <div class="row">
                       <div class="col-sm-6">
-                        <label >Business license.</label>
+                        <label >Business license. <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="BusinessLicence" >
                       </div>
                       <div class="col-sm-6">
-                        <label >Attach Business license.</label>
+                        <label >Attach Business license. <strong style="color:red">*</strong></label>
                         <input type="file" class="form-control"   style="border: 0;">
                       </div>
                     
@@ -456,17 +456,17 @@
           
                     <div class="row">
                       <div class="col-sm-4">
-                        <label >Plot Number.</label>
+                        <label >Plot Number. <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="PlotNumber" >
                       </div>
           
                       <div class="col-sm-4">
-                        <label >Market/Road</label>
+                        <label >Market/Road <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control"   [(ngModel)]="MarketOrRoad" >
                       </div>
           
                       <div class="col-sm-4">
-                        <label >Sub County.</label>
+                        <label >Sub County. <strong style="color:red">*</strong></label>
                         <select class="form-control" name="Constituency" [(ngModel)]="Subcounty" >
                           <option selected value="">-Not Selected-</option>
                           <option *ngFor="let Constituency of Constituencies" value="{{Constituency.EmployerId}}" >{{Constituency.EmployerName}}</option>
@@ -475,7 +475,7 @@
                     </div>
                     <div class="row" *ngIf="LegalStatus !='Unregistered' || FormOfBusiness !='Sole-Proprietor'">
                       <div class="col-sm-12">
-                        <label >Name, address and occupation of each partner.</label>
+                        <label >Name, address and occupation of each partner. <strong style="color:red">*</strong></label>
                         <textarea class="form-control" aria-label="With textarea" [(ngModel)]="Partners"></textarea>  
                       </div>
                     </div>
@@ -488,7 +488,7 @@
           
               <div class="row">
                 <div class="col-sm-4">
-                  <label >How long has the business been in operation?</label> 
+                  <label >How long has the business been in operation? <strong style="color:red">*</strong></label> 
                   <div class="row" *ngIf="passedLoanId ==0">
                     <div class="col-sm-4"><input class="form-control" (keyup)=formulation() [(ngModel)]="BeenInOperation" ></div>
                     <div class="col-sm-8">
@@ -508,12 +508,12 @@
                 </div>
         
                 <div class="col-sm-4">
-                  <label>Number of Employees engaged by business</label>
+                  <label>Number of Employees engaged by business <strong style="color:red">*</strong></label>
                   <input type="text" class="form-control"   [(ngModel)]="NoOfEmployees" > 
                 </div>
         
                 <div class="col-sm-4">
-                  <label >Do you own the business building or is it rented?</label>
+                  <label >Do you own the business building or is it rented? <strong style="color:red">*</strong></label>
                     <select class="form-control" [(ngModel)]="OwnBuilding">
                       <option value="">-select-</option>
                       <option value="Rented">Rented</option>
@@ -525,16 +525,16 @@
               
               <div class="row" *ngIf="OwnBuilding=='Rented'">
                 <div class="col-sm-4">
-                    <label >Business premise owner name</label>
+                    <label >Business premise owner name <strong style="color:red">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="BuildingOwner"> 
                 </div>
                 <div class="col-sm-4">
-                    <label>Business premise owner's Address</label>
+                    <label>Business premise owner's Address <strong style="color:red">*</strong></label>
                     <input type="text" class="form-control"   [(ngModel)]="BuildingAddress" > 
             
                 </div>
                 <div class="col-sm-4">
-                  <label >Premise monthly rent</label>
+                  <label >Premise monthly rent <strong style="color:red">*</strong></label>
                     <input type="text" class="form-control"  [(ngModel)]="MonthRent" > 
                 </div>
               </div> 
@@ -542,23 +542,23 @@
               <div class="row">
                
                 <div class="col-sm-3">
-                  <label >Average sales per month</label>
+                  <label >Average sales per month <strong style="color:red">*</strong></label>
                   <div style="padding-top: 8%;">
                     <input type="text" class="form-control"  [(ngModel)]="SalePerMonth" > 
                   </div>
                 </div>
                 <div class="col-sm-3">
-                    <label >Average business expenses per month</label>
+                    <label >Average business expenses per month <strong style="color:red">*</strong></label>
                     <input type="text" class="form-control"  [(ngModel)]="ExpensesPerMonth" > 
                 </div>
                 <div class="col-sm-3">
-                  <label >What is the business’s monthly profit</label>
+                  <label >What is the business’s monthly profit <strong style="color:red">*</strong></label>
                   <div style="padding-top: 8%;">
                     <input type="text" class="form-control"  [(ngModel)]="MonthProfit"> 
                   </div>
               </div>
               <div class="col-sm-3">
-                  <label>What is the value of the saleable stock?</label>
+                  <label>What is the value of the saleable stock? <strong style="color:red">*</strong></label>
                   <input type="text" class="form-control"   [(ngModel)]="SaleAbleStock" > 
            
               </div>
@@ -567,11 +567,11 @@
         
         <div class="row">
           <div class="col-sm-4">
-              <label >What book of accounts do you keep</label>
+              <label >What book of accounts do you keep <strong style="color:red">*</strong></label>
               <input type="text" class="form-control" [(ngModel)]="BookofAccount"> 
           </div>
           <div class="col-sm-4">
-              <label>Do you keep the books yourself?</label>
+              <label>Do you keep the books yourself? <strong style="color:red">*</strong></label>
               <select class="form-control" [(ngModel)]="PersonalBooks">
                 <option value="">-select-</option>
                 <option value="Yes">Yes</option>
@@ -579,7 +579,7 @@
               </select>
           </div>
           <div class="col-sm-4">
-            <label >Do you have a business bank account?</label>
+            <label >Do you have a business bank account? <strong style="color:red">*</strong></label>
             <select class="form-control" [(ngModel)]="BusinessBank">
                 <option value="">-select-</option>
                 <option value="Yes">Yes</option>
@@ -591,7 +591,7 @@
         <div class="row" *ngIf="BusinessBank=='Yes'" >
           
           <div class="col-sm-4">
-              <label>Bank Name</label>
+              <label>Bank Name <strong style="color:red">*</strong></label>
               <select class="form-control" [(ngModel)]="BankName">
                 <option value="">-select-</option>
                 <option value="The Co-operative Bank">The Co-operative Bank</option>
@@ -637,18 +637,18 @@
             </select>
           </div>
           <div class="col-sm-4">
-            <label>Bank Branch</label>
+            <label>Bank Branch <strong style="color:red">*</strong></label>
             <input type="text" class="form-control"   [(ngModel)]="BankBranch" > 
         </div>
         <div class="col-sm-4">
-          <label>Bank Account Number</label>
+          <label>Bank Account Number <strong style="color:red">*</strong></label>
           <input type="text" class="form-control"   [(ngModel)]="BankAccountNo" > 
         </div>
         </div>
         <div *ngIf="ClientTypeId=='1'">
           <div class="row">
             <div class="col-sm-4">
-              <label>Private Debts(Ksh)</label>
+              <label>Private Debts(Ksh) <strong style="color:red">*</strong></label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Ksh</span>
                 <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="PrivateDebts" > 
@@ -656,7 +656,7 @@
                 
               </div>
             <div class="col-sm-4">
-              <label>Business Debts(Ksh)</label>
+              <label>Business Debts(Ksh) <strong style="color:red">*</strong></label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Ksh</span>
               <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="BusinessDebts" > 
@@ -666,7 +666,7 @@
             <label>Total Debts(Ksh)</label>
             <div class="input-group mb-3">
             <span class="input-group-text">Ksh</span>
-            <input class="form-control"  [(ngModel)]="TotalDebts" readonly> 
+            <input class="form-control"  [(ngModel)]="TotalDebts" disabled style="background-color: white;"> 
           </div>
           </div>
           </div>
@@ -676,14 +676,14 @@
           <div class="row">
           
             <div class="col-sm-4">
-              <label>Current debts (1 year and Below)</label>
+              <label>Current debts (1 year and Below) <strong style="color:red">*</strong></label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Ksh</span>
               <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="PrivateDebts" > 
               </div>
           </div>
           <div class="col-sm-4">
-            <label> Longterm debts (above 1 Year)</label>
+            <label> Longterm debts (above 1 Year) <strong style="color:red">*</strong></label>
             <div class="input-group mb-3">
               <span class="input-group-text">Ksh</span>
             <input type="number" class="form-control" (keyup)=formulation()  [(ngModel)]="BusinessDebts" > 
@@ -721,21 +721,21 @@
                     <div style="padding-left:25px;padding-right: 25px;"> 
                   <div class="row">
                     <div class="col-sm-4">
-                        <label>Amount of loan required Sh</label>
+                        <label>Amount of loan required Sh <strong style="color:red">*</strong></label>
                         <div class="input-group mb-3">
                           <span class="input-group-text">Ksh</span>
                           <input type="number" class="form-control" [(ngModel)]="loanAmount" >
                         </div>
                       </div>
                     <div class="col-sm-8">
-                      <label>What is the purpose of the loan if granted? (100 Characters)</label>
+                      <label>What is the purpose of the loan if granted? (100 Characters) <strong style="color:red">*</strong></label>
                       <textarea class="form-control" aria-label="With textarea" maxlength="100" [(ngModel)]="loanpurpose"></textarea> 
                     </div>
                       
                   </div>
                   <div class="row">
                       <div class="col-sm-4">
-                          <label >Have you applied for or received a loan from any other source during the past two years? </label>
+                          <label >Have you applied for or received a loan from any other source during the past two years?  <strong style="color:red">*</strong></label>
                           
                           <select class="form-control" [(ngModel)]="haveAppliedLoan">
                             <option value="">-select-</option>
@@ -744,7 +744,7 @@
                         </select>
                       </div>
                       <div class="col-sm-8" *ngIf="haveAppliedLoan=='Yes'">
-                          <label>If Yes State the loan Creditor</label>
+                          <label>If Yes State the loan Creditor <strong style="color:red">*</strong></label>
                           <textarea class="form-control" aria-label="With textarea" [(ngModel)]="AppliedLoanCreditor"></textarea>
                    
                       </div>
@@ -753,7 +753,7 @@
                   <h4>Collateral.</h4>
                   <div class="row" *ngIf="ClientTypeId=='1'">
                     <div class="col-sm-4">
-                        <label >What security will you offer </label>
+                        <label >What security will you offer  <strong style="color:red">*</strong></label>
                         <select class="form-control" [(ngModel)]="collateralType">
                           <option value="">-select-</option>
                           <option value="Log Books">Log Books (motor cycle, motor vehicle) </option>
@@ -762,18 +762,18 @@
                       </select>
                     </div>
                     <div class="col-sm-4" >
-                        <label>Attach Collateral Document</label>
+                        <label>Attach Collateral Document <strong style="color:red">*</strong></label>
                         <input type="file" class="form-control" style="border: 0;">
                     </div>
                     <div class="col-sm-4" *ngIf="collateralType=='Third Party Collateral'">
-                      <label>Attach Concent Document</label>
+                      <label>Attach Concent Document <strong style="color:red">*</strong></label>
                       <input type="file"  id="file"  class="form-control" style="border: 0;">
                     </div>
                   </div>
                   <div *ngIf="ClientTypeId=='2'">
                     <div class="row" >
                       <div class="col-sm-4">
-                          <label >What security will you offer </label>
+                          <label >What security will you offer  <strong style="color:red">*</strong></label>
                           <select class="form-control" [(ngModel)]="collateralType">
                             <option value="">-select-</option>
                             <option value="Log Books">Log Books (motor cycle, motor vehicle) </option>
@@ -782,17 +782,17 @@
                         </select>
                       </div>
                       <div class="col-sm-4" >
-                          <label>Attach Collateral Document</label>
+                          <label>Attach Collateral Document <strong style="color:red">*</strong></label>
                           <input type="file" class="form-control" style="border: 0;">
                       </div>
                       <div class="col-sm-4" *ngIf="FormOfBusiness !='Partnership' || FormOfBusiness !='Limited Company'">
-                        <label>Attach Endorsement Document</label>
+                        <label>Attach Endorsement Document <strong style="color:red">*</strong></label>
                         <input type="file"  id="file"  class="form-control" style="border: 0;">
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-4" *ngIf="collateralType=='Third Party Collateral'">
-                        <label>Attach Concent Document</label>
+                        <label>Attach Concent Document <strong style="color:red">*</strong></label>
                         <input type="file"  id="file"  class="form-control" style="border: 0;">
                       </div>
                     </div>
@@ -801,34 +801,34 @@
                
                   <hr>
                   <h4>Enter Names, addresses and signatures of two Guarantors.</h4>
-                  <h4>Guarantor 1</h4>
+                  <h4>Guarantor 1 <strong style="color:red">*</strong></h4>
                   <div class="row">
                     <div class="col-sm-6">
-                        <label >FullName</label>
+                        <label >FullName <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="gurantor1Name">
                     </div>
                     <div class="col-sm-6">
-                        <label>Address</label>
+                        <label>Address <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="gurantor1Address">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-6">
-                        <label >ID Number</label>
+                        <label >ID Number <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="gurantor1IdNo">
                     </div>
                     <div class="col-sm-6">
-                        <label>Attach Copy of ID</label>
+                        <label>Attach Copy of ID <strong style="color:red">*</strong></label>
                         <input type="file" id="file"  class="form-control" style="border: 0;">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-6">
-                        <label >Email Address</label>
+                        <label >Email Address <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="gurantor1Email">
                     </div>
                     <div class="col-sm-6">
-                        <label>Telephone Number</label>
+                        <label>Telephone Number <strong style="color:red">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="gurantor1Telephone">
                     </div>
                   </div>

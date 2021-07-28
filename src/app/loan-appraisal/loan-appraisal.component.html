@@ -102,7 +102,7 @@
 
                 <div class="row"  style="margin:2px">
                     <div class="col-sm-4">
-                        <label>Type of Business</label>
+                        <label>Type of Business (eg retail shop, wholesale shop)</label>
                         <input type="text" class="form-control"   [(ngModel)]="TypeofBusiness" > 
                     </div>
 
@@ -1107,7 +1107,7 @@
                     </div>
                     <div class="col-sm-4">
                         <label>Actual score</label>
-                        <input type="number" class="form-control"  (keyup)=formulation()  [(ngModel)]="TotalActualScore" readonly style="background-color: white;"> 
+                        <input type="number" class="form-control"  (keyup)=formulation()  [(ngModel)]="TotalActualScore" disabled style="background-color: white;"> 
                     </div>
                     <div class="col-sm-4">
                         <label>REMARK</label>

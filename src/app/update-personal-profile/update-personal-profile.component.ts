@@ -185,7 +185,7 @@ export class UpdatePersonalProfileComponent implements OnInit {
                   }
                   //if (this.isSuccess==true){
                     if(Response.member.memberid != null){this.MemberId=Response.member.memberid;}
-                    this.BForm=Response.member.FormOfBusiness;
+                    if(Response.member.FormOfBusiness != null){this.BForm=Response.member.FormOfBusiness;}
                     if(Response.member.mfirstname != null){this.Firstname=Response.member.mfirstname;}
                     if(Response.member.mothername != null){this.Othernames=Response.member.mothername;}
                     if(Response.member.msurname != null){this.Surname=Response.member.msurname;}
